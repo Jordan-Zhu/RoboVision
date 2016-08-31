@@ -1,6 +1,6 @@
 # RoboVision
 -----------------------------------------------------------
-Goals: 
+About
 -----------------------------------------------------------
+Currently merging all functions into one project
 
-This page intentionally left blank
