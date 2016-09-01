@@ -3,8 +3,12 @@ import numpy as np
 from matplotlib import pyplot as plt
 from skimage import morphology
 
+from drawlinefeature import DrawLineFeature,drawconvex#zc
 from lineseg import lineseg
 from drawedgelist import drawedgelist
+from Lseg_to_Lfeat_v2 import Lseg_to_Lfeat_v2   #zc
+from LabelLineCurveFeature_v2 import LabelLineCurveFeature_v2  #zc
+from merge_lines_v2 import merge_lines# zc
 
 
 def auto_canny(image, sigma=0.33):
@@ -140,11 +144,26 @@ if __name__ == '__main__':
     depthimg = cv2.imread('img/learn17.png', -1)
     colorimg = cv2.imread('img/clearn17.png', 0)
 
-    edges = edge_detect(depthimg, colorimg)
+    id = depthimg[100:, 100:480]  ##zc corp the region of interest
+
+    siz = id.shape  ## image size of the region of interest
+    thresh_m = 10
+    label_thresh = 11
+    # edges = edge_detect(depthimg, colorimg)
+    edges = edge_detect(id, colorimg)  # zc
+
     showimg(edges)
 
     cntrs = np.asarray(find_contours(edges))
 
     seglist = lineseg(cntrs, tol=2)
+
+    [linefeature, listpoint] = Lseg_to_Lfeat_v2(seglist, cntrs, siz)
+
+    [line_new, listpoint_new, line_merged] = merge_lines(linefeature, listpoint, thresh_m, siz)
+
+    line_new = LabelLineCurveFeature_v2(depthimg, line_new, listpoint_new, label_thresh)
+    # DrawLineFeature(linefeature,siz,'lf')
+    drawconvex(line_new, siz, 'line_new')
 
     drawedgelist(seglist, rowscols=[])
