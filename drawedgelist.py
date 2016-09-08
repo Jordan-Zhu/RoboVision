@@ -52,9 +52,9 @@ def drawedgelist(edgelist, *args, **kwargs):
         listlen = x.size - 1
         for i in range(listlen):
             # Draw the line segments.
-            cv2.line(blank_image, (x[i], y[i]), (x[i + 1], y[i + 1]), (0, 255, 255), thickness=2)
+            cv2.line(blank_image, (x[i], y[i]), (x[i + 1], y[i + 1]), (0, 255, 255), thickness=1)
         # Join the first and last line of the contour.
-        cv2.line(blank_image, (x[0], y[0]), (x[listlen], y[listlen]), (0, 255, 0), thickness=2)
+        cv2.line(blank_image, (x[0], y[0]), (x[listlen], y[listlen]), (0, 255, 0), thickness=1)
 
     # Display the edge list.
     cv2.imshow("Edge list", blank_image)

@@ -1,10 +1,12 @@
+import cv2
 import numpy as np
+import math
 
+def zeroElimMedianFilter (im):
+    rows = im.shape[0]
+    cols = im.shape[1]
+    r = np.zeros((rows, cols))
+    im = np.lib.pad(im, ((2, 2), (2, 2)), 'edge')
 
-def ZeroElimMedianFilter(img):
-    rows = img.shape[0]
-    cols = img.shape[1]
-
-    adjmap = np.zeros_like(img)
-    # Needs hhf_pad
-    # And is itself a dependency for zeroElimMedianHoleFill
+    for m in range (0,rows-1):
+        for n in range (0,cols-1):
