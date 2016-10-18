@@ -25,4 +25,4 @@ def distance2d(line1, line2):
     x2 = other_line[3]
     y2 = other_line[2]
 
-    return abs((x2 - x1) * (y1 - y0) - (x1 - x0) * (y2 - y1)) / math.sqrt((x2 - x1)^2 + (y2 - y1)^2)
+    return abs((x2 - x1) * (y1 - y0) - (x1 - x0) * (y2 - y1)) / math.sqrt((x2 - x1)**2 + (y2 - y1)**2)

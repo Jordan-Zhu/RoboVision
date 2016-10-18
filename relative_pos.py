@@ -15,14 +15,14 @@ def relative_pos(line1, line2):
     dir_line_ver = abs(m) >= 1
 
     if a == 90 or a == -90:
-        dir_dec = line_ref[1] - second[1] > 0
+        dir_dec = (line_ref[1] - second[1]) > 0
     else:
         hr = line_ref[0] - m * line_ref[1]
         hl = second[0] - m * second[1]
         dir_dec = (hr - hl) > 0
         if m >= 1:
             # And what is this =~ symbol too
-            dir_dec = ~ dir_dec
+            dir_dec = ~dir_dec
 
     # if the second line was discontinuity too, another condition is needed to
     # check, otherwise if the direction of object and second lines are equal,
@@ -35,4 +35,3 @@ def relative_pos(line1, line2):
         flag_out = (dir_obj == dir_dec)
 
     return flag_out
-    a = 1

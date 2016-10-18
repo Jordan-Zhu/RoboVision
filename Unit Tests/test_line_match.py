@@ -1,4 +1,4 @@
-from loadmat import loadmat
+# from loadmat import loadmat
 import numpy as np
 from line_match import line_match
 import scipy.io as sio
@@ -9,9 +9,29 @@ if __name__ == '__main__':
     LineInteresting = np.array(data1['LineInteresting'])
 
     data2 = sio.loadmat('Parameter.mat')
-    Parameter = list(data2['P'])
+    Parameter = data2['P']
 
-    # I haven't been able to figure out how to get the list into a dictionary
-    # or another way to use it
-    print(Parameter)
-    line_match(LineInteresting, Parameter)
+    out = sio.loadmat('ListPair_out.mat')
+    ListPair = out['ListPair']
+
+    a = line_match(LineInteresting, Parameter)
+    print(a)
+    # print("Line interesting\n", LineInteresting)
+    for item, value in enumerate(LineInteresting):
+        print(item, value)
+
+    # print(int(Parameter["Cons_Lmin"]))
+    # print(int(Parameter["Cons_AlphaD"]))
+    # print(int(Parameter["Cons_Dmax"]))
+    # print(int(Parameter["Cons_Dmin"]))
+
+    # print("Parameter\n", Parameter)
+
+    # rowsize = LineInteresting.shape[0] - 1
+    # for i in range(0, rowsize):
+    #     j = i + 1
+    #     for j in range(j, rowsize):
+    #         if(ListPair[:][:] == LineInteresting[i, 7] and ListPair[:][:] == LineInteresting[j, 7]):
+    #             print("Lines ", i, "and ", j, "were chosen")
+
+    print("MATLAB List pair:\n", ListPair)

@@ -1,9 +1,18 @@
 import numpy as np
+import math
 
 # Written 10/4/2016
 # Check overlap between two lines
 # according to types of triangle that 3 points of end points of the line
 # make.
+# ---------------
+# 10/13 - Added angle function
+
+def angle(x,y,z):
+    # RuntimeWarning: invalid value encountered in double_scalars
+    # Possibly a divide by zero error
+    return math.acos((y**2 + z**2 - x**2 + 0.0)/(2*y*z + 0.0)) / math.pi*180.0
+
 
 
 def check_overlap(line1, line2):
@@ -26,17 +35,29 @@ def check_overlap(line1, line2):
 
     # angle = @(x,y,z) acosd((y^2+z^2-x^2)/(2*y*z)) ;   % cosine law
 
-    a143 = np.angle((c, d, f))
-    a134 = np.angle((d, c, f))
+    # a143 = np.angle((c, d, f))
+    # a134 = np.angle((d, c, f))
 
-    a243 = np.angle((b, e, f))
-    a234 = np.angle((e, b, f))
+    # a243 = np.angle((b, e, f))
+    # a234 = np.angle((e, b, f))
 
-    a312 = np.angle((b, a, c))
-    a321 = np.angle((c, b, a))
+    # a312 = np.angle((b, a, c))
+    # a321 = np.angle((c, b, a))
 
-    a412 = np.angle((e, a, d))
-    a421 = np.angle((d, a, e))
+    # a412 = np.angle((e, a, d))
+    # a421 = np.angle((d, a, e))
+
+    a143 = angle(c, d, f)
+    a134 = angle(d, c, f)
+
+    a243 = angle(b, e, f)
+    a234 = angle(e, b, f)
+
+    a312 = angle(b, a, c)
+    a321 = angle(c, b, a)
+
+    a412 = angle(e, a, d)
+    a421 = angle(d, a, e)
 
     # Return f_val
     return ((a143 < 90) & (a134 < 90)) | ((a243 < 90) & (a234 < 90)) | ((a312 < 90) & (a321 < 90)) | (
