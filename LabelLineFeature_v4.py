@@ -4,8 +4,8 @@ import scipy.io as sio
 import math
 # import roipoly
 
-data = sio.loadmat('lableline_in_DE1.mat')
-data2 = sio.loadmat('lableline_in_Id.mat')
+data = sio.loadmat('lableline_in_DE1.mat')  # canny edge detect on depth image
+data2 = sio.loadmat('lableline_in_Id.mat')  # depth image
 data3 = sio.loadmat('lableline_in_Line_new.mat')
 data4 = sio.loadmat('lableline_out_Line_new.mat')
 DE1 = data['DE1']
@@ -106,25 +106,39 @@ for cc in [180]:
 
         mask0 = roipolyy(vxd, DE1)
         if (dy > dx) or (dy == dx):
-            yrangestart = min(int(vxd[0][0]), int(vxd[1][0]))
-            yrangeend = max(int(vxd[0][0]), int(vxd[1][0]))
-            len_mask = (yrangeend - yrangestart) * 2 * label_win_sized
+            # yrangestart = min(int(vxd[0][0]), int(vxd[1][0]))
+            # yrangeend = max(int(vxd[0][0]), int(vxd[1][0]))
+            yrangestart = ptd1[0]
+            yrangeend = ptd1[1]
+            # len_mask = (yrangeend - yrangestart) * 2 * label_win_sized
+            len_mask = abs(yrangestart - yrangeend) * 2 * label_win_sized
         else:
             xrangestart = min(int(vxd[0][1]), int(vxd[1][1]))
             xrangeend = max(int(vxd[0][1]), int(vxd[1][1]))
-            len_mask = (xrangeend-xrangestart)*2*label_win_sized
+            # len_mask = (xrangeend-xrangestart)*2*label_win_sized
+            len_mask = abs(xrangestart - xrangeend) * 2 * label_win_sized
 
         tdd = len(mask0)/float(len_mask)
         if tdd>thresh_label_dis:
             maskp = roipolyy(winp,Id)
             maskn = roipolyy(winn, Id)
-            if (len(maskp)>0)&(len(maskn)>0):
-                dp = sum(maskp)/len(maskp)
-                dn = sum(maskn) / len(maskn)
-                if dp>dn:
-                    l[cc][10] = 9
-                elif dp<dn:
-                    l[cc][10] = 10
+
+            dp = sum(maskp) / len(maskp)
+            # print(dp)
+            dn = sum(maskn) / len(maskn)
+            if dp > dn:
+                l[cc][10] = 9
+            elif dp < dn:
+                l[cc][10] = 10
+            # if (len(maskp)>0)&(len(maskn)>0):
+            #     dp = sum(maskp)/len(maskp)
+            #     dn = sum(maskn) / len(maskn)
+            #     if dp>dn:
+            #         l[cc][10] = 9
+            #     elif dp<dn:
+            #         l[cc][10] = 10
+            # else:
+            #     print("mask is 0")
         else:
             l[cc][10] =  13
 
@@ -144,7 +158,7 @@ for i in range(len(col11)):
         lostline += [i]
 
 print(len(extline))
-# print len(lostline)
+print(len(lostline))
 
 
 a = 1
