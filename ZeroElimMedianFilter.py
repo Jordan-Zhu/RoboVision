@@ -13,10 +13,12 @@ def zero_elim_median_filter (im):
         for n in range (0,cols):
             a = im[m+i+3, n+i+3]
             print(a.shape)
-            a = np.reshape(a, a.shape[0] * a.shape[1])
-            a = a[np.where(a != 0)]
+            a = a.flatten()
+            a = np.where(a != 0)
+            print(a)
             if a:
                 a = np.sort(a)
+                print(a)
                 r[m+1, n+1] = a[math.ceil(a.shape[1] / 2)]
             else:
                 r[m+1, n+1] = im[m+1, n+1]

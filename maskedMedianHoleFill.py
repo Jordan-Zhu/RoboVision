@@ -1,11 +1,19 @@
 import numpy as np
-from ZeroElimMedianFilter import zero_elim_median_filter
+import cv2
+from maskedMedianFilter import masked_median_filter
+from algo import showimg
 
 
 def zeroElimMedianHoleFill(im):
-    r = masked_median_filter(im, im == 0)
+    mask = np.where(np.array(im) == 0)
+    r = masked_median_filter(im, mask)
     has_holes = ~np.all(np.all(r))
     while has_holes:
         r = masked_median_filter(r, r == 0)
         has_holes = ~np.all(np.all(r))
     return r
+
+if __name__ == '__main__':
+    depthimg = cv2.imread('img/learn17.png', -1)
+    h = zeroElimMedianHoleFill(depthimg)
+    showimg(h)

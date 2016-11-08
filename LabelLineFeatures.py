@@ -9,6 +9,7 @@ import numpy as np
 # We define curvature edges as lines (or curves) on the object and discontinuities as those lines
 # on the outside edges of the object where you can see it touching the background.
 
+global window_size
 
 def vertical_line(line):
     line = np.append(line, [0, 1])
@@ -37,44 +38,82 @@ def get_orientation(line):
     if dy > dx or dy == dx:
         # Vertical line
         pt1, pt2, pt3, pt4, line = vertical_line(line)
-        # pt1 = [line[0], line[1] - mask_size]
-        # pt2 = [line[0], line[1] + mask_size]
-        # pt3 = [line[2], line[3] - mask_size]
-        # pt4 = [line[2], line[3] + mask_size]
-        # line.append(0)  # fill in the spot for +/- side of the line
-        # line.append(1)	# tag for vertical lines in index 11
-        win_pos = [startpt, endpt, pt4, pt2]
-        win_neg = [pt1, pt3, endpt, startpt]
     else:
         # Horizontal line
         pt1, pt2, pt3, pt4, line = horizontal_line(line)
-        # pt1 = [line[0] - mask_size, line[1]]
-        # pt2 = [line[0] + mask_size, line[1]]
-        # pt3 = [line[2] - mask_size, line[3]]
-        # pt4 = [line[2] + mask_size, line[3]]
-        # line.append(0)  # fill in the spot for +/- side of the line
-        # line.append(2)  # horizontal line in index 11
-        win_pos = [startpt, pt4, endpt, pt2]
-        win_neg = [pt1, endpt, pt3, startpt]
     window = [pt1, pt2, pt3, pt4]
     # Positive or negative side of the window is used
     # when we are checking which side the line is on the discontinuity
-    return window, win_pos, win_neg, line
+    return window, startpt, endpt, line
 
 
-def roipoly(src, poly):
-    return src[poly[0][1]:poly[2][1], poly[0][0]:poly[1][0]]
+def create_windows(startpt, endpt, window):
+    pt1, pt2, pt3, pt4 = window
+    temp1 = np.linalg.norm(np.subtract((np.add(pt1, pt3) / 2.0), (np.add(pt2, pt4) / 2.0)))
+    temp2 = np.linalg.norm(np.subtract((np.add(pt1, pt4) / 2.0), (np.add(pt2, pt3) / 2.0)))
+    if temp1 > temp2:
+        window = [pt1, pt3, pt4, pt2]
+        win_p = [startpt, endpt, pt4, pt2]
+        win_n = [pt1, pt3, endpt, startpt]
+    else:
+        window = [pt1, pt4, pt3, pt2]
+        win_p = [startpt, pt4, endpt, pt2]
+        win_n = [pt1, endpt, pt3, startpt]
+    return window, win_p, win_n
+
+
+def mask_length(line, window):
+    range_start = 0
+    range_end = 0
+    if line[11] == 1:
+        # Y range start / end
+        range_start = min(int(window[0][0]), int(window[1][0]))
+        range_end = max(int(window[0][0]), int(window[1][0]))
+    elif line[11] == 2:
+        # X range start / end
+        range_start = min(int(window[0][1]), int(window[1][1]))
+        range_end = max(int(window[0][1]), int(window[1][1]))
+    return abs(range_start - range_end) * 2 * window_size
+
+
+def roipoly(src, line, poly):
+    mask = []
+    dyy = line[0] - line[2]
+    dxx = line[1] - line[3]
+
+    if line[11] == 1:
+        xfp = min(int(poly[0][1]), int(poly[1][1])) if dxx * dyy > 0 else max(int(poly[0][1]), int(poly[1][1]))
+        mask_len = int(poly[3][1] - poly[0][1])
+        y_range_start = min(int(poly[0][0]), int(poly[1][0]))
+        y_range_end = max(int(poly[0][0]), int(poly[1][0]))
+
+        for i in range(y_range_start, y_range_end):
+            x0 = int(round(xfp))
+            mask += list(src[i, x0:x0 + mask_len])
+            step = (poly[1][1] - poly[0][1] + 0.0) / (poly[1][0] - poly[0][0] + 0.0)
+            xfp += step
+    elif line[11] == 2:
+        yfp = min(int(poly[0][0]), int(poly[1][0])) if dxx * dyy > 0 else max(int(poly[0][0]), int(poly[1][0]))
+        mask_len = int(poly[3][0] - poly[0][0])
+        x_range_start = min(int(poly[0][1]), int(poly[1][1]))
+        x_range_end = max(int(poly[0][1]), int(poly[1][1]))
+
+        for i in range(x_range_start, x_range_end):
+            y0 = int(round(yfp))
+            mask += list(src[y0:y0 + mask_len, i])
+            step = (poly[1][0] - poly[0][0] + 0.0) / (poly[1][1] - poly[0][1] + 0.0)
+            yfp += step
+    return mask
+    # return src[poly[0][1]:poly[1][1], poly[0][0]:poly[1][0]]
 
 
 def mean(arr):
-    # print(arr.type)
-    return np.sum(arr) / arr.shape[0]
+    return sum(arr) / len(arr)
 
 
-def obj_relation(depthimg, win_p, win_n):
-    mask_p = roipoly(depthimg, win_p)
-    mask_n = roipoly(depthimg, win_n)
-    # print("mean p ", mean(mask_p))
+def obj_relation(depthimg, line, win_p, win_n):
+    mask_p = roipoly(depthimg, line, win_p)
+    mask_n = roipoly(depthimg, line, win_n)
     return 9 if mean(mask_p) > mean(mask_n) else 10
 
 
@@ -87,34 +126,18 @@ def label_line_features(depthimg, edgeimg, seglist, parameters):
 
     # Get the lines which are longer than the minimum length
     desired_lines = [line for line in seglist if line[4] > minlen]
+    # print(len(seglist))
     out = []
 
     for line in desired_lines:
-        window, win_p, win_n, line = get_orientation(line)
-        roi = roipoly(edgeimg, window)
+        window, startpt, endpt, line = get_orientation(line)
+        window, win_p, win_n = create_windows(startpt, endpt, window)
+        roi = roipoly(edgeimg, line, window)
 
-        # temp1 = np.linalg.norm(np.subtract((np.add(ptd1, ptd3) / 2.0), (np.add(ptd2, ptd4) / 2.0)))
-        # temp2 = np.linalg.norm(np.subtract((np.add(ptd1, ptd4) / 2.0), (np.add(ptd2, ptd3) / 2.0)))
-        # if (norm(((ptd1 + ptd3) / 2) - ((ptd2 + ptd4) / 2)) > norm(((ptd1 + ptd4) / 2) - ((ptd2 + ptd3) / 2)))
-
-        p1 = [line[0], line[1]]
-        p2 = [line[2], line[3]]
-        ptd1, ptd2, ptd3, ptd4 = window
-        temp1 = np.linalg.norm(np.subtract((np.add(ptd1, ptd3) / 2.0), (np.add(ptd2, ptd4) / 2.0)))
-        temp2 = np.linalg.norm(np.subtract((np.add(ptd1, ptd4) / 2.0), (np.add(ptd2, ptd3) / 2.0)))
-        if temp1 > temp2:
-            vxd = [ptd1, ptd3, ptd4, ptd2]
-            winp = [p1, p2, ptd4, ptd2]
-            winn = [ptd1, ptd3, p2, p1]
-        else:
-            vxd = [ptd1, ptd4, ptd3, ptd2]
-            winp = [p1, ptd4, p2, ptd2]
-            winn = [ptd1, p2, ptd3, p1]
-        len_mask = abs(ptd1[0] - ptd1[1]) * 2 * window_size if line[11] == 1 else abs(vxd[0][1] - vxd[1][1]) * 2 * window_size
-        # len_mask = np.linalg.norm(window[0][0] - window[1][0]) * 2 * window_size if line[11] == 1 else np.linalg.norm(window[0][1] - window[1][1]) * 2 * window_size
+        len_mask = mask_length(line, window)
         dis_var = len(roi)/float(len_mask)
         if dis_var > dis_thresh:
-            line[10] = obj_relation(depthimg, win_p, win_n)
+            line[10] = obj_relation(depthimg, line, win_p, win_n)
         else:
             line[10] = 13
         line = np.reshape(line, (12, 1))

@@ -106,8 +106,8 @@ for cc in [180]:
 
         mask0 = roipolyy(vxd, DE1)
         if (dy > dx) or (dy == dx):
-            # yrangestart = min(int(vxd[0][0]), int(vxd[1][0]))
-            # yrangeend = max(int(vxd[0][0]), int(vxd[1][0]))
+            yrangestart = min(int(vxd[0][0]), int(vxd[1][0]))
+            yrangeend = max(int(vxd[0][0]), int(vxd[1][0]))
             yrangestart = ptd1[0]
             yrangeend = ptd1[1]
             # len_mask = (yrangeend - yrangestart) * 2 * label_win_sized
@@ -150,6 +150,8 @@ col10out = lout[:,10]
 col11out = lout[:,11]
 extline = []
 lostline = []
+for i in range(len(ll)):
+    print(i, ".", ll[i])
 for i in range(len(col10)):
     if col10[i] != col10out[i]:
         extline += [i]

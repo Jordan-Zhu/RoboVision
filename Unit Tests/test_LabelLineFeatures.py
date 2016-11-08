@@ -18,9 +18,13 @@ if __name__ == '__main__':
 
     l = label_line_features(Id, DE1, l2, parameter)
     ll = l
-    print(ll[0])
-    col10 = ll[:][:, 10]
-    col11 = ll[:, 11]
+    # for i in range(0, len(ll)):
+    #     print(ll[i][7], ll[i][10], ll[i][11])
+    for i in range(0, len(ll)):
+        if ll[i][7] == lout[i][7]:
+            print(ll[i][7], ll[i][10], ll[i][11], lout[i][7], lout[i][10], lout[i][11])
+    col10 = ll[:][10]
+    col11 = ll[:][11]
     col10out = lout[:, 10]
     col11out = lout[:, 11]
     extline = []
