@@ -41,25 +41,62 @@ def roipoly(src, line, poly):
             yfp += step
     return mask
 
+def get_orientation(line, window_size):
+    dy = abs(line[0] - line[2])
+    dx = abs(line[1] - line[3])
+    # Vertical or horizontal line test
+    if dy > dx or dy == dx:
+        pt1 = [line[0], line[1] - window_size]
+        pt2 = [line[0], line[1] + window_size]
+        pt3 = [line[2], line[3] - window_size]
+        pt4 = [line[2], line[3] + window_size]
+        return pt1, pt2, pt3, pt4
+    else:
+        pt1 = [line[0] - window_size, line[1]]
+        pt2 = [line[0] + window_size, line[1]]
+        pt3 = [line[2] - window_size, line[3]]
+        pt4 = [line[2] + window_size, line[3]]
+        return pt1, pt2, pt3, pt4
+
+def get_ordering(pt1, pt2, pt3, pt4):
+    temp1 = np.linalg.norm(np.subtract((np.add(pt1, pt3) / 2.0), (np.add(pt2, pt4) / 2.0)))
+    temp2 = np.linalg.norm(np.subtract((np.add(pt1, pt4) / 2.0), (np.add(pt2, pt3) / 2.0)))
+    return np.array([pt1, pt3, pt4, pt2]) if temp1 > temp2 else np.array([pt1, pt4, pt3, pt2])
+
+
 def classify_curves(src, list_lines, list_points, window_size):
-    for line in list_lines:
-        dy = abs(line[0] - line[2])
-        dx = abs(line[1] - line[3])
-        # Vertical or horizontal line test
-        if dy > dx or dy == dx:
-            pt1 = [line[0], line[1] - window_size]
-            pt2 = [line[0], line[1] + window_size]
-            pt3 = [line[2], line[3] - window_size]
-            pt4 = [line[2], line[3] + window_size]
+    im_size = src.shape
+    out = []
+    for index, line in enumerate(list_lines):
+        pt1, pt2, pt3, pt4 = get_orientation(line, window_size)
+        win = get_ordering(pt1, pt2, pt3, pt4)
+
+        mask4 = roipoly(src, line, win)
+        mask4[:] = (value for value in mask4 if value != 0)
+
+        a1 = np.mean(mask4)
+        lx = list_points[index]
+        temp_list = []
+        for ii in lx[0]:
+            temp3 = np.unravel_index(ii, im_size, order='F')
+            temp4 = (temp3[0], temp3[1])
+            temp_list.append(temp4)
+        mask5 = []
+
+        for i in temp_list:
+            mask5.append(src[i])
+
+        mask5[:] = (value for value in mask5 if value != 0)
+        a2 = np.mean(mask5)
+        b1 = len(mask4) * a1 - len(mask5) * a2
+        try:
+            b11 = float(b1) / (len(mask4) - len(mask5))
+        except ZeroDivisionError:
+            b11 = float('nan')
+
+        if b11 < a2:
+            out.append(np.append(list_lines[index], [12]))
         else:
-            pt1 = [line[0] - window_size, line[1]]
-            pt2 = [line[0] + window_size, line[1]]
-            pt3 = [line[2] - window_size, line[3]]
-            pt4 = [line[2] + window_size, line[3]]
+            out.append(np.append(list_lines[index], [13]))
 
-        temp1 = np.linalg.norm(np.subtract((np.add(pt1, pt3) / 2.0), (np.add(pt2, pt4) / 2.0)))
-        temp2 = np.linalg.norm(np.subtract((np.add(pt1, pt4) / 2.0), (np.add(pt2, pt3) / 2.0)))
-        win = np.array([pt1, pt3, pt4, pt2]) if temp1 > temp2 else np.array([pt1, pt4, pt3, pt2])
-
-        mask1 = roipoly(src, line, win)
-        initial_mask = np.mean(np.nonzero(mask1))
+    return np.asarray(out)

@@ -9,6 +9,7 @@ from drawedgelist import drawedgelist
 from Lseg_to_Lfeat_v2 import Lseg_to_Lfeat_v2   #zc
 from LabelLineCurveFeature_v2 import LabelLineCurveFeature_v2  #zc
 from merge_lines_v2 import merge_lines# zc
+from LabelLineCurveFeature import classify_curves
 from zeroElimMedianHoleFill import zeroElimMedianHoleFill
 
 
@@ -193,6 +194,8 @@ if __name__ == '__main__':
     [line_new, listpoint_new, line_merged] = merge_lines(linefeature, listpoint, thresh_m, siz)
 
     line_new = LabelLineCurveFeature_v2(depthimg, line_new, listpoint_new, label_thresh)
+    # line_new = classify_curves(depthimg, line_new, listpoint_new, label_thresh)
+    # line_new = LabelLineCurveFeature_v2(depthimg, line_new, listpoint_new, label_thresh)
     DrawLineFeature(linefeature,siz,'line features')
     drawconvex(line_new, siz, 'convex')
 

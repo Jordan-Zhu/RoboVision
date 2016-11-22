@@ -33,6 +33,7 @@ def drawconvex(linefeature, siz, im_name):
 
     for i in range(xx):
         if linefeature[i][10] == 13:
+            print(i)
             x1 = int(linefeature[i][1])
             y1 = int(linefeature[i][0])
             x2 = int(linefeature[i][3])
