@@ -2,7 +2,7 @@ import numpy as np
 
 
 # Written 11/1/2016
-# Label Line features
+# Label Line features (LabelLineFeature_v4)
 # Pre-condition: Gets the depth image and list of line segments and parameters
 # Post-condition: Returns a list of lines labeled as curvature edges or discontinuities
 # ----------------

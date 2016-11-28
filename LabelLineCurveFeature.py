@@ -1,5 +1,5 @@
 import numpy as np
-
+import scipy.io as sio
 
 # Written 11/8/2016
 # Label Line curve feature
@@ -63,6 +63,27 @@ def get_ordering(pt1, pt2, pt3, pt4):
     temp2 = np.linalg.norm(np.subtract((np.add(pt1, pt4) / 2.0), (np.add(pt2, pt3) / 2.0)))
     return np.array([pt1, pt3, pt4, pt2]) if temp1 > temp2 else np.array([pt1, pt4, pt3, pt2])
 
+def check_output(mat_out, py_out, check_dim):
+    m_data = sio.loadmat(mat_out)
+    m_dim = m_data[check_dim]
+
+    p_out = np.where(np.asanyarray(py_out)[:, 10] == 12)
+    m_out = np.where(np.asanyarray(m_dim)[:, 10] == 12)
+
+    print('python lines:', p_out)
+    print('matlab lines:', m_out)
+    misses = 0
+    extline = []
+    lostline = []
+    for i in py_out[0]:
+        if (i in m_out[0]) == False:
+            extline += [i]
+    for i in m_out[0]:
+        if (i in py_out[0]) == False:
+            lostline += [i]
+
+    print('extline:', len(extline))
+    print('lostline:', len(lostline))
 
 def classify_curves(src, list_lines, list_points, window_size):
     im_size = src.shape
@@ -99,4 +120,5 @@ def classify_curves(src, list_lines, list_points, window_size):
         else:
             out.append(np.append(list_lines[index], [13]))
 
+    check_output('linenewout.mat', np.asarray(out), 'Line_newC')
     return np.asarray(out)
