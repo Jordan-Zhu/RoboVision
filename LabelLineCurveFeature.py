@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import numpy as np
 import scipy.io as sio
 
@@ -8,6 +9,8 @@ import scipy.io as sio
 # ----------------
 # We define curvature edges as lines (or curves) on the object and discontinuities as those lines
 # on the outside edges of the object where you can see it touching the background.
+
+# 12/5/2016 - Gets some of the lines, but not all and doesn't get any lines past a particular index
 
 
 def roipoly(src, line, poly):
