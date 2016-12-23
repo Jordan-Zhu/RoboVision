@@ -20,10 +20,6 @@ def merge_lines(inputline, listpt, thresh, imgsize):
     listpoint_new = listpt
     line_new = inputline
 
-
-
-
-
     # Fill the cell array with initial line numbers.
     line_merged = []
     for n in range(0, inputline.shape[0]):

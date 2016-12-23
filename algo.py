@@ -1,9 +1,11 @@
 
 import cv2
 import numpy as np
+import scipy.io as sio
 from matplotlib import pyplot as plt
 from skimage import morphology
 
+from utility import showimg
 from drawlinefeature import DrawLineFeature,drawconvex#zc
 from lineseg import lineseg
 from drawedgelist import drawedgelist
@@ -25,25 +27,6 @@ def auto_canny(image, sigma=0.33):
 
     # return the edged image
     return edged
-
-
-def showimg(img, im_name='image', type='cv', write=False, imagename='img.png'):
-    if type == 'plt':
-        plt.figure()
-        plt.imshow(img, im_name, interpolation='nearest', aspect='auto')
-        # plt.imshow(img, 'gray', interpolation='none')
-        plt.title(im_name)
-        plt.show()
-
-        if write:
-            plt.savefig(imagename, bbox_inches='tight')
-    elif type == 'cv':
-        cv2.imshow(im_name, img)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
-
-        if write:
-            cv2.imwrite("../../images/%s", imagename, img)
 
 
 def create_img(mat):
@@ -174,6 +157,7 @@ if __name__ == '__main__':
     id = depthimg[100:, 100:480]  ## zc crop the region of interest
 
     siz = id.shape  ## image size of the region of interest
+    print(depthimg.shape)
     thresh_m = 10
     label_thresh = 11
     # edges = edge_detect(depthimg, colorimg)
@@ -191,13 +175,27 @@ if __name__ == '__main__':
     # Get line features for later processing
     [linefeature, listpoint] = Lseg_to_Lfeat_v2(seglist, cntrs, siz)
 
-
-    [line_new, listpoint_new, line_merged] = merge_lines(linefeature, listpoint, thresh_m, siz)
+    # Data to test merge_lines
+    data1 = sio.loadmat('mergeline_input1_LineFeatureC.mat')
+    LineFeatureC = data1['LineFeatureC']
+    data2 = sio.loadmat('mergeline_input2_ListPointC.mat')
+    ListPointC = data2['ListPointC']
+    data3 = sio.loadmat('mergeline_output1_Line_newC.mat')
+    Line_new = list(data3['Line_newC'])
+    data4 = sio.loadmat('mergeline_output2_ListPoint_newC.mat')
+    ListPoint_newC = data4['ListPoint_newC']
+    data5 = sio.loadmat('mergeline_output3_Line_merged_nC.mat')
+    Line_merged_nC = data5['Line_merged_nC']
+    print('LineFeatureC', LineFeatureC)
+    print('ListPointC', ListPointC.shape)
+    print('Line_merged_nC', Line_merged_nC)
+    [line_new, listpoint_new, line_merged] = merge_lines(LineFeatureC, ListPointC, thresh_m, siz)
+    # [line_new, listpoint_new, line_merged] = merge_lines(linefeature, listpoint, thresh_m, siz)
 
     # line_new = LabelLineCurveFeature_v2(depthimg, line_new, listpoint_new, label_thresh)
     line_new = classify_curves(depthimg, line_new, listpoint_new, label_thresh)
     # line_new = LabelLineCurveFeature_v2(depthimg, line_new, listpoint_new, label_thresh)
-    DrawLineFeature(linefeature,siz,'line features')
+    DrawLineFeature(linefeature, siz, 'line features')
     drawconvex(line_new, siz, 'convex')
 
     # TO-DO
