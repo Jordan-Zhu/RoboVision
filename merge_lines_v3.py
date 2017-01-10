@@ -103,6 +103,8 @@ def merge_lines(lines, listpt, thresh, imgsize):
 
                 listpt = merge_listpoints(listpt, pt1, pt2)
 
+                # Almost done
+
 
 
 
