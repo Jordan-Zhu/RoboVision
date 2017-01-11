@@ -103,7 +103,8 @@ def merge_lines(lines, listpt, thresh, imgsize):
 
                 listpt = merge_listpoints(listpt, pt1, pt2)
 
-                # Almost done
+                # Almost done. Figure out what to return
+    return [lines, listpt, out]
 
 
 
@@ -116,6 +117,9 @@ def merge_lines(lines, listpt, thresh, imgsize):
 
 
 if __name__ == '__main__':
-    lines_merged = [[n] for n in range(0, 100)]
-    print(lines_merged)
+    # lines_merged = [[n] for n in range(0, 100)]
+    # print(lines_merged)
+
+    # Testing with MATLAB data
+
 
