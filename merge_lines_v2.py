@@ -73,7 +73,6 @@ def merge_lines(inputline, listpt, thresh, imgsize):
                 if delta_slope < thresh:
                     # print delta_slope
                     # The two lines are different.
-                    # print 'len(set(line1ptx).intersection(line2ptx)) < 2', (len(set(line1ptx).intersection(line2ptx)) < 2)
                     if len(set(line1ptx).intersection(line2ptx)) < 2:
                         # Get a new line with the common points between them removed.
                         sdiff = [x for x in line1ptx + line2ptx if x not in {ptx}]
@@ -126,21 +125,21 @@ def merge_lines(inputline, listpt, thresh, imgsize):
                             startpt3 = list(np.where(lppair2 == ind1)[0])
                             startpt4 = list(np.where(lppair2 == ind2)[0])
                             # print 'not startpt1', (not startpt1)
-                            if len(startpt1)==0 :                              #####  change the way to check startpt1 is empty
+                            if len(startpt1) == 0:                              #####  change the way to check startpt1 is empty
                                 line_start = list(lppair2)
                                 line_end = list(lppair1)
 
-                                if startpt3[0] > 0:
+                                if len(startpt3) > 0:
                                     line_start = list(reversed(line_start))
-                                if startpt2[0] == 0:
+                                if len(startpt2) == 0:
                                     line_end = list(reversed(line_end))
                             else:
                                 line_start = list(lppair1)
                                 line_end = list(lppair2)
 
-                                if startpt1[0] > 0:
+                                if len(startpt1) > 0:
                                     line_start = list(reversed(line_start))
-                                if startpt4[0] == 0:
+                                if len(startpt4) == 0:
                                     line_end = list(reversed(line_end))
 
                             # listpoint_new = np.delete(listpoint_new, [startpt, endpt], axis=0)
