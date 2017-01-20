@@ -1,6 +1,6 @@
 # Robot Grasping Algorithm
 
-# We first start by importing the necessary packages:
+# Importing the necessary packages:
 import cv2
 import numpy as np
 import scipy.io as sio
@@ -34,7 +34,7 @@ if __name__ == '__main__':
     # edges = edge_detect(depthimg, colorimg)
     edges = edge_detect(id)  # zc
 
-    showimg(edges)
+    showimg(edges, "Canny of depth image + discontinuity")
     # showimg(cntr1)
     # showimg(cntr2)
 
@@ -60,14 +60,14 @@ if __name__ == '__main__':
     # print('LineFeatureC', LineFeatureC)
     # print('ListPointC', ListPointC.shape)
     # print('Line_merged_nC', Line_merged_nC)
-    [line_new, listpoint_new, line_merged] = merge_lines(LineFeatureC, ListPointC, thresh_m, siz)
+    [line_new, listpoint_new, line_merged] = merge_lines(linefeature, listpoint, thresh_m, siz)
     # [line_new, listpoint_new, line_merged] = merge_lines(linefeature, listpoint, thresh_m, siz)
 
     # line_new = LabelLineCurveFeature_v2(depthimg, line_new, listpoint_new, label_thresh)
     line_new = classify_curves(depthimg, line_new, listpoint_new, label_thresh)
     # line_new = LabelLineCurveFeature_v2(depthimg, line_new, listpoint_new, label_thresh)
     DrawLineFeature(linefeature, siz, 'line features')
-    # drawconvex(line_new, siz, 'convex')
+    drawconvex(line_new, siz, 'convex')
 
     # TO-DO
     # - Check LabelLineCurveFeature_v2 with python input

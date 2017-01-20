@@ -21,9 +21,11 @@ if __name__ == '__main__':
 
     # showimg(normalize_depth(depthimg, colormap=True), 'depth')
 
-    # id = depthimg[100:, 100:480]  ## zc crop the region of interest
+    id = depthimg[100:, 100:480]  ## zc crop the region of interest
+    print("id:", id.shape)
 
     siz = depthimg.shape  ## image size of the region of interest
+    print(siz)
     thresh_m = 10
 
     # Data to test merge_lines
@@ -39,7 +41,15 @@ if __name__ == '__main__':
     Line_merged_nC = data5['Line_merged_nC']
     # print('Line_new', Line_new)
     # print('ListPoint_newC', ListPoint_newC)
-    print('Line_merged_nC', Line_merged_nC)
+    # print('Line_merged_nC', Line_merged_nC)
     [line_new, listpoint_new, line_merged] = merge_lines(LineFeatureC, ListPointC, thresh_m, siz)
     print("line merged", line_merged)
+    # print(Line_merged_nC.shape, len(line_merged))
+    # length = len(line_merged)
+    # for i in range(0, length-1):
+    #     if(i > Line_merged_nC.shape[0]):
+    #         print(" ", line_merged[i], "\n")
+    #     else:
+    #         print(Line_merged_nC[i], " ", line_merged[i])
+
     # print("line_new", line_new)

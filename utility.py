@@ -88,13 +88,13 @@ def edge_detect(depth):
     blur = cv2.bilateralFilter(median, 9, 25, 25)
     dimg1 = auto_canny(blur)
     skel1 = morpho(dimg1)
-    showimg(create_img(skel1))
+    showimg(create_img(skel1), "Morphology + canny on depth image")
     # cnt1 = find_contours(create_img(skel1))
 
     # Depth discontinuity
     depthimg = normalize_depth(depth)
     dimg2 = clahe(depthimg, iter=2)
-    showimg(dimg2)
+    showimg(dimg2, "Depth discontinuity w/ tone balancing")
     dimg2 = auto_canny(dimg2)
     skel2 = morpho(dimg2)
     # cnt2 = find_contours(create_img(skel2))
