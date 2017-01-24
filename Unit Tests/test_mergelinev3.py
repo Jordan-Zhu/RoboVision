@@ -29,21 +29,31 @@ if __name__ == '__main__':
     thresh_m = 10
 
     # Data to test merge_lines
-    data1 = sio.loadmat('mergeline_input1_LineFeatureC.mat')
-    LineFeatureC = data1['LineFeatureC']
-    data2 = sio.loadmat('mergeline_input2_ListPointC.mat')
-    ListPointC = data2['ListPointC']
-    data3 = sio.loadmat('mergeline_output1_Line_newC.mat')
-    Line_new = list(data3['Line_newC'])
-    data4 = sio.loadmat('mergeline_output2_ListPoint_newC.mat')
-    ListPoint_newC = data4['ListPoint_newC']
-    data5 = sio.loadmat('mergeline_output3_Line_merged_nC.mat')
-    Line_merged_nC = data5['Line_merged_nC']
+    # data1 = sio.loadmat('mergeline_input1_LineFeatureC.mat')
+    # LineFeatureC = data1['LineFeatureC']
+    # data2 = sio.loadmat('mergeline_input2_ListPointC.mat')
+    # ListPointC = data2['ListPointC']
+    # data3 = sio.loadmat('mergeline_output1_Line_newC.mat')
+    # Line_new = list(data3['Line_newC'])
+    # data4 = sio.loadmat('mergeline_output2_ListPoint_newC.mat')
+    # ListPoint_newC = data4['ListPoint_newC']
+    # data5 = sio.loadmat('mergeline_output3_Line_merged_nC.mat')
+    # Line_merged_nC = data5['Line_merged_nC']
+    data = sio.loadmat('line_merge_1_23.mat')
+    # inputs
+    LineFeature = data['LineFeature']
+    ListPoint = data['ListPoint']
+    # output
+    Line_new = data['Line_new']
+    ListPoint_new = data['ListPoint_new']
+    Line_merged_n = data['Line_merged_n']
+
     # print('Line_new', Line_new)
     # print('ListPoint_newC', ListPoint_newC)
     # print('Line_merged_nC', Line_merged_nC)
-    [line_new, listpoint_new, line_merged] = merge_lines(LineFeatureC, ListPointC, thresh_m, siz)
-    print("line merged", line_merged)
+    [line_new, listpoint_new, line_merged] = merge_lines(LineFeature, ListPoint, thresh_m, siz)
+    print("line merged\n")
+    print(*line_merged, sep='\n')
     # print(Line_merged_nC.shape, len(line_merged))
     # length = len(line_merged)
     # for i in range(0, length-1):

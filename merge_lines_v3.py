@@ -9,7 +9,6 @@ def compare(s, t):
 
 
 def math_stuff(x1, y1, x2, y2):
-    # print("x1,", x1, "y1", y1, "x2", x2, "y2", y2)
     slope = (y2 - y1) / (x2 - x1) if ((x2 - x1) != 0) else inf  # float((y2 - y1)) / (x2 - x1)
     line_len = sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
     alpha = degrees(atan(-slope))
@@ -20,13 +19,11 @@ def merge_listpoints(listpt, pt1, pt2, px1, px2):
     # Merge the list points
     lp1 = listpt[pt1]
     lp2 = listpt[pt2]
-    # print("pt1 = ", pt1, "pt2 = ", pt2, " px1 = ", px1, " px2 = ", px2, " lp1 = ", lp1, " lp2 = ", lp2)
     startpt1 = list(where(lp1 == px1)[0])
     startpt2 = list(where(lp1 == px2)[0])
     startpt3 = list(where(lp2 == px1)[0])
     startpt4 = list(where(lp2 == px2)[0])
 
-    # print("startpt1, 2, 3, 4", startpt1, " ", startpt2, " ", startpt3, " ", len(startpt4))
 
     if not startpt1:
         line_start = list([lp2])
@@ -45,11 +42,8 @@ def merge_listpoints(listpt, pt1, pt2, px1, px2):
         if len(startpt4) == 0:      # startpt4[0] == 0:
             line_end = list(reversed(line_end))
 
-    # print("listpt = ", listpt)
     listpt = delete(listpt, max(pt1, pt2))
     listpt = delete(listpt, min(pt1, pt2))
-    # del listpt[max(pt1, pt2)]
-    # del listpt[min(pt1, pt2)]
     listpt = append(listpt, (line_start[0:-1] + line_end))
 
     return listpt
@@ -77,21 +71,12 @@ def merge_lines(lines, listpt, thresh, imgsize):
     # Get unique start and end points. These are what we check
     unique_pts = sort(unique(lines[:, 8:10]))
 
-    # print(unique_pts)
-    print(lines[1][8], lines[1][9])
-    print(lines[40][8], lines[40][9])
-    print("slopes", lines[1][5], ",", lines[40][5])
-    print(unique_pts[7])
-    print("lines containing this point", list(where(lines == unique_pts[7])[0]))
-
     for index, ptx in enumerate(unique_pts):
         # Test each combination of lines with this
         # point to see which ones we can merge.
         # Formula is combinations w/o repetitions (choose 2)
-        # print("ptx", ptx, "where", where(lines == ptx)[0])
         pairs = list(combinations(list(where(lines == ptx)[0]), 2))
 
-        # print(pairs)
         # Go to next iteration if there's no combinations
         if not pairs:
             continue
@@ -101,29 +86,17 @@ def merge_lines(lines, listpt, thresh, imgsize):
             if abs(alph1 - alph2) > thresh or compare(temp1, temp2):
                 continue
 
-            print("\nlines:", out[pt1], ",", out[pt2])
-            print("Point in common:", ptx)
-            print("line1:", temp1, "line2:", temp2)
-            # print("set diff: ", [int(i) for i in list(filter(lambda e: e not in [ptx], chain(temp1 + temp2)))])
             px1, px2 = [int(i) for i in list(filter(lambda e: e not in [ptx], chain(temp1 + temp2)))]
-            print("linear indices:", px1, " ", px2)
-            # print(imgsize)
             y1, x1 = unravel_index([px1], imgsize, order='F')
             y2, x2 = unravel_index([px2], imgsize, order='F')
             slope, line_len, alpha = math_stuff(x1, y1, x2, y2)
 
-            print("y1:", y1, "x1:", x1, "y2:", y2, "x2:", x2)
-            print("slope:", slope, ", alpha:", alpha, ", alph1:", alph1, ", alph2:", alph2)
-            print("===============================")
-
             # Intersection point is in the middle of the new line
             if min(alph1, alph2) <= alpha <= max(alph1, alph2):
-                # print("pt1", pt1, "pt2", pt2)
                 lines = delete(lines, max(pt1, pt2), axis=0)
                 lines = delete(lines, min(pt1, pt2), axis=0)
                 val1 = out[pt1]
                 val2 = out[pt2]
-                # print(out)
                 del out[max(pt1, pt2)]
                 del out[min(pt1, pt2)]
 
