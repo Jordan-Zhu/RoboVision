@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-from utility import get_orientation, get_ordering
+from utility import get_orientation, get_ordering, normalize_depth
 
 # Written 11/8/2016
 # Label Line curve feature
@@ -15,10 +15,15 @@ from utility import get_orientation, get_ordering
 
 
 def roipoly(src, line, poly):
-    mask = np.zeros_like(src)
-    dst = np.zeros_like(src)
+    src = normalize_depth(src, colormap=True)
+    mask = np.zeros_like(src, dtype=np.uint8)
+    # print("poly:", poly)
     cv2.rectangle(mask, (poly[0][1], poly[0][0]), (poly[3][1], poly[3][0]), (255, 255, 255), cv2.FILLED)
-    cv2.bitwise_and(src, src, mask=mask)
+    res = src * mask
+    # cv2.imshow("image", res)
+    # cv2.waitKey(0)
+    return res
+
 
 
 def classify_curves(src, list_lines, list_points, window_size):
@@ -28,27 +33,37 @@ def classify_curves(src, list_lines, list_points, window_size):
     for index, line in enumerate(list_lines):
         pt1, pt2, pt3, pt4 = get_orientation(line, window_size)
         win = get_ordering(pt1, pt2, pt3, pt4)
+        poly = [pt1, pt2, pt3, pt4]
 
+        win = [[int(i) for i in pt] for pt in poly]
         # Use numpy mask function to create masked array
         mask4 = roipoly(src, line, win)
-        print('mask4:', mask4)
-        mask4 = [value for value in mask4 if value != 0]
+        # print('mask4:', np.nonzero(mask4))
+        # mask4 = [value for value in mask4 if value != 0]
 
-        a1 = np.mean(mask4)
+        # a1 = np.mean(mask4)
+        a1 = sum(mask4) / len(mask4)
+        print(len(mask4))
+        # a1 = np.mean(mask4[np.nonzero(mask4)])
         lx = list_points[index]
         # print("lx:", lx[0][0])
         temp_list = []
         for ii in lx[0]:
-            temp3 = np.unravel_index(ii, im_size, order='F')
-            temp4 = (temp3[0], temp3[1])
-            temp_list.append(temp4)
+            t1, t2 = np.unravel_index(ii, im_size, order='F')
+            # print(t1[0], ",", t2[0])
+            # temp4 = [temp3[0][0], temp3[1][0]]
+            # print(temp4)
+            temp_list.append([t1[0], t2[0]])
+        # print(temp_list)
 
         mask5 = []
+        # print(src[100, 100])
         for i in temp_list:
-            mask5.append(src[i])
+            mask5.append(src[i[0], i[1]])
+        # print("mask5:", mask5)
 
 
-        mask5[:] = (value for value in mask5 if value != 0)
+        mask5 = [value for value in mask5 if value != 0]
         a2 = np.mean(mask5)
         b1 = len(mask4) * a1 - len(mask5) * a2
         try:

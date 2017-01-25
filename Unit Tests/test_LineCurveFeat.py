@@ -24,13 +24,16 @@ if __name__ == '__main__':
     thresh_m = 10
     label_thresh = 11
 
-    mask = np.zeros_like(src)
-    dst = np.zeros_like(src)
-    cv2.rectangle(mask, (poly[0][1], poly[0][0]), (poly[3][1], poly[3][0]), (255, 255, 255), cv2.FILLED)
-    res = cv2.bitwise_and(src, dst, mask=mask)
+    # mask = np.zeros_like(src, dtype=np.uint8)
+    # dst = np.zeros_like(src, dtype=np.uint8)
+    # print("mask shape:", mask.shape, "src shape:", src.shape)
+    # cv2.rectangle(mask, (poly[0][1], poly[0][0]), (poly[3][1], poly[3][0]), (255, 255, 255), cv2.FILLED)
+    # res = cv2.bitwise_and(src, src, mask=mask)
+    # final_im = mask * src
+    # final = cv2.bitwise_or(src, dst)
     # res = np.copyto(dst, src, where=)
-    cv2.imshow("image", mask)
-    cv2.waitKey(0)
+    # cv2.imshow("image", src)
+    # cv2.waitKey(0)
 
     data = sio.loadmat('LabelLineCurveFeature_v2.mat')
     # data2 = sio.loadmat('Parameter.mat')
@@ -42,4 +45,6 @@ if __name__ == '__main__':
     # Parameter = data2['P']
 
     # [line_new, listpoint_new, line_merged] = merge_lines(Line_newC, ListPoint_newC, thresh_m, siz)
-    # line_new = classify_curves(depthimg, Line_newC, ListPoint_newC, label_thresh)
+    line_new = classify_curves(depthimg, Line_newC, ListPoint_newC, label_thresh)
+    print(line_new[:, 10])
+    # print(*line_new[:, 10], sep='\n')
