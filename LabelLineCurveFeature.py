@@ -1,6 +1,7 @@
+import cv2
 import numpy as np
 
-from utility import roipoly, get_orientation, get_ordering
+from utility import get_orientation, get_ordering
 
 # Written 11/8/2016
 # Label Line curve feature
@@ -11,6 +12,13 @@ from utility import roipoly, get_orientation, get_ordering
 # on the outside edges of the object where you can see it touching the background.
 
 # 12/5/2016 - Gets some of the lines, but not all and doesn't get any lines past a particular index
+
+
+def roipoly(src, line, poly):
+    mask = np.zeros_like(src)
+    dst = np.zeros_like(src)
+    cv2.rectangle(mask, (poly[0][1], poly[0][0]), (poly[3][1], poly[3][0]), (255, 255, 255), cv2.FILLED)
+    cv2.bitwise_and(src, src, mask=mask)
 
 
 def classify_curves(src, list_lines, list_points, window_size):
