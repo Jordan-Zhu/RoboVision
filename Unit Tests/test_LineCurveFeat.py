@@ -16,7 +16,7 @@ def roipoly(src, line, poly):
 
 
 if __name__ == '__main__':
-    depthimg = cv2.imread('learn15.png', -1)
+    depthimg = cv2.imread('learn0.png', -1)
     src = normalize_depth(depthimg, colormap=True)
     poly = [[100, 100], [0, 0], [0,0], [200, 200]]
 
@@ -36,9 +36,12 @@ if __name__ == '__main__':
     # cv2.waitKey(0)
 
     data = sio.loadmat('LabelLineCurveFeature_v2.mat')
+    data2 = sio.loadmat('Id.mat')
     # data2 = sio.loadmat('Parameter.mat')
     #
     # # inputs
+    # print('Id:', data2)
+    # Id = data['Id']
     Line_newC = data['Line_newC']
     ListPoint_newC = data['ListPoint_newC']
     #

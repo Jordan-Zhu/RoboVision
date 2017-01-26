@@ -13,17 +13,28 @@ from utility import get_orientation, get_ordering, normalize_depth
 
 # 12/5/2016 - Gets some of the lines, but not all and doesn't get any lines past a particular index
 
+def swap_indices(arr):
+    res = []
+    for i, e in enumerate(arr):
+        res.append([arr[i][1], arr[i][0]])
+    return np.array(res)
+
 
 def roipoly(src, line, poly):
     src = normalize_depth(src, colormap=True)
     mask = np.zeros_like(src, dtype=np.uint8)
     # print("poly:", poly)
-    cv2.rectangle(mask, (poly[0][1], poly[0][0]), (poly[3][1], poly[3][0]), (255, 255, 255), cv2.FILLED)
+    cv2.fillConvexPoly(mask, poly, (255, 255, 255), 8)
     res = src * mask
-    # cv2.imshow("image", res)
+    # cv2.imshow("image", mask)
     # cv2.waitKey(0)
     return res
 
+
+def poly_area_2d(pts):
+    lines = np.hstack([pts,np.roll(pts,-1,axis=0)])
+    area = 0.5*abs(sum(x1*y2-x2*y1 for x1,y1,x2,y2 in lines))
+    return area
 
 
 def classify_curves(src, list_lines, list_points, window_size):
@@ -33,26 +44,30 @@ def classify_curves(src, list_lines, list_points, window_size):
     for index, line in enumerate(list_lines):
         pt1, pt2, pt3, pt4 = get_orientation(line, window_size)
         win = get_ordering(pt1, pt2, pt3, pt4)
-        poly = [pt1, pt2, pt3, pt4]
+        # poly = [pt1, pt2, pt3, pt4]
 
-        win = [[int(i) for i in pt] for pt in poly]
+        win = [[int(i) for i in pt] for pt in win]
+        # print(win)
+        win = swap_indices(win)
+        # print(win)
         # Use numpy mask function to create masked array
+        # Issue: mask4 is not same value as in MATLAB
         mask4 = roipoly(src, line, win)
-        # print('mask4:', np.nonzero(mask4))
-        # mask4 = [value for value in mask4 if value != 0]
+        temp = mask4[np.nonzero(mask4)]
+        # print(sum(1 for e in temp))
+        # print('mask4 length:', len(mask4[mask4 != 0]))
+        mask4 = [value for value in mask4 if value != 0]
+        # mask4 = mask4[np.nonzero(mask4)]
 
         # a1 = np.mean(mask4)
         a1 = sum(mask4) / len(mask4)
-        print(len(mask4))
+        print(a1)
         # a1 = np.mean(mask4[np.nonzero(mask4)])
         lx = list_points[index]
         # print("lx:", lx[0][0])
         temp_list = []
         for ii in lx[0]:
             t1, t2 = np.unravel_index(ii, im_size, order='F')
-            # print(t1[0], ",", t2[0])
-            # temp4 = [temp3[0][0], temp3[1][0]]
-            # print(temp4)
             temp_list.append([t1[0], t2[0]])
         # print(temp_list)
 
@@ -65,6 +80,7 @@ def classify_curves(src, list_lines, list_points, window_size):
 
         mask5 = [value for value in mask5 if value != 0]
         a2 = np.mean(mask5)
+        # a2 = sum(mask5) / len(mask5) if len(mask5) != 0 else 'nan'
         b1 = len(mask4) * a1 - len(mask5) * a2
         try:
             b11 = float(b1) / (len(mask4) - len(mask5))
