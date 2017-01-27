@@ -13,6 +13,7 @@ from utility import get_orientation, get_ordering, normalize_depth
 
 # 12/5/2016 - Gets some of the lines, but not all and doesn't get any lines past a particular index
 
+
 def swap_indices(arr):
     res = []
     for i, e in enumerate(arr):
@@ -20,7 +21,7 @@ def swap_indices(arr):
     return np.array(res)
 
 
-def roipoly(src, line, poly):
+def roipoly(src, poly):
     src = normalize_depth(src, colormap=True)
     mask = np.zeros_like(src, dtype=np.uint8)
     # print("poly:", poly)
@@ -44,24 +45,28 @@ def classify_curves(src, list_lines, list_points, window_size):
     for index, line in enumerate(list_lines):
         pt1, pt2, pt3, pt4 = get_orientation(line, window_size)
         win = get_ordering(pt1, pt2, pt3, pt4)
-        # poly = [pt1, pt2, pt3, pt4]
-
         win = [[int(i) for i in pt] for pt in win]
-        # print(win)
+
         win = swap_indices(win)
-        # print(win)
+
         # Use numpy mask function to create masked array
         # Issue: mask4 is not same value as in MATLAB
-        mask4 = roipoly(src, line, win)
-        temp = mask4[np.nonzero(mask4)]
+        mask4 = roipoly(src, win)
+        # gray_image = cv2.cvtColor(mask4, cv2.COLOR_BGR2GRAY)
+        # mask4 = cv2.countNonZero(gray_image)
+        # print("t =", t)
+        # cv2.imshow("image", normalize_depth(src))
+        # cv2.waitKey(0)
+        # print("t:", t)
+        # temp = mask4[np.nonzero(mask4)]
         # print(sum(1 for e in temp))
         # print('mask4 length:', len(mask4[mask4 != 0]))
-        mask4 = [value for value in mask4 if value != 0]
+        # mask4 = [value for value in mask4 if value != 0]
         # mask4 = mask4[np.nonzero(mask4)]
 
-        # a1 = np.mean(mask4)
-        a1 = sum(mask4) / len(mask4)
-        print(a1)
+        a1 = np.mean(mask4[np.nonzero(mask4)])
+        # a1 = sum(mask4) / len(mask4)
+        # print(a1)
         # a1 = np.mean(mask4[np.nonzero(mask4)])
         lx = list_points[index]
         # print("lx:", lx[0][0])

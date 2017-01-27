@@ -35,8 +35,10 @@ if __name__ == '__main__':
     # cv2.imshow("image", src)
     # cv2.waitKey(0)
 
-    data = sio.loadmat('LabelLineCurveFeature_v2.mat')
-    data2 = sio.loadmat('Id.mat')
+    data = sio.loadmat('input_LLCF_1.mat')
+    out_mat = sio.loadmat('out_LLCF_1.mat')
+    # data = sio.loadmat('LabelLineCurveFeature_v2.mat')
+    # data2 = sio.loadmat('Id.mat')
     # data2 = sio.loadmat('Parameter.mat')
     #
     # # inputs
@@ -44,10 +46,20 @@ if __name__ == '__main__':
     # Id = data['Id']
     Line_newC = data['Line_newC']
     ListPoint_newC = data['ListPoint_newC']
+    out_Line_new = out_mat['Line_newC']
     #
     # Parameter = data2['P']
 
     # [line_new, listpoint_new, line_merged] = merge_lines(Line_newC, ListPoint_newC, thresh_m, siz)
     line_new = classify_curves(depthimg, Line_newC, ListPoint_newC, label_thresh)
-    print(line_new[:, 10])
+    # print(line_new[:, 10])
+    # print(out_Line_new[:, 10])
+
+    # Checking the output is the same as matlab
+    sum = 0
+    for i in range(len(line_new)):
+        if line_new[i, 10] == out_Line_new[i, 10]:
+            print(i, ".", int(line_new[i, 10]), " == ", int(out_Line_new[i, 10]), "\n")
+            sum += 1
+    print('Total lines:', len(line_new), ' Total correct lines:', sum)
     # print(*line_new[:, 10], sep='\n')
