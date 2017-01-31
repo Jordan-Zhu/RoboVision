@@ -23,7 +23,7 @@ if __name__ == '__main__':
     depthimg = cv2.imread('img/learn15.png', -1)
     colorimg = cv2.imread('img/clearn17.png', 0)
 
-    # showimg(normalize_depth(depthimg, colormap=True), 'depth')
+    showimg(normalize_depth(depthimg, colormap=True), 'depth')
 
     id = depthimg[100:, 100:480]  ## zc crop the region of interest
 
