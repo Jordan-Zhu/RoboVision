@@ -18,54 +18,45 @@ from LabelLineCurveFeature import classify_curves
 
 
 if __name__ == '__main__':
-    # second argument is a flag which specifies the way
-    # an image should be read. -1 loads image unchanged with alpha channel
-    depthimg = cv2.imread('img/learn15.png', -1)
-    colorimg = cv2.imread('img/clearn17.png', 0)
-
-    showimg(normalize_depth(depthimg, colormap=True), 'depth')
-
-    id = depthimg[100:, 100:480]  ## zc crop the region of interest
-
-    siz = id.shape  ## image size of the region of interest
-    print(depthimg.shape)
     thresh_m = 10
     label_thresh = 11
-    # edges = edge_detect(depthimg, colorimg)
-    edges = edge_detect(id)  # zc
 
+    # Load the depth image with alpha channel, hence -1
+    depthimg = cv2.imread('img/learn0.png', -1)
+    colorimg = cv2.imread('img/clearn17.png', 0)
+
+    showimg(normalize_depth(depthimg, colormap=True), 'Depth img')
+
+    id = depthimg[100:, 100:480]  ## zc crop the region of interest
+    siz = id.shape  ## image size of the region of interest
+
+    # Find edges in the depth image as gradient plus the depth image in range (0 - 255)
+    edges = edge_detect(id)
     showimg(edges, "Canny of depth image + discontinuity")
-    # showimg(cntr1)
-    # showimg(cntr2)
 
+    # Next, find the contours
     cntrs = np.asarray(find_contours(edges))
 
+    # Create line segments from the contours
     seglist = lineseg(cntrs, tol=2)
+
+    print("seglist shape:", len(seglist))
+    print(seglist, sep='\n')
+
     drawedgelist(seglist, rowscols=[])
 
-    # Get line features for later processing
+    # Get line features (slope, length, angle, linear indices) for later steps
     [linefeature, listpoint] = Lseg_to_Lfeat_v2(seglist, cntrs, siz)
-
-    # Data to test merge_lines
-    data1 = sio.loadmat('mergeline_input1_LineFeatureC.mat')
-    LineFeatureC = data1['LineFeatureC']
-    data2 = sio.loadmat('mergeline_input2_ListPointC.mat')
-    ListPointC = data2['ListPointC']
-    data3 = sio.loadmat('mergeline_output1_Line_newC.mat')
-    Line_new = list(data3['Line_newC'])
-    data4 = sio.loadmat('mergeline_output2_ListPoint_newC.mat')
-    ListPoint_newC = data4['ListPoint_newC']
-    data5 = sio.loadmat('mergeline_output3_Line_merged_nC.mat')
-    Line_merged_nC = data5['Line_merged_nC']
-    # print('LineFeatureC', LineFeatureC)
-    # print('ListPointC', ListPointC.shape)
-    # print('Line_merged_nC', Line_merged_nC)
+    # Merge visually similar lines
     [line_new, listpoint_new, line_merged] = merge_lines(linefeature, listpoint, thresh_m, siz)
-    # [line_new, listpoint_new, line_merged] = merge_lines(linefeature, listpoint, thresh_m, siz)
 
     # line_new = LabelLineCurveFeature_v2(depthimg, line_new, listpoint_new, label_thresh)
+
+    # Label curvatures as either convex or concave
     line_new = classify_curves(depthimg, line_new, listpoint_new, label_thresh)
+
     # line_new = LabelLineCurveFeature_v2(depthimg, line_new, listpoint_new, label_thresh)
+
     DrawLineFeature(linefeature, siz, 'line features')
     drawconvex(line_new, siz, 'convex')
 

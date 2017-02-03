@@ -57,6 +57,7 @@ def drawedgelist(edgelist, *args, **kwargs):
         cv2.line(blank_image, (x[0], y[0]), (x[listlen], y[listlen]), (0, 255, 0), thickness=1)
 
     # Display the edge list.
+    cv2.namedWindow("Edge list", cv2.WINDOW_NORMAL)
     cv2.imshow("Edge list", blank_image)
     cv2.waitKey(0)
     cv2.destroyAllWindows()

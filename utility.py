@@ -145,6 +145,7 @@ def showimg(img, im_name='image', type='cv', write=False, imagename='img.png'):
         if write:
             plt.savefig(imagename, bbox_inches='tight')
     elif type == 'cv':
+        cv2.namedWindow(im_name, cv2.WINDOW_NORMAL)
         cv2.imshow(im_name, img)
         cv2.waitKey(0)
         cv2.destroyAllWindows()

@@ -15,5 +15,34 @@ if __name__ == '__main__':
     ListSegLineC = data['ListSegLineC']
     ListEdgeC = data['ListEdgeC']
 
-    create_linefeatures(ListSegLineC, ListEdgeC, img.shape)
+    LineFeatureC = data2['LineFeatureC']
+    ListPointC = data2['ListPointC']
+
+    LineFeature, LPP = create_linefeatures(ListSegLineC, ListEdgeC, img.shape)
+
+    lf_len = len(LineFeature)
+    lf_match = 0
+    lp_match = 0
+    for i in range(lf_len):
+        if all(LineFeature[i]) == all(LineFeatureC[i]):
+            lf_match += 1
+        else:
+            print(i, ".")
+            print(LineFeature[i])
+            print(LineFeatureC[i])
+        if all(LPP[i][0]) == all(ListPointC[i][0]):
+            lp_match += 1
+        else:
+            print(LPP[i][0])
+            print(ListPointC[i][0])
+    # print(LPP[0][0])
+    print("--------------------")
+    print(LineFeature[1])
+    print(LineFeatureC[1])
+    print(LineFeature[2])
+    print(LineFeatureC[2])
+    print("Totals:\nLineFeature:", lf_len, "ListPoint:", len(ListPointC))
+    print("LineFeature matching lines:", lf_match)
+    print("ListPoint matches:", lp_match)
+
 

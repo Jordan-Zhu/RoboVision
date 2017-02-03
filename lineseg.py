@@ -29,7 +29,6 @@ import numpy as np
 from maxlinedev import maxlinedev
 
 def lineseg(edgelist, tol):
-    # num_contours = edgelist.shape[0]
     num_contours = edgelist.shape[0]
 
     # reshape array -
