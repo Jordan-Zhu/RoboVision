@@ -50,4 +50,4 @@ def create_linefeatures(ListSegments, ListEdges, imgsize):
     for cnt in range(len_lp):
         LPP.append([np.ravel_multi_index((ListPoint[cnt][:, 0] - 1, ListPoint[cnt][:, 1] - 1), imgsize, order='F') + 1])
 
-    return LineFeature, LPP
+    return np.array(LineFeature), np.array(LPP)

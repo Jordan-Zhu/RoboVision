@@ -3,6 +3,7 @@ import scipy.io as sio
 import numpy as np
 from merge_lines_v3 import merge_lines
 from utility import showimg
+from Lseg_to_Lfeat_v3 import create_linefeatures
 
 
 def normalize_depth(depthimg, colormap=False):
@@ -17,43 +18,70 @@ def normalize_depth(depthimg, colormap=False):
 
 
 if __name__ == '__main__':
-    depthimg = cv2.imread('learn15.png', -1)
+    img = cv2.imread('learn15.png', -1)
 
     # showimg(normalize_depth(depthimg, colormap=True), 'depth')
 
-    id = depthimg[100:, 100:480]  ## zc crop the region of interest
-    print("id:", id.shape)
+    id = img[100:, 100:480]  ## zc crop the region of interest
+    # print("id:", id.shape)
 
-    siz = depthimg.shape  ## image size of the region of interest
-    print(siz)
+    siz = img.shape  ## image size of the region of interest
+    # print(siz)
     thresh_m = 10
 
-    # Data to test merge_lines
-    # data1 = sio.loadmat('mergeline_input1_LineFeatureC.mat')
-    # LineFeatureC = data1['LineFeatureC']
-    # data2 = sio.loadmat('mergeline_input2_ListPointC.mat')
-    # ListPointC = data2['ListPointC']
-    # data3 = sio.loadmat('mergeline_output1_Line_newC.mat')
-    # Line_new = list(data3['Line_newC'])
-    # data4 = sio.loadmat('mergeline_output2_ListPoint_newC.mat')
-    # ListPoint_newC = data4['ListPoint_newC']
-    # data5 = sio.loadmat('mergeline_output3_Line_merged_nC.mat')
-    # Line_merged_nC = data5['Line_merged_nC']
-    data = sio.loadmat('line_merge_1_23.mat')
+    data = sio.loadmat('in_out_ML_2.mat')
     # inputs
-    LineFeature = data['LineFeature']
-    ListPoint = data['ListPoint']
+    LineFeatureC = data['LineFeatureC']
+    ListPointC = data['ListPointC']
+    # LineFeature = data['LineFeature']
+    # ListPoint = data['ListPoint']
     # output
-    Line_new = data['Line_new']
-    ListPoint_new = data['ListPoint_new']
-    Line_merged_n = data['Line_merged_n']
+    Line_newC = data['Line_newC']
+    ListPoint_newC = data['ListPoint_newC']
+    Line_merged_nC = data['Line_merged_nC']
 
-    # print('Line_new', Line_new)
-    # print('ListPoint_newC', ListPoint_newC)
-    # print('Line_merged_nC', Line_merged_nC)
-    [line_new, listpoint_new, line_merged] = merge_lines(LineFeature, ListPoint, thresh_m, siz)
-    print("line merged\n")
-    print(*line_merged, sep='\n')
+    # data = sio.loadmat('input_LTLF_1.mat')
+    # data2 = sio.loadmat('output_LTLF_1.mat')
+
+    # data = sio.loadmat('input_LTLF_1.mat')
+    # data2 = sio.loadmat('output_LTLF_1.mat')
+    # data3 = sio.loadmat('out_ML_1.mat')
+    #
+    # ListSegLineC = data['ListSegLineC']
+    # ListEdgeC = data['ListEdgeC']
+    #
+    # LineFeatureC = data2['LineFeatureC']
+    # ListPointC = data2['ListPointC']
+    #
+    # Line_newC = data3['Line_newC']
+    # ListPoint_newC = data3['ListPoint_newC']
+    # Line_merged_nC = data3['Line_merged_nC']
+    #
+    # LineFeature, ListPoint = create_linefeatures(ListSegLineC, ListEdgeC, img.shape)
+
+    # print(ListPointC[550])
+    line_new, listpoint_new, line_merged = merge_lines(LineFeatureC, ListPointC, thresh_m, siz)
+    print("Line_newC shape:", Line_newC.shape)
+    print("ListPoint_newC shape:", ListPoint_newC.shape)
+    print("Line_merged_nC shape:", Line_merged_nC.shape)
+    print("======================================")
+
+    print("Line_new shape:", line_new.shape)
+    print("Listpoint_new shape:", len(listpoint_new))
+    print("line_merged shape:", line_merged.shape)
+
+    # print(listpoint_new)
+    # print("line merged\n")
+    # print(*line_merged, sep='\n')
+
+    matches = 0
+    for i in range(len(listpoint_new)):
+        if np.array_equiv(listpoint_new[i], ListPoint_newC[i][0]): # listpoint_new[i] == ListPoint_newC[i][0]:
+            matches += 1
+        # else:
+        #     print(i, '.\n', listpoint_new[i], sep='')
+        #     print(ListPoint_newC[i][0])
+    # print('matches', matches)
     # print(Line_merged_nC.shape, len(line_merged))
     # length = len(line_merged)
     # for i in range(0, length-1):

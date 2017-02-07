@@ -1,5 +1,5 @@
 from math import sqrt, atan, degrees, inf
-from numpy import sort, unique, where, unravel_index, append, delete
+from numpy import sort, unique, where, unravel_index, append, delete, array, concatenate, r_
 from itertools import combinations, chain
 from collections import Counter
 
@@ -9,42 +9,68 @@ def compare(s, t):
 
 
 def math_stuff(x1, y1, x2, y2):
-    slope = (y2 - y1) / (x2 - x1) if ((x2 - x1) != 0) else inf  # float((y2 - y1)) / (x2 - x1)
+    slope = (y2 - y1) / (x2 - x1) if ((x2 - x1) != 0) else inf
     line_len = sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
     alpha = degrees(atan(-slope))
     return slope, line_len, alpha
+
+
+def squeeze_arr(arr):
+    res = []
+    for i in range(arr.shape[0]):
+        res.append(arr[i][0])
+    return res
 
 
 def merge_listpoints(listpt, pt1, pt2, px1, px2):
     # Merge the list points
     lp1 = listpt[pt1]
     lp2 = listpt[pt2]
-    startpt1 = list(where(lp1 == px1)[0])
-    startpt2 = list(where(lp1 == px2)[0])
-    startpt3 = list(where(lp2 == px1)[0])
-    startpt4 = list(where(lp2 == px2)[0])
+    startpt1 = where(lp1 == px1)[0]
+    startpt2 = where(lp1 == px2)[0]
+    startpt3 = where(lp2 == px1)[0]
+    startpt4 = where(lp2 == px2)[0]
 
+    print('pt1:', pt1, 'pt2:', pt2)
+    print('px1:', px1, 'px2:', px2)
+    print('startpt1:', startpt1, 'startpt2:', startpt2, 'startpt3:', startpt3, 'startpt4:', startpt4, '\n')
+    print('lp1', lp1, '\nlp2', lp2)
 
     if not startpt1:
-        line_start = list([lp2])
-        line_end = list([lp1])
+        line_start = lp2 # list([lp2])
+        line_end = lp1 # list([lp1])
 
-        if len(startpt3) > 0:
-            line_start = list(reversed(line_start))
-        if len(startpt2) == 0:
-            line_end = list(reversed(line_end))
+        if startpt3 > 0:
+            line_start = line_start[::-1] # list(reversed(line_start))
+        if startpt2 == 0:
+            line_end = line_end[::-1] # list(reversed(line_end))
     else:
-        line_start = list([lp1])
-        line_end = list([lp2])
+        line_start = lp1 # list([lp1])
+        line_end = lp2 # list([lp2])
 
-        if len(startpt1) > 0:       # startpt1[0] > 0:
-            line_start = list(reversed(line_start))
-        if len(startpt4) == 0:      # startpt4[0] == 0:
-            line_end = list(reversed(line_end))
+        if startpt1 > 0:       # startpt1[0] > 0:
+            line_start = line_start[::-1] # list(reversed(line_start))
+        if startpt4 == 0:      # startpt4[0] == 0:
+            line_end = line_end[::-1] # list(reversed(line_end))
 
-    listpt = delete(listpt, max(pt1, pt2))
-    listpt = delete(listpt, min(pt1, pt2))
-    listpt = append(listpt, (line_start[0:-1] + line_end))
+    del listpt[max(pt1, pt2)] # delete(listpt, max(pt1, pt2))
+    del listpt[min(pt1, pt2)] # listpt = delete(listpt, min(pt1, pt2))
+    # print('listpt length', len(listpt))
+    # print('line_start:', line_start[0])
+    # # print(line_start[0][0:-1])
+    # print('line_end:', line_end[0])
+    # if len(line_end[0]) == 1:
+    #     line_end[0] = array(list(line_end[0]))
+    #     print('new line end', line_end[0])
+    # print('line_start shape:', line_start[0].shape, 'line_end shape:', line_end[0].shape)
+    # print('line start:', line_start[0:-1], '\nline end:', line_end)
+    # merged = concatenate((line_start[0:-1], line_end))
+    merged = r_[line_start[0:-1], line_end]
+    print('concatenate:', merged)
+    listpt.append(merged)
+    # listpt = append(listpt, array(merged))
+    # print('end of listpt', listpt[-1])
+    # print('after length', len(listpt))
 
     return listpt
 
@@ -63,6 +89,7 @@ def relevant_lines(i, pairs, lines):
 
 def merge_lines(lines, listpt, thresh, imgsize):
     # lines format: y1, x1, y2, x2, length, slope, alpha, index, start_pt, end_pt
+    listpt = squeeze_arr(listpt)
 
     # All lines that can be merged. Merging lines
     # will group them together and then add the grouping to the list
@@ -80,15 +107,15 @@ def merge_lines(lines, listpt, thresh, imgsize):
         # Go to next iteration if there's no combinations
         if not pairs:
             continue
-        for i in range(0, len(pairs)):
+        for i in range(len(pairs)):
             pt1, pt2, alph1, alph2, temp1, temp2 = relevant_lines(i, pairs, lines)
             # Check that the lines are within the threshold and not coincident
             if abs(alph1 - alph2) > thresh or compare(temp1, temp2):
                 continue
 
-            px1, px2 = [int(i) for i in list(filter(lambda e: e not in [ptx], chain(temp1 + temp2)))]
-            y1, x1 = unravel_index([px1], imgsize, order='F')
-            y2, x2 = unravel_index([px2], imgsize, order='F')
+            lind1, lind2 = sort([int(i) for i in list(filter(lambda e: e not in [ptx], chain(temp1 + temp2)))])
+            y1, x1 = unravel_index([lind1], imgsize, order='F')
+            y2, x2 = unravel_index([lind2], imgsize, order='F')
             slope, line_len, alpha = math_stuff(x1, y1, x2, y2)
 
             # Intersection point is in the middle of the new line
@@ -101,13 +128,13 @@ def merge_lines(lines, listpt, thresh, imgsize):
                 del out[min(pt1, pt2)]
 
                 # Update both lists to reflect the addition of the merged line.
-                lines = append(lines, [[y1, x1, y2, x2, line_len, slope, alpha, 0, px1, px2]], axis=0)
+                lines = append(lines, [[y1, x1, y2, x2, line_len, slope, alpha, 0, lind1, lind2]], axis=0)
                 out.append([val1, val2])
 
-                listpt = merge_listpoints(listpt, pt1, pt2, px1, px2)
+                listpt = merge_listpoints(listpt, pt1, pt2, lind1, lind2)
                 # Merged lines, so don't check the other pairs
                 break
             else:
                 continue
 
-    return [lines, listpt, out]
+    return lines, listpt, array(out)

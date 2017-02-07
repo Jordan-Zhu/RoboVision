@@ -20,7 +20,8 @@ if __name__ == '__main__':
 
     LineFeature, LPP = create_linefeatures(ListSegLineC, ListEdgeC, img.shape)
 
-    lf_len = len(LineFeature)
+    # lf_len = len(LineFeature)
+    lf_len = LineFeature.shape[0]
     lf_match = 0
     lp_match = 0
     for i in range(lf_len):
