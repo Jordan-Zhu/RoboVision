@@ -23,7 +23,6 @@ def squeeze_arr(arr):
 
 
 def merge_listpoints(listpt, pt1, pt2, px1, px2):
-    # Merge the list points
     lp1 = listpt[pt1]
     lp2 = listpt[pt2]
     startpt1 = where(lp1 == px1)[0]
@@ -31,27 +30,29 @@ def merge_listpoints(listpt, pt1, pt2, px1, px2):
     startpt3 = where(lp2 == px1)[0]
     startpt4 = where(lp2 == px2)[0]
 
-    print('pt1:', pt1, 'pt2:', pt2)
-    print('px1:', px1, 'px2:', px2)
-    print('startpt1:', startpt1, 'startpt2:', startpt2, 'startpt3:', startpt3, 'startpt4:', startpt4, '\n')
-    print('lp1', lp1, '\nlp2', lp2)
+    # print('pt1:', pt1, 'pt2:', pt2)
+    # print('px1:', px1, 'px2:', px2)
+    # print('startpt1:', startpt1, 'startpt2:', startpt2, 'startpt3:', startpt3, 'startpt4:', startpt4, '\n')
+    # print('lp1', lp1, '\nlp2', lp2)
 
-    if not startpt1:
-        line_start = lp2 # list([lp2])
-        line_end = lp1 # list([lp1])
+    if not startpt1 and startpt1.shape[0] < 1:
+        # print('if')
+        line_start = lp2
+        line_end = lp1
 
         if startpt3 > 0:
-            line_start = line_start[::-1] # list(reversed(line_start))
+            line_start = line_start[::-1]
         if startpt2 == 0:
-            line_end = line_end[::-1] # list(reversed(line_end))
+            line_end = line_end[::-1]
     else:
-        line_start = lp1 # list([lp1])
-        line_end = lp2 # list([lp2])
+        # print('else')
+        line_start = lp1
+        line_end = lp2
 
-        if startpt1 > 0:       # startpt1[0] > 0:
-            line_start = line_start[::-1] # list(reversed(line_start))
-        if startpt4 == 0:      # startpt4[0] == 0:
-            line_end = line_end[::-1] # list(reversed(line_end))
+        if startpt1 > 0:
+            line_start = line_start[::-1]
+        if startpt4 == 0:
+            line_end = line_end[::-1]
 
     del listpt[max(pt1, pt2)] # delete(listpt, max(pt1, pt2))
     del listpt[min(pt1, pt2)] # listpt = delete(listpt, min(pt1, pt2))
@@ -66,8 +67,9 @@ def merge_listpoints(listpt, pt1, pt2, px1, px2):
     # print('line start:', line_start[0:-1], '\nline end:', line_end)
     # merged = concatenate((line_start[0:-1], line_end))
     merged = r_[line_start[0:-1], line_end]
-    print('concatenate:', merged)
+    # print('concatenate:', merged)
     listpt.append(merged)
+    # print('index appended to', len(listpt) - 1)
     # listpt = append(listpt, array(merged))
     # print('end of listpt', listpt[-1])
     # print('after length', len(listpt))
@@ -137,4 +139,4 @@ def merge_lines(lines, listpt, thresh, imgsize):
             else:
                 continue
 
-    return lines, listpt, array(out)
+    return lines, array(listpt), array(out)

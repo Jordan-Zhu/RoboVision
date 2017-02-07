@@ -51,15 +51,18 @@ if __name__ == '__main__':
     # Parameter = data2['P']
 
     # [line_new, listpoint_new, line_merged] = merge_lines(Line_newC, ListPoint_newC, thresh_m, siz)
+    print(ListPoint_newC[0])
+    print(Line_newC[0])
     line_new = classify_curves(depthimg, Line_newC, ListPoint_newC, label_thresh)
     # print(line_new[:, 10])
     # print(out_Line_new[:, 10])
 
     # Checking the output is the same as matlab
-    sum = 0
-    for i in range(len(line_new)):
-        if line_new[i, 10] == out_Line_new[i, 10]:
-            print(i, ".", int(line_new[i, 10]), " == ", int(out_Line_new[i, 10]), "\n")
-            sum += 1
-    print('Total lines:', len(line_new), ' Total correct lines:', sum)
-    # print(*line_new[:, 10], sep='\n')
+    # sum = 0
+    # for i in range(len(line_new)):
+    #     if line_new[i, 10] == out_Line_new[i, 10]:
+    #         print(i, ".", int(line_new[i, 10]), " == ", int(out_Line_new[i, 10]), "\n")
+    #         sum += 1
+    # print('Total lines:', len(line_new), ' Total correct lines:', sum)
+
+    print(line_new[:, 10])
