@@ -7,12 +7,11 @@ from LabelLineCurveFeature import classify_curves
 from utility import normalize_depth
 
 
-def roipoly(src, line, poly):
-    mask = np.zeros_like(src)
-    dst = np.zeros_like(src)
-    cv2.rectangle(mask, (poly[0][1], poly[0][0]), (poly[3][1], poly[3][0]), (255, 255, 255), cv2.FILLED)
-    cv2.bitwise_and(src, dst, mask=mask)
-    cv2.imshow("image", dst)
+def squeeze_array(arr):
+    res = []
+    for i in range(arr.shape[0]):
+        res.append(arr[i][0])
+    return res
 
 
 if __name__ == '__main__':
@@ -24,38 +23,14 @@ if __name__ == '__main__':
     thresh_m = 10
     label_thresh = 11
 
-    # mask = np.zeros_like(src, dtype=np.uint8)
-    # dst = np.zeros_like(src, dtype=np.uint8)
-    # print("mask shape:", mask.shape, "src shape:", src.shape)
-    # cv2.rectangle(mask, (poly[0][1], poly[0][0]), (poly[3][1], poly[3][0]), (255, 255, 255), cv2.FILLED)
-    # res = cv2.bitwise_and(src, src, mask=mask)
-    # final_im = mask * src
-    # final = cv2.bitwise_or(src, dst)
-    # res = np.copyto(dst, src, where=)
-    # cv2.imshow("image", src)
-    # cv2.waitKey(0)
-
-    data = sio.loadmat('input_LLCF_1.mat')
-    out_mat = sio.loadmat('out_LLCF_1.mat')
-    # data = sio.loadmat('LabelLineCurveFeature_v2.mat')
-    # data2 = sio.loadmat('Id.mat')
-    # data2 = sio.loadmat('Parameter.mat')
-    #
-    # # inputs
-    # print('Id:', data2)
-    # Id = data['Id']
+    data = sio.loadmat('LLCF_1.mat')
     Line_newC = data['Line_newC']
-    ListPoint_newC = data['ListPoint_newC']
-    out_Line_new = out_mat['Line_newC']
-    #
-    # Parameter = data2['P']
+    Line_newCx = data['Line_newCx']
+    ListPoint_newC = squeeze_array(data['ListPoint_newC'])
 
-    # [line_new, listpoint_new, line_merged] = merge_lines(Line_newC, ListPoint_newC, thresh_m, siz)
-    print(ListPoint_newC[0])
-    print(Line_newC[0])
+    # print(ListPoint_newC[0])
+
     line_new = classify_curves(depthimg, Line_newC, ListPoint_newC, label_thresh)
-    # print(line_new[:, 10])
-    # print(out_Line_new[:, 10])
 
     # Checking the output is the same as matlab
     # sum = 0
@@ -65,4 +40,5 @@ if __name__ == '__main__':
     #         sum += 1
     # print('Total lines:', len(line_new), ' Total correct lines:', sum)
 
-    print(line_new[:, 10])
+    # print(line_new[:, 10])
+    # print(Line_newCx[:, 10])

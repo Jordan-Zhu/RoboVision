@@ -47,39 +47,49 @@ if __name__ == '__main__':
 
     data = sio.loadmat('input_LTLF_1.mat')
     data2 = sio.loadmat('output_LTLF_1.mat')
-    # data3 = sio.loadmat('out_ML_1.mat')
-    #
+    data3 = sio.loadmat('in_out_ML_2.mat')
+
     ListSegLineC = data['ListSegLineC']
     ListEdgeC = data['ListEdgeC']
-    #
+
     LineFeatureC = data2['LineFeatureC']
     ListPointC = data2['ListPointC']
-    #
-    # Line_newC = data3['Line_newC']
-    # ListPoint_newC = data3['ListPoint_newC']
-    # Line_merged_nC = data3['Line_merged_nC']
-    #
+
+    Line_newC = data3['Line_newC']
+    ListPoint_newC = data3['ListPoint_newC']
+    Line_merged_nC = data3['Line_merged_nC']
+
     LineFeature, ListPoint = create_linefeatures(ListSegLineC, ListEdgeC, img.shape)
 
     # print(ListPoint[0])
-    # print(ListPointC[0])
-    Line_newC, ListPoint_newC, line_merged = merge_lines(LineFeature, ListPoint, thresh_m, siz)
+    # print(LineFeature[0, 0])
+    Line_new, ListPoint_new, line_merged = merge_lines(LineFeature, ListPoint, thresh_m, siz)
 
 
     print("Line_newC shape:", Line_newC.shape)
     print("ListPoint_newC shape:", ListPoint_newC.shape)
-    # print("Line_merged_nC shape:", Line_merged_nC.shape)
-    # print("======================================")
-
-    # print("Line_new shape:", line_new.shape)
-    # print("Listpoint_new shape:", len(listpoint_new))
-    print("line_merged shape:", line_merged.shape)
+    print("Line_merged_nC shape:", Line_merged_nC.shape)
     print("======================================")
-    print(ListPoint_newC[0])
-    print(Line_newC[0])
+
+    print("Line_new shape:", Line_new.shape)
+    print("Listpoint_new shape:", len(ListPoint_new))
+    print("line_merged shape:", line_merged.shape)
+
+    # line_match = 0
+    for i in range(Line_new.shape[0]):
+        print(Line_new[i])
+        # if np.array_equiv(Line_newC[i], Line_new[i]):
+        #     line_match += 1
+    # print(Line_newC[0])
+    # print(Line_new[0])
+    # print('Lines matching:', line_match)
+
+    # print("======================================")
+    # print(ListPoint_newC[0])
+    # print(Line_newC[0])
     line_new = classify_curves(img, Line_newC, ListPoint_newC, label_thresh)
 
-    # print(line_new.shape)
+    print(line_new.shape)
     out_mat = sio.loadmat('out_LLCF_1.mat')
     out_Line_new = out_mat['Line_newC']
 
@@ -91,7 +101,7 @@ if __name__ == '__main__':
     # print('Total lines:', len(line_new), ' Total correct lines:', sum)
     # print(line_new[:, 10])
 
-    print(line_new[:, 10])
+    # print(line_new[:, 10])
 
     # print(listpoint_new)
     # print("line merged\n")

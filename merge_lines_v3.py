@@ -9,7 +9,7 @@ def compare(s, t):
 
 
 def math_stuff(x1, y1, x2, y2):
-    slope = (y2 - y1) / (x2 - x1) if ((x2 - x1) != 0) else inf
+    slope = float((y2 - y1) / (x2 - x1) if ((x2 - x1) != 0) else inf)
     line_len = sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
     alpha = degrees(atan(-slope))
     return slope, line_len, alpha
@@ -118,7 +118,9 @@ def merge_lines(lines, listpt, thresh, imgsize):
             lind1, lind2 = sort([int(i) for i in list(filter(lambda e: e not in [ptx], chain(temp1 + temp2)))])
             y1, x1 = unravel_index([lind1], imgsize, order='F')
             y2, x2 = unravel_index([lind2], imgsize, order='F')
+            # print('y1', y1, 'x1', x1, 'y2', y2, 'x2', x2)
             slope, line_len, alpha = math_stuff(x1, y1, x2, y2)
+            # print('slope', slope)
 
             # Intersection point is in the middle of the new line
             if min(alph1, alph2) <= alpha <= max(alph1, alph2):
@@ -130,7 +132,7 @@ def merge_lines(lines, listpt, thresh, imgsize):
                 del out[min(pt1, pt2)]
 
                 # Update both lists to reflect the addition of the merged line.
-                lines = append(lines, [[y1, x1, y2, x2, line_len, slope, alpha, 0, lind1, lind2]], axis=0)
+                lines = append(lines, [[int(y1), int(x1) + 1, int(y2), int(x2) + 1, line_len, slope, alpha, 0, lind1, lind2]], axis=0)
                 out.append([val1, val2])
 
                 listpt = merge_listpoints(listpt, pt1, pt2, lind1, lind2)
