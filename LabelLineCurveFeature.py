@@ -1,5 +1,7 @@
 import cv2
 import numpy as np
+import numpy.ma as ma
+import matplotlib as plt
 
 from utility import get_orientation, get_ordering, normalize_depth
 
@@ -25,14 +27,24 @@ def roipoly(src, poly):
     # img = normalize_depth(src, colormap=True)
     mask = np.zeros_like(src, dtype=np.uint8)
 
-    cv2.fillConvexPoly(mask, poly, (255, 255, 255), 4)
+    cv2.fillConvexPoly(mask, poly, 255) # Create the ROI
+    # cv2.fillPoly(mask, np.int32([poly]), 255)
+    # cv2.drawContours(mask, np.int32([poly]), -1, 255, -1)
     res = src * mask
-    # print('mask1 sum', np.count_nonzero(mask))
-    cv2.namedWindow('roi poly', cv2.WINDOW_NORMAL)
-    cv2.imshow('roi poly', res)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    print('mask1 count', np.count_nonzero(mask))
+    # cv2.namedWindow('roi poly', cv2.WINDOW_NORMAL)
+    # cv2.imshow('roi poly', mask)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
     return res
+
+
+def roipoly2(src, poly):
+    mask = np.zeros_like(src, dtype=np.uint8)
+
+    for i in range(poly[0][0], poly[3][0]):
+        a = 1
+
 
 
 def classify_curves(src, list_lines, list_points, window_size):
@@ -45,20 +57,26 @@ def classify_curves(src, list_lines, list_points, window_size):
 
         print(win)
         mask4 = roipoly(src, win)
-        print('Mask4 sum:', np.count_nonzero(mask4))
+        area = cv2.contourArea(np.int32([win]))
+        print('Mask4 area:', area)
+        print('Mask4 sum:', sum(src[np.nonzero(mask4)]))
         # print('Mask4 shape:', mask4[np.nonzero(mask4)].shape)
         # cv2.countNonZero(cv2.cvtColor(mask4, cv2.COLOR_BGR2GRAY)
 
-        a1 = np.mean(mask4[np.nonzero(mask4)])
+        # a1 = np.mean(mask4[np.nonzero(mask4)])
+        a1 = sum(src[np.nonzero(mask4)]) / cv2.countNonZero(mask4)
         lx = list_points[index]
+        # print('lx', lx)
         temp_list = []
         for ii in lx:
-            t1, t2 = np.unravel_index([ii], im_size, order='F')
+            t1, t2 = np.unravel_index([ii - 1], im_size, order='F')
             temp_list.append([t1[0], t2[0]])
+        # print('Temp list:', temp_list)
 
         mask5 = []
         for i in temp_list:
             mask5.append(src[i[0], i[1]])
+        # print('Mask 5:', mask5)
 
 
         mask5 = [value for value in mask5 if value != 0]
@@ -66,6 +84,7 @@ def classify_curves(src, list_lines, list_points, window_size):
         print('A1', a1, '\nA2', a2)
 
         b1 = len(mask4) * a1 - len(mask5) * a2
+        # b1 = np.count_nonzero(mask4) * a1 - len(mask5) * a2
         try:
             b11 = float(b1) / (len(mask4) - len(mask5))
         except ZeroDivisionError:
@@ -73,10 +92,10 @@ def classify_curves(src, list_lines, list_points, window_size):
 
         # print('b11', b11, '\n')
         if b11 < a2:
-            # print('IF\n')
+            print('IF\n\n')
             out.append(np.append(list_lines[index], [12]))
         else:
-            # print('ELSE\n')
+            print('ELSE\n\n')
             out.append(np.append(list_lines[index], [13]))
 
     return np.asarray(out)

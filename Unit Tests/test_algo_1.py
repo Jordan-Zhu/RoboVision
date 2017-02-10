@@ -12,6 +12,13 @@ if __name__ == '__main__':
     label_thresh = 11
 
     img = cv2.imread('learn0.png', -1)
+    # cv2.namedWindow('image', cv2.WINDOW_NORMAL)
+    # cv2.imshow('image', img)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
+    # Id_o = sio.loadmat('Id.mat')
+    # Id = Id_o['Id']
+    # Id = Id.astype(np.uint8).copy()
 
     data = sio.loadmat('input_LTLF_1.mat')
     ListSegLineC = data['ListSegLineC']
