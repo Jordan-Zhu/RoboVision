@@ -32,6 +32,7 @@ def drawconvex(linefeature, siz, im_name):
     xx = len(linefeature)
     blank_image = np.zeros(siz)
 
+    print(linefeature[0])
     for i in range(xx):
         if linefeature[i][10] == 13:
             # print(i)
@@ -39,7 +40,7 @@ def drawconvex(linefeature, siz, im_name):
             y1 = int(linefeature[i][0])
             x2 = int(linefeature[i][3])
             y2 = int(linefeature[i][2])
-            cv2.line(blank_image, (x1,y1), (x2,y2), (2, 0, 200))
+            cv2.line(blank_image, [x1,y1], [x2,y2], (2, 0, 200), 2)
         # cv2.line(Id3,(x1,y1),(x2,y2),(0, 255, 255), thickness=2)
 
 # def drawcontour(contour2,im_name):

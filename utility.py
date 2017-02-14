@@ -210,3 +210,26 @@ def get_ordering(pt1, pt2, pt3, pt4):
     res = np.array([pt1, pt3, pt4, pt2]) if temp1 > temp2 else np.array([pt1, pt4, pt3, pt2])
     return [[int(i) for i in pt] for pt in res]
 
+
+def draw_convex(line_feature, img):
+    blank_image = np.zeros_like(img, dtype=np.uint8)
+
+    print(line_feature[0])
+    for i, e in enumerate(line_feature):
+        if e[10] == 13:
+            x1 = int(e[1])
+            y1 = int(e[0])
+            x2 = int(e[3])
+            y2 = int(e[2])
+            cv2.line(blank_image, (x1, y1), (x2, y2), (255, 0, 0), 1)
+            # cv2.namedWindow('Convex lines', cv2.WINDOW_NORMAL)
+            # cv2.imshow('Convex lines', blank_image)
+            # cv2.waitKey(0)
+            # cv2.destroyAllWindows()
+
+    cv2.namedWindow('Convex lines', cv2.WINDOW_NORMAL)
+    cv2.imshow('Convex lines', blank_image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+

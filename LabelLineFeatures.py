@@ -1,4 +1,4 @@
-
+import cv2
 import numpy as np
 
 
@@ -108,6 +108,14 @@ def roipoly(src, line, poly):
     # return src[poly[0][1]:poly[1][1], poly[0][0]:poly[1][0]]
 
 
+# def roipoly(src, poly):
+#     mask = np.zeros_like(src, dtype=np.uint8)
+#
+#     cv2.fillConvexPoly(mask, poly, 255) # Create the ROI
+#     res = src * mask
+#     return res
+
+
 def mean(arr):
     return sum(arr) / len(arr)
 
@@ -130,19 +138,36 @@ def label_line_features(depthimg, edgeimg, seglist, parameters):
     # print(len(seglist))
     out = []
 
-    for line in desired_lines:
-        window, startpt, endpt, line = get_orientation(line)
-        window, win_p, win_n = create_windows(startpt, endpt, window)
-        roi = roipoly(edgeimg, line, window)
+    for i, line in enumerate(seglist):
+        if line[4] > minlen:
+            # window, startpt, endpt, line = get_orientation(line)
+            # window, win_p, win_n = create_windows(startpt, endpt, window)
+            # roi = roipoly(edgeimg, window)
+            #
+            # edd = np.where(roi == 1)
+            # maskd2 = edgeimg[edd]
+            # xjd = np.where(maskd2 == 1)
+            # tdd = len(xjd) / len(maskd2)
+            # if tdd > dis_thresh:
+            #     line[10] = obj_relation(depthimg, line, win_p, win_n)
+            # else:
+            #     line[10] = 13
+            # line = np.reshape(line, (12, 1))
+            # out.append(line)
 
-        len_mask = mask_length(line, window)
-        dis_var = len(roi)/float(len_mask)
-        if dis_var > dis_thresh:
-            line[10] = obj_relation(depthimg, line, win_p, win_n)
-        else:
-            line[10] = 13
-        line = np.reshape(line, (12, 1))
-        # print(line.shape)
-        out.append(line)
+    # for line in desired_lines:
+            window, startpt, endpt, line = get_orientation(line)
+            window, win_p, win_n = create_windows(startpt, endpt, window)
+            roi = roipoly(edgeimg, line, window)
 
-    return out
+            len_mask = mask_length(line, window)
+            dis_var = len(roi)/float(len_mask)
+            if dis_var > dis_thresh:
+                line[10] = obj_relation(depthimg, line, win_p, win_n)
+            else:
+                line[10] = 13
+            line = np.reshape(line, (12, 1))
+            # print(line.shape)
+            out.append(line)
+
+    return np.array(out)
