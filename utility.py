@@ -88,13 +88,13 @@ def edge_detect(depth):
     blur = cv2.bilateralFilter(median, 9, 25, 25)
     dimg1 = auto_canny(blur)
     skel1 = morpho(dimg1)
-    showimg(create_img(skel1), "Morphology + canny on depth image")
+    # showimg(create_img(skel1), "Morphology + canny on depth image")
     # cnt1 = find_contours(create_img(skel1))
 
     # Depth discontinuity
     depthimg = normalize_depth(depth)
     dimg2 = clahe(depthimg, iter=2)
-    showimg(dimg2, "Depth discontinuity w/ tone balancing")
+    # showimg(dimg2, "Depth discontinuity w/ tone balancing")
     dimg2 = auto_canny(dimg2)
     skel2 = morpho(dimg2)
     # cnt2 = find_contours(create_img(skel2))
@@ -118,6 +118,9 @@ def find_contours(im, mode=cv2.RETR_CCOMP):
                 newcontours.append(contours[i])
 
         cv2.drawContours(im, newcontours, 2, (0, 255, 0), 1)
+        # cv2.imshow("contours", im)
+        # cv2.waitKey(0)
+        # cv2.destroyAllWindows()
         return newcontours
     else:
         im2, contours, hierarchy = cv2.findContours(im, mode, cv2.CHAIN_APPROX_SIMPLE)
@@ -212,9 +215,11 @@ def get_ordering(pt1, pt2, pt3, pt4):
 
 
 def draw_convex(line_feature, img):
-    blank_image = np.zeros_like(img, dtype=np.uint8)
+    # blank_image = np.zeros_like(img, dtype=np.uint8)
+    blank_image = normalize_depth(img)
 
-    print(line_feature[0])
+
+    # print(line_feature[0])
     for i, e in enumerate(line_feature):
         if e[10] == 13:
             x1 = int(e[1])
@@ -233,3 +238,44 @@ def draw_convex(line_feature, img):
     cv2.destroyAllWindows()
 
 
+def draw_convex_py(line_feature, img):
+    blank_image = normalize_depth(img)
+
+    # print(line_feature[0])
+    for i, e in enumerate(line_feature):
+        if e[10] == 13:
+            x1 = int(e[0])
+            y1 = int(e[1])
+            x2 = int(e[2])
+            y2 = int(e[3])
+            cv2.line(blank_image, (x1, y1), (x2, y2), (255, 0, 0), 1)
+            # cv2.namedWindow('Convex lines', cv2.WINDOW_NORMAL)
+            # cv2.imshow('Convex lines', blank_image)
+            # cv2.waitKey(0)
+            # cv2.destroyAllWindows()
+
+    cv2.namedWindow('Convex lines', cv2.WINDOW_NORMAL)
+    cv2.imshow('Convex lines', blank_image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+
+def draw_lf(line_feature, img):
+    blank_image = normalize_depth(img)
+
+    # print(line_feature[0])
+    for i, e in enumerate(line_feature):
+        x1 = int(e[0])
+        y1 = int(e[1])
+        x2 = int(e[2])
+        y2 = int(e[3])
+        cv2.line(blank_image, (x1, y1), (x2, y2), (255, 0, 0), 1)
+        # cv2.namedWindow('Convex lines', cv2.WINDOW_NORMAL)
+        # cv2.imshow('Convex lines', blank_image)
+        # cv2.waitKey(0)
+        # cv2.destroyAllWindows()
+
+    cv2.namedWindow('Line features', cv2.WINDOW_NORMAL)
+    cv2.imshow('Line features', blank_image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()

@@ -28,21 +28,24 @@ if __name__ == '__main__':
     data2 = sio.loadmat('LLCF_1.mat')
     Line_newCx = data2['Line_newCx']
 
-    # edges = edge_detect(img)
-    # cntrs = np.asarray(find_contours(edges))
-    #
-    # # Create line segments from the contours
-    # seglist = lineseg(cntrs, tol=2)
-    # print(seglist[0])
+    edges = edge_detect(img)
+    cntrs = np.asarray(find_contours(edges))
+
+    # Create line segments from the contours
+    seglist = lineseg(cntrs, tol=2)
+    print(seglist[0].shape)
+    print(ListSegLineC.shape)
+    print(cntrs[0][:, :, 0])
 
     # SEGMENT AND LABEL THE CURVATURE LINES AS EITHER CONVEX / CONCAVE
     LineFeature, ListPoint = create_linefeatures(ListSegLineC, ListEdgeC, img.shape)
+    print(LineFeature.shape, ListPoint.shape)
     # LineFeature, ListPoint = create_linefeatures(seglist, edges, img.shape)
     Line_new, ListPoint_new, line_merged = merge_lines(LineFeature, ListPoint, thresh_m, img.shape)
     line_newC = classify_curves(img, Line_new, ListPoint_new, label_thresh)
 
     print(line_newC.shape)
-    print(line_newC[:, 10])
+    # print(line_newC[:, 10])
 
     sum = 0
     for i in range(len(line_newC)):
