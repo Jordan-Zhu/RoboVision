@@ -25,7 +25,7 @@ def create_linefeatures(ListSegments, ListEdges, imgsize):
 
     for i, curr in enumerate(ListSegments):
         for j in range(curr.shape[0] - 1):
-            # print(curr)
+            # print(i, '.', curr)
             x1, y1 = curr[j].astype(int)
             x2, y2 = curr[j + 1].astype(int)
             # print('x1', x1, 'y1', y1, 'x2', x2, 'y2', y2)
@@ -34,7 +34,7 @@ def create_linefeatures(ListSegments, ListEdges, imgsize):
             slope = round((y2 - y1) / (x2 - x1), 4) if ((x2 - x1) != 0) else calc_inf(y2, y1, x2, x1)
             lin_ind1 = get_lin_index(x1, y1, imgsize)
             lin_ind2 = get_lin_index(x2, y2, imgsize)
-            print('linear indices:', lin_ind1, lin_ind2)
+            # print('linear indices:', lin_ind1, lin_ind2)
             linelen = sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
             alpha = degrees(atan(-slope))
 
@@ -53,7 +53,7 @@ def create_linefeatures(ListSegments, ListEdges, imgsize):
     len_lp = len(ListPoint)
     LPP = []
     for cnt in range(len_lp):
-        LPP.append([np.ravel_multi_index((ListPoint[cnt][:, 0], ListPoint[cnt][:, 1]), imgsize, order='F')])
+        LPP.append([np.ravel_multi_index((ListPoint[cnt][:, 0], ListPoint[cnt][:, 1]), imgsize, order='C')])
 
     return np.array(LineFeature), np.array(LPP)
 

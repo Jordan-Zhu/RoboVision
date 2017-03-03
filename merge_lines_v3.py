@@ -105,6 +105,7 @@ def merge_lines(lines, listpt, thresh, imgsize):
         # point to see which ones we can merge.
         # Formula is combinations w/o repetitions (choose 2)
         pairs = list(combinations(list(where(lines == ptx)[0]), 2))
+        print(pairs)
 
         # Go to next iteration if there's no combinations
         if not pairs:

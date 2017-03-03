@@ -127,35 +127,14 @@ def obj_relation(depthimg, line, win_p, win_n):
 
 
 def label_line_features(depthimg, edgeimg, seglist, parameters):
-    # Constants
     minlen = int(parameters["Cons_Lmin"])
     dis_thresh = int(parameters["thresh_label_dis"])
     global window_size
     window_size = int(parameters["label_win_sized"])
 
-    # Get the lines which are longer than the minimum length
-    desired_lines = [line for line in seglist if line[4] > minlen]
-    # print(len(seglist))
     out = []
-
     for i, line in enumerate(seglist):
         if line[4] > minlen:
-            # window, startpt, endpt, line = get_orientation(line)
-            # window, win_p, win_n = create_windows(startpt, endpt, window)
-            # roi = roipoly(edgeimg, window)
-            #
-            # edd = np.where(roi == 1)
-            # maskd2 = edgeimg[edd]
-            # xjd = np.where(maskd2 == 1)
-            # tdd = len(xjd) / len(maskd2)
-            # if tdd > dis_thresh:
-            #     line[10] = obj_relation(depthimg, line, win_p, win_n)
-            # else:
-            #     line[10] = 13
-            # line = np.reshape(line, (12, 1))
-            # out.append(line)
-
-    # for line in desired_lines:
             window, startpt, endpt, line = get_orientation(line)
             window, win_p, win_n = create_windows(startpt, endpt, window)
             roi = roipoly(edgeimg, line, window)

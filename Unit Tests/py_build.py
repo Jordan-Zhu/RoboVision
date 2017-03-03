@@ -4,9 +4,12 @@ import numpy as np
 from utility import showimg, draw_convex_py, edge_detect, find_contours, normalize_depth, draw_lf
 from Lseg_to_Lfeat_py import create_linefeatures
 from lineseg import lineseg
-from merge_lines_v3 import merge_lines
+# from merge_lines_v3 import merge_lines
+from merge_lines_py import merge_lines
 from LabelLineCurveFeature_py import classify_curves
+from drawedgelist import drawedgelist
 from test_convexity import test_convexity
+
 
 if __name__ == '__main__':
     thresh_m = 10
@@ -32,6 +35,7 @@ if __name__ == '__main__':
 
     # Create line segments from the contours
     seglist = lineseg(cntrs, tol=2)
+    # drawedgelist(seglist, rowscols=[])
     # print(seglist)
     # print(cntrs)
     # print(ListSegLineC.shape)
@@ -40,14 +44,15 @@ if __name__ == '__main__':
     imgsize = (img.shape[1], img.shape[0])
     # print(imgsize)
     LineFeature, ListPoint = create_linefeatures(seglist, cntrs, imgsize)
-    Line_new, ListPoint_new, line_merged = merge_lines(LineFeature, ListPoint, thresh_m, img.shape)
-    # print(ListPoint_new)
-
+    print(imgsize)
+    print(np.ravel_multi_index((1, 1), imgsize, order='F'))
+    Line_new, ListPoint_new, line_merged = merge_lines(LineFeature, ListPoint, thresh_m, imgsize)
+    # Line_new, ListPoint_new, line_merged = merge_lines(LineFeature, ListPoint, thresh_m, img.shape)
+    # print(line_merged)
+    # draw_lf(LineFeature, img)
     draw_lf(Line_new, img)
 
-    line_newC = classify_curves(img, Line_new, ListPoint_new, label_thresh)
 
-    # print(LineFeature)
-    # print(ListPoint)
+    line_newC = classify_curves(img, Line_new, ListPoint_new, label_thresh)
 
     draw_convex_py(line_newC, img)

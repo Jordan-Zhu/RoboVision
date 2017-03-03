@@ -1,4 +1,4 @@
-<<<<<<< Updated upstream
+
 import numpy as np
 import math
 
@@ -23,7 +23,7 @@ def masked_median_filter(im, mask):
             temp = A.shape[1] / 2
             print(temp)
             r[m, n] = A[math.ceil(A.shape[1] / 2)]
-=======
+
 import numpy as np
 import math
 
@@ -46,4 +46,4 @@ def masked_median_filter(im, mask):
         if A:
             A = np.sort(A)
             r[m, n] = A[math.ceil(A.shape[1] / 2)]
->>>>>>> Stashed changes
+

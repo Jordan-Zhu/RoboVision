@@ -33,28 +33,28 @@ if __name__ == '__main__':
 
     # Create line segments from the contours
     seglist = lineseg(cntrs, tol=2)
-    print(seglist[0].shape)
-    print(ListSegLineC.shape)
-    print(cntrs[0][:, :, 0])
+    # print(seglist[0].shape)
+    # print(ListSegLineC.shape)
+    # print(cntrs[0][:, :, 0])
 
     # SEGMENT AND LABEL THE CURVATURE LINES AS EITHER CONVEX / CONCAVE
     LineFeature, ListPoint = create_linefeatures(ListSegLineC, ListEdgeC, img.shape)
-    print(LineFeature.shape, ListPoint.shape)
+    # print(LineFeature.shape, ListPoint.shape)
     # LineFeature, ListPoint = create_linefeatures(seglist, edges, img.shape)
     Line_new, ListPoint_new, line_merged = merge_lines(LineFeature, ListPoint, thresh_m, img.shape)
     line_newC = classify_curves(img, Line_new, ListPoint_new, label_thresh)
 
-    print(line_newC.shape)
+    # print(line_newC.shape)
     # print(line_newC[:, 10])
 
-    sum = 0
-    for i in range(len(line_newC)):
-        if line_newC[i, 10] == Line_newCx[i, 10]:
-            # print(i, ".", int(line_newC[i, 10]), " == ", int(Line_newCx[i, 10]), "\n")
-            sum += 1
-        else:
-            print(i, ".", int(line_newC[i, 10]), " == ", int(Line_newCx[i, 10]), "\n")
-    print('Total lines:', len(line_newC), ' Total correct lines:', sum)
+    # sum = 0
+    # for i in range(len(line_newC)):
+    #     if line_newC[i, 10] == Line_newCx[i, 10]:
+    #         # print(i, ".", int(line_newC[i, 10]), " == ", int(Line_newCx[i, 10]), "\n")
+    #         sum += 1
+    #     else:
+    #         print(i, ".", int(line_newC[i, 10]), " == ", int(Line_newCx[i, 10]), "\n")
+    # print('Total lines:', len(line_newC), ' Total correct lines:', sum)
 
     draw_convex(line_newC, img)
 
