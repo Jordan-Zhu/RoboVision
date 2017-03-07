@@ -1,7 +1,7 @@
 import cv2
 import scipy.io as sio
 import numpy as np
-from utility import showimg, draw_convex_py, edge_detect, find_contours, normalize_depth, draw_lf
+from utility import showimg, draw_convex_py, edge_detect, find_contours, normalize_depth, draw_lf, draw_lp
 from Lseg_to_Lfeat_py import create_linefeatures
 from lineseg import lineseg
 # from merge_lines_v3 import merge_lines
@@ -44,12 +44,13 @@ if __name__ == '__main__':
     imgsize = (img.shape[1], img.shape[0])
     # print(imgsize)
     LineFeature, ListPoint = create_linefeatures(seglist, cntrs, imgsize)
-    print(imgsize)
-    print(np.ravel_multi_index((1, 1), imgsize, order='F'))
+    # print(LineFeature[:, ])
+    # print(np.ravel_multi_index((1, 1), imgsize, order='F'))
     Line_new, ListPoint_new, line_merged = merge_lines(LineFeature, ListPoint, thresh_m, imgsize)
     # Line_new, ListPoint_new, line_merged = merge_lines(LineFeature, ListPoint, thresh_m, img.shape)
     # print(line_merged)
-    # draw_lf(LineFeature, img)
+    draw_lf(LineFeature, img)
+    draw_lp(ListPoint, img, imgsize)
     draw_lf(Line_new, img)
 
 
