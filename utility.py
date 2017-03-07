@@ -1,6 +1,7 @@
 import cv2
 import matplotlib as plt
 import numpy as np
+import random as rand
 from skimage import morphology
 
 
@@ -261,7 +262,8 @@ def draw_convex_py(line_feature, img):
 
 
 def draw_lf(line_feature, img):
-    blank_image = normalize_depth(img)
+    blank_image = normalize_depth(img, colormap=True)
+    # blank_image = np.zeros_like(img)
 
     # print(line_feature[0])
     for i, e in enumerate(line_feature):
@@ -269,7 +271,8 @@ def draw_lf(line_feature, img):
         y1 = int(e[1])
         x2 = int(e[2])
         y2 = int(e[3])
-        cv2.line(blank_image, (x1, y1), (x2, y2), (255, 0, 0), 1)
+        color = (rand.randint(0, 255), rand.randint(0, 255), rand.randint(0, 255))
+        cv2.line(blank_image, (x1, y1), (x2, y2), color, 1)
         # cv2.namedWindow('Convex lines', cv2.WINDOW_NORMAL)
         # cv2.imshow('Convex lines', blank_image)
         # cv2.waitKey(0)
@@ -279,3 +282,17 @@ def draw_lf(line_feature, img):
     cv2.imshow('Line features', blank_image)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+
+def draw_lp(list_point, img, imgsize):
+
+    for i, e in enumerate(list_point):
+        for j, element in enumerate(e[0]):
+            # print(e2)
+            x, y = np.unravel_index([element], imgsize, order='C')
+            cv2.line(img, (x, y), (x, y), (255, 0, 0), 2)
+
+    cv2.namedWindow('List Points', cv2.WINDOW_NORMAL)
+    cv2.imshow('List Points', img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+

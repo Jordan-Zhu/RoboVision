@@ -36,7 +36,7 @@ def classify_curves(src, list_lines, list_points, window_size):
         mask4 = roipoly(src, win)
         # mask0 = np.array(roipoly2(src, line, win2))
         area = cv2.contourArea(np.int32([win]))
-        print('Mask4 area:', area)
+        # print('Mask4 area:', area)
         # print('Mask4 count:', cv2.countNonZero(mask4))
 
 
@@ -51,16 +51,16 @@ def classify_curves(src, list_lines, list_points, window_size):
             t1, t2 = np.unravel_index([ii], im_size, order='C')
             temp_list.append([t1[0], t2[0]])
 
-        print(temp_list)
+        # print(temp_list)
         mask5 = []
         for i in temp_list:
             mask5.append(src[i[0], i[1]])
 
-        print('mask5', mask5)
+        # print('mask5', mask5)
         # mask5 = [value for value in mask5 if value != 0]
         a2 = 0 if not mask5 else np.mean(mask5)
 
-        print('A1', a1, '\nA2', a2, '\n')
+        # print('A1', a1, '\nA2', a2, '\n')
 
         b1 = cv2.countNonZero(mask4) * a1 - len(mask5) * a2
         try:
