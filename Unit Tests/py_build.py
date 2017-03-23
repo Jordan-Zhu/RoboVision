@@ -17,7 +17,7 @@ if __name__ == '__main__':
 
     img = cv2.imread('learn0.png', -1)
     # cv2.namedWindow('image', cv2.WINDOW_NORMAL)
-    # cv2.imshow('image', normalize_depth(img))
+    # cv2.imshow('image', normalize_depth(img, colormap=True))
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
 
@@ -49,10 +49,9 @@ if __name__ == '__main__':
     Line_new, ListPoint_new, line_merged = merge_lines(LineFeature, ListPoint, thresh_m, imgsize)
     # Line_new, ListPoint_new, line_merged = merge_lines(LineFeature, ListPoint, thresh_m, img.shape)
     # print(line_merged)
-    draw_lf(LineFeature, img)
-    draw_lp(ListPoint, img, imgsize)
-    draw_lf(Line_new, img)
-
+    # draw_lf(LineFeature, img)
+    # draw_lp(ListPoint, img, imgsize)
+    # draw_lf(Line_new, img)
 
     line_newC = classify_curves(img, Line_new, ListPoint_new, label_thresh)
 

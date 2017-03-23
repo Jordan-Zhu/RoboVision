@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from utility import get_orientation, get_ordering, normalize_depth
+from utility import get_orientation, get_ordering, normalize_depth, get_direction_py
 
 
 def swap_indices(arr):
@@ -13,11 +13,20 @@ def swap_indices(arr):
 def roipoly(src, poly):
     mask = np.zeros_like(src, dtype=np.uint8)
 
-    cv2.fillConvexPoly(mask, poly, 255) # Create the ROI
+    overlay = normalize_depth(src, colormap=True)
+    output = normalize_depth(src, colormap=True)
+    alpha = 0.5
+
+    cv2.fillConvexPoly(mask, poly, 255)  # Create the ROI
+    cv2.fillConvexPoly(overlay, poly, (0, 0, 255))
+    cv2.putText(overlay, "ROI Poly: alpha={}".format(alpha), (10, 30),
+                cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0, 0, 255), 3)
+    cv2.addWeighted(overlay, alpha, output, 1 - alpha,
+                    0, output)
     res = src * mask
     # print('mask1 count', np.count_nonzero(mask))
     # cv2.namedWindow('roi poly', cv2.WINDOW_NORMAL)
-    # cv2.imshow('roi poly', res)
+    # cv2.imshow('roi poly', output)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
     return res

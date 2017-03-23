@@ -208,6 +208,23 @@ def get_orientation(line, window_size):
         return pt1, pt2, pt3, pt4
 
 
+def get_direction_py(line, window_size):
+    dx = abs(line[0] - line[2])
+    dy = abs(line[1] - line[3])
+    # Vertical line test
+    if dy > dx or dy == dx:
+        pt1 = [line[0] - window_size, line[1]]
+        pt2 = [line[0] + window_size, line[1]]
+        pt3 = [line[2] - window_size, line[3]]
+        pt4 = [line[2] + window_size, line[3]]
+        return pt1, pt2, pt3, pt4
+    else:
+        pt1 = [line[0], line[1] - window_size]
+        pt2 = [line[0], line[1] + window_size]
+        pt3 = [line[2], line[3] - window_size]
+        pt4 = [line[2], line[3] + window_size]
+        return pt1, pt2, pt3, pt4
+
 def get_ordering(pt1, pt2, pt3, pt4):
     temp1 = np.linalg.norm(np.subtract((np.add(pt1, pt3) / 2.0), (np.add(pt2, pt4) / 2.0)))
     temp2 = np.linalg.norm(np.subtract((np.add(pt1, pt4) / 2.0), (np.add(pt2, pt3) / 2.0)))
@@ -272,7 +289,7 @@ def draw_lf(line_feature, img):
         x2 = int(e[2])
         y2 = int(e[3])
         color = (rand.randint(0, 255), rand.randint(0, 255), rand.randint(0, 255))
-        cv2.line(blank_image, (x1, y1), (x2, y2), color, 1)
+        cv2.line(blank_image, (x1, y1), (x2, y2), color, 3)
         # cv2.namedWindow('Convex lines', cv2.WINDOW_NORMAL)
         # cv2.imshow('Convex lines', blank_image)
         # cv2.waitKey(0)
@@ -282,6 +299,7 @@ def draw_lf(line_feature, img):
     cv2.imshow('Line features', blank_image)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+
 
 def draw_lp(list_point, img, imgsize):
 
