@@ -41,18 +41,23 @@ if __name__ == '__main__':
     # print(ListSegLineC.shape)
     # print(ListEdgeC[0][0][:, 1])
     # print(cntrs[0][:, 0][:, 1])
-    imgsize = (img.shape[1], img.shape[0])
-    # print(imgsize)
-    LineFeature, ListPoint = create_linefeatures(seglist, cntrs, imgsize)
-    # print(LineFeature[:, ])
+
+    # imgsize = (img.shape[1], img.shape[0])
+    imgsize = img.shape
+
+    print(imgsize)
+    LineFeature, ListPoint = create_linefeatures(seglist, cntrs, img, imgsize)
+    print(LineFeature.shape)
     # print(np.ravel_multi_index((1, 1), imgsize, order='F'))
     Line_new, ListPoint_new, line_merged = merge_lines(LineFeature, ListPoint, thresh_m, imgsize)
     # Line_new, ListPoint_new, line_merged = merge_lines(LineFeature, ListPoint, thresh_m, img.shape)
     # print(line_merged)
     # draw_lf(LineFeature, img)
     # draw_lp(ListPoint, img, imgsize)
-    # draw_lf(Line_new, img)
+    draw_lf(Line_new, img)
 
+    print(Line_new[0][8:10])
+    print(ListPoint_new[0])
     line_newC = classify_curves(img, Line_new, ListPoint_new, label_thresh)
 
     draw_convex_py(line_newC, img)

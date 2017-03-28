@@ -289,7 +289,7 @@ def draw_lf(line_feature, img):
         x2 = int(e[2])
         y2 = int(e[3])
         color = (rand.randint(0, 255), rand.randint(0, 255), rand.randint(0, 255))
-        cv2.line(blank_image, (x1, y1), (x2, y2), color, 3)
+        cv2.line(blank_image, (x1, y1), (x2, y2), color, 2)
         # cv2.namedWindow('Convex lines', cv2.WINDOW_NORMAL)
         # cv2.imshow('Convex lines', blank_image)
         # cv2.waitKey(0)
@@ -314,3 +314,20 @@ def draw_lp(list_point, img, imgsize):
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
+
+def swap_indices(arr):
+    res = []
+    for i, e in enumerate(arr):
+        res.append([arr[i][1] - 1, arr[i][0] - 1])
+    return np.array(res)
+
+
+def swap_cols(arr, frm, to):
+    arr[:,[frm, to]] = arr[:,[to, frm]]
+
+
+def squeeze_ndarr(arr):
+    temp = []
+    for i in range(arr.shape[0]):
+        temp.append(np.squeeze(arr[i]))
+    np.copyto(arr, np.array(temp))

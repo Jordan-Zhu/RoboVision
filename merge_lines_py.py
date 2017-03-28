@@ -58,6 +58,7 @@ def merge_listpoints(listpt, pt1, pt2, px1, px2):
     del listpt[max(pt1, pt2)]
     del listpt[min(pt1, pt2)]
     merged = np.r_[line_start[0:-1], line_end]
+    # print('merged', merged)
     listpt.append(merged)
 
     return listpt
@@ -80,8 +81,8 @@ def merge_lines(lines, listpt, thresh, imgsize):
 
             lind1, lind2 = np.sort([int(i) for i in list(filter(lambda e: e not in [ptx], chain(temp1 + temp2)))])
             # print('linear indices: ', lind1, lind2)
-            x1, y1 = np.unravel_index([lind1], imgsize, order='C')
-            x2, y2 = np.unravel_index([lind2], imgsize, order='C')
+            x1, y1 = np.squeeze(np.unravel_index([lind1], imgsize, order='C'))
+            x2, y2 = np.squeeze(np.unravel_index([lind2], imgsize, order='C'))
             # print('x1', x1, 'y1', y1, 'x2', x2, 'y2', y2)
             slope, line_len, alpha = math_stuff(x1, y1, x2, y2)
 
