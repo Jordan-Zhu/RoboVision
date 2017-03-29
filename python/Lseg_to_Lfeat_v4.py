@@ -16,7 +16,7 @@ def find_star(x, y, idx, ListEdges):
 
 
 def get_lin_index(x1, y1, imgsize):
-    return np.ravel_multi_index((y1 - 1, x1 - 1), imgsize, order='F') + 1
+    return np.ravel_multi_index((y1, x1), imgsize, order='F')
 
 
 def create_linefeatures(ListSegments, ListEdges, imgsize):
@@ -50,6 +50,6 @@ def create_linefeatures(ListSegments, ListEdges, imgsize):
     len_lp = len(ListPoint)
     LPP = []
     for cnt in range(len_lp):
-        LPP.append([np.ravel_multi_index((ListPoint[cnt][:, 0] - 1, ListPoint[cnt][:, 1] - 1), imgsize, order='F') + 1])
+        LPP.append([np.ravel_multi_index((ListPoint[cnt][:, 0], ListPoint[cnt][:, 1]), imgsize, order='F')])
 
     return np.array(LineFeature), np.array(LPP)

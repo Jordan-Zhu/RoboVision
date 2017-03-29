@@ -42,8 +42,8 @@ if __name__ == '__main__':
     # print(ListEdgeC[0][0][:, 1])
     # print(cntrs[0][:, 0][:, 1])
 
-    # imgsize = (img.shape[1], img.shape[0])
-    imgsize = img.shape
+    imgsize = (img.shape[1], img.shape[0])
+    # imgsize = img.shape
 
     print(imgsize)
     LineFeature, ListPoint = create_linefeatures(seglist, cntrs, img, imgsize)
