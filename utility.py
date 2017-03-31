@@ -315,10 +315,17 @@ def draw_lp(list_point, img, imgsize):
     cv2.destroyAllWindows()
 
 
-def swap_indices(arr):
+def swap_indices_m(arr):
     res = []
     for i, e in enumerate(arr):
         res.append([arr[i][1] - 1, arr[i][0] - 1])
+    return np.array(res)
+
+
+def swap_indices(arr):
+    res = []
+    for i, e in enumerate(arr):
+        res.append([arr[i][1], arr[i][0]])
     return np.array(res)
 
 

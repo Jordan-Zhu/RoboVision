@@ -3,13 +3,6 @@ import numpy as np
 from utility import *
 
 
-def swap_indices(arr):
-    res = []
-    for i, e in enumerate(arr):
-        res.append([arr[i][1], arr[i][0]])
-    return np.array(res)
-
-
 def roipoly(src, poly):
     mask = np.zeros_like(src, dtype=np.uint8)
 
