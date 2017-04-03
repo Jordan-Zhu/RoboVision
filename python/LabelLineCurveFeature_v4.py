@@ -11,7 +11,7 @@ def roipoly(src, poly):
     alpha = 0.5
 
     win = swap_indices(poly)
-    print(win)
+    # print(win)
 
     cv2.fillConvexPoly(mask, win, 255)  # Create the ROI
     cv2.fillConvexPoly(overlay, win, (255, 255, 255))
@@ -22,10 +22,10 @@ def roipoly(src, poly):
                     0, output)
     res = src * mask
     # print('mask1 count', np.count_nonzero(mask))
-    cv2.namedWindow('roi poly', cv2.WINDOW_NORMAL)
-    cv2.imshow('roi poly', output)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    # cv2.namedWindow('roi poly', cv2.WINDOW_NORMAL)
+    # cv2.imshow('roi poly', output)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
     return res
 
 
@@ -56,7 +56,7 @@ def classify_curves(src, list_lines, list_points, window_size):
 
         # new_list = [int(i) for i in temp_list[0], int(j) for j in temp_list[1]]
         # temp_list = np.squeeze(np.array(temp_list))
-        print(temp_list)
+        # print(temp_list)
         # new_list = np.vstack(([temp_list[0].T], [temp_list[1].T])).T
         # print(new_list)
         # points = np.array([[164, 65], [164, 544], [165, 385], [164, 546]])

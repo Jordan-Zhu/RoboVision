@@ -1,7 +1,8 @@
 # from loadmat import loadmat
 import numpy as np
-from line_match import line_match
 import scipy.io as sio
+
+from python.line_match import line_match
 
 if __name__ == '__main__':
     data1 = sio.loadmat('LineInteresting_in.mat')

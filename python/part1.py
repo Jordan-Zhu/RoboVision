@@ -8,6 +8,8 @@ from drawedgelist import drawedgelist
 from python.Lseg_to_Lfeat_v4 import create_linefeatures
 from python.merge_lines_v4 import merge_lines
 from python.LabelLineCurveFeature_v4 import classify_curves
+from python.LabelLineFeature_v1 import label_line_features
+from python.line_match import line_match
 
 
 def initContours(img):
@@ -22,7 +24,7 @@ def initContours(img):
         swap_cols(seg_list[i], 0, 1)
     for i in range(cntrs.shape[0]):
         swap_cols(cntrs[i], 0, 1)
-    return seg_list, cntrs
+    return seg_list, edges, cntrs
 
 
 def draw_lfeat(line_feature, img):
@@ -46,11 +48,31 @@ def draw_lfeat(line_feature, img):
 if __name__ == '__main__':
     img = cv2.imread('learn0.png', -1)
     im_size = img.shape
-    seg_list, cntrs = initContours(img)
+
+    P = sio.loadmat('Parameter.mat')
+    param = P['P']
+
+    seg_list, edges, cntrs = initContours(img)
 
     LineFeature, ListPoint = create_linefeatures(seg_list, cntrs, im_size)
     Line_new, ListPoint_new, line_merged = merge_lines(LineFeature, ListPoint, 10, im_size)
     draw_lfeat(Line_new, img)
     line_newC = classify_curves(img, Line_new, ListPoint_new, 11)
     draw_convex(line_newC, img)
+
+    # Remove the 11th column for post-processing
+    line_newC = np.delete(line_newC, 10, axis=1)
+    line_new_new = label_line_features(img, edges, line_newC, param)
+    print(line_new_new.shape)
+
+    # Keep the lines that are curvature / discontinuities
+    relevant_lines = np.where(line_new_new[:, 10] != 0)[0]
+    line_interesting = line_new_new[relevant_lines]
+    # Fast sorting, done based on line angle
+    line_interesting = line_interesting[line_interesting[:, 6].argsort()]
+
+    print(line_interesting.shape)
+    list_pair = line_match(line_interesting, param)
+    print(list_pair)
+
 

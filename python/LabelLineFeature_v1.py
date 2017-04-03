@@ -61,7 +61,7 @@ def create_windows(pt1, pt2, pt3, pt4, startpt, endpt):
 
 def roipoly(src, poly):
     mask = np.zeros_like(src, dtype=np.uint8)
-    win = swap_indices(poly)
+    win = swap_indices(poly).astype(int)
 
     cv2.fillConvexPoly(mask, win, 255)  # Create the ROI
     return mask

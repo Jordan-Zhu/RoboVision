@@ -13,18 +13,26 @@ def angle(x,y,z):
     # angle = @(x,y,z) acosd((y^2+z^2-x^2)/(2*y*z)) ;   % cosine law
 
     # The angles of the triangle if one knows the three sides: arccos((a^2 + b^2 - c^2) / (2ab))
-    # print("x, y, z =", x, y, z, ",", math.degrees(math.acos((y**2 + z**2 - x**2)/(2*y*z + 0.0))))
-    return math.degrees(math.acos((y**2 + z**2 - x**2)/(2*y*z + 0.0))) # / math.pi*180.0
+    print("x, y, z =", x, y, z)
+    # print(math.degrees(math.acos((y**2 + z**2 - x**2)/(2*y*z + 0.0))))
+    t1 = y**2 + z**2 - x**2
+    t2 = 2*y*z
+    print('t1 =', t1, 't2 =', t2, 't1/t2 =', t1/t2, 'acos =', math.acos(1.0))
+    # print('acos =', math.acos(t1/t2))
+    # return math.degrees(math.acos((y**2 + z**2 - x**2)/(2*y*z + 0.0))) # / math.pi*180.0
+    return 0 if t1 < 0 else math.degrees(math.acos(t1 / t2))
 
 
 def check_overlap(line1, line2):
     # Format of the lines - [y1, x1, y2, x2, length, slope]
 
-    pt1 = np.array((line1[1], line1[0]))
-    pt2 = np.array((line1[3], line1[2]))
+    pt1 = np.array([line1[1], line1[0]]).astype(int)
+    pt2 = np.array([line1[3], line1[2]]).astype(int)
 
-    pt3 = np.array((line2[1], line2[0]))
-    pt4 = np.array((line2[3], line2[2]))
+    pt3 = np.array([line2[1], line2[0]]).astype(int)
+    pt4 = np.array([line2[3], line2[2]]).astype(int)
+
+    print('pt1 =', pt1, 'pt2 =', pt2, 'pt3 =', pt3, 'pt4 =', pt4)
 
     # Calculate straight-line (Euclidean) distance between points
     a = np.linalg.norm(pt1 - pt2)
@@ -35,21 +43,30 @@ def check_overlap(line1, line2):
     f = np.linalg.norm(pt3 - pt4)
 
     # print("pt1", pt1, ",pt2", pt2, ",pt3", pt3, ",pt4", pt4)
-    # print(a, b, c, d, e, f)
+    print(a, b, c, d, e, f)
 
     a143 = angle(c, d, f)
+    print('a143 =', a143)
     a134 = angle(d, c, f)
+    print('a134 =', a134)
 
     a243 = angle(b, e, f)
+    print('a243 =', a243)
     a234 = angle(e, b, f)
+    print('a234 =', a234)
 
     a312 = angle(b, a, c)
+    print('a312 =', a312)
     a321 = angle(c, b, a)
+    print('a321 =', a321)
 
     a412 = angle(e, a, d)
+    print('a412 =', a412)
     a421 = angle(d, a, e)
+    print('a421 =', a421)
 
     # Print this in MATLAB
+    # print('a312 = ', a312, '\n')
     # print("\na143", a143, "a134", a134, "|a243", a243, "a234", a234, "|a312", a312, "a321", a321, "|a412", a412, "a421", a421)
 
     # Return True if the lines could overlap
