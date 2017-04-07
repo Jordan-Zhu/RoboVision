@@ -78,9 +78,9 @@ def morpho(img):
     return skel
 
 
-def edge_detect(depth):
+def curve_discont(depth_im):
     # Gradient of depth img
-    graddir = grad_dir(depth)
+    graddir = grad_dir(depth_im)
     # Threshold image to get it in the RGB color space
     dimg1 = (((graddir - graddir.min()) / (graddir.max() - graddir.min())) * 255.9).astype(np.uint8)
     # Eliminate salt-and-pepper noise
@@ -89,20 +89,32 @@ def edge_detect(depth):
     blur = cv2.bilateralFilter(median, 9, 25, 25)
     dimg1 = auto_canny(blur)
     skel1 = morpho(dimg1)
-    # showimg(create_img(skel1), "Morphology + canny on depth image")
-    # cnt1 = find_contours(create_img(skel1))
+    showimg(create_img(skel1), "Morphology + canny on depth image")
+    cnt1 = find_contours(create_img(skel1))
 
+    return skel1, cnt1
+
+
+def depth_discont(depth_im):
     # Depth discontinuity
-    depthimg = normalize_depth(depth)
+    depthimg = normalize_depth(depth_im)
     dimg2 = clahe(depthimg, iter=2)
-    # showimg(dimg2, "Depth discontinuity w/ tone balancing")
     dimg2 = auto_canny(dimg2)
     skel2 = morpho(dimg2)
-    # cnt2 = find_contours(create_img(skel2))
+    showimg(dimg2, "Depth discontinuity w/ tone balancing")
+    cnt2 = find_contours(create_img(skel2), cv2.RETR_EXTERNAL)
+
+    return skel2, cnt2
+
+
+def edge_detect(depth):
+    skel1, cnt1 = curve_discont(depth)
+    skel2, cnt2 = depth_discont(depth)
 
     # combine both images
     dst = (np.logical_or(skel1, skel2)).astype('uint8')
     dst = create_img(dst)
+    showimg(dst, "Depth + Discontinuity")
     return dst
 
 
@@ -111,6 +123,9 @@ def find_contours(im, mode=cv2.RETR_CCOMP):
     # error: (-215) scn == 3 || scn == 4 in function cv::ipp_cvtColor
     # imgray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
     # ret, thresh = cv2.threshold(imgray, 127, 255, 0)
+    height = im.shape[0]
+    width = im.shape[1]
+    blank_image = np.zeros((height, width, 3), np.uint8)
     if mode == cv2.RETR_CCOMP:
         im2, contours, hierarchy = cv2.findContours(im, mode, cv2.CHAIN_APPROX_SIMPLE)
         newcontours = []
@@ -118,22 +133,19 @@ def find_contours(im, mode=cv2.RETR_CCOMP):
             if hierarchy[0][i, 2] < 0:
                 newcontours.append(contours[i])
 
-        cv2.drawContours(im, newcontours, 2, (0, 255, 0), 1)
-        # cv2.imshow("contours", im)
-        # cv2.waitKey(0)
-        # cv2.destroyAllWindows()
+        # Display contours
+        cv2.drawContours(blank_image, newcontours, -1, (0, 255, 0), 1)
+        cv2.imshow("contours", blank_image)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
         return newcontours
     else:
         im2, contours, hierarchy = cv2.findContours(im, mode, cv2.CHAIN_APPROX_SIMPLE)
+        cv2.drawContours(blank_image, contours, -1, (0, 255, 0), 1)
+        cv2.imshow("contours", blank_image)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
     # cv2.RETR_EXTERNAL cv2.RETR_CCOMP
-
-    # show contours
-    # cv2.drawContours(im, contours, -1, (0, 255, 0), 2)
-    #
-    # # Display the image.
-    # cv2.imshow("contours", im)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
 
     return contours
 

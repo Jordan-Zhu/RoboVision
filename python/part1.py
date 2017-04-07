@@ -45,34 +45,60 @@ def draw_lfeat(line_feature, img):
     cv2.destroyAllWindows()
 
 
+def draw_listpair(list_pair, line_feature, img):
+    blank_image = normalize_depth(img, colormap=True)
+
+    for i, e in enumerate(list_pair):
+        color = (rand.randint(0, 255), rand.randint(0, 255), rand.randint(0, 255))
+        for j, e in enumerate(e):
+            line = line_feature[np.where(line_feature[:, 7] == e)[0]][0]
+            x1 = int(line[1])
+            y1 = int(line[0])
+            x2 = int(line[3])
+            y2 = int(line[2])
+            cv2.line(blank_image, (x1, y1), (x2, y2), color, 2)
+
+    cv2.namedWindow('Line features', cv2.WINDOW_NORMAL)
+    cv2.imshow('Line features', blank_image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+
 if __name__ == '__main__':
-    img = cv2.imread('learn0.png', -1)
+    img = cv2.imread('../img/learn0.png', -1)
     im_size = img.shape
 
     P = sio.loadmat('Parameter.mat')
     param = P['P']
 
-    seg_list, edges, cntrs = initContours(img)
+    edges = edge_detect(img)
 
-    LineFeature, ListPoint = create_linefeatures(seg_list, cntrs, im_size)
-    Line_new, ListPoint_new, line_merged = merge_lines(LineFeature, ListPoint, 10, im_size)
-    draw_lfeat(Line_new, img)
-    line_newC = classify_curves(img, Line_new, ListPoint_new, 11)
-    draw_convex(line_newC, img)
+    # seg_list, edges, cntrs = initContours(img)
+    #
+    # LineFeature, ListPoint = create_linefeatures(seg_list, cntrs, im_size)
+    # Line_new, ListPoint_new, line_merged = merge_lines(LineFeature, ListPoint, 10, im_size)
+    # draw_lfeat(Line_new, img)
+    # line_newC = classify_curves(img, Line_new, ListPoint_new, 11)
+    # draw_convex(line_newC, img)
+    #
+    # # Remove the 11th column for post-processing
+    # line_newC = np.delete(line_newC, 10, axis=1)
+    # line_new_new = label_line_features(img, edges, line_newC, param)
+    # print('Line_new:', line_new_new.shape)
+    #
+    # # Keep the lines that are curvature / discontinuities
+    # relevant_lines = np.where(line_new_new[:, 10] != 0)[0]
+    # line_interesting = line_new_new[relevant_lines]
+    # # Fast sorting, done based on line angle
+    # line_interesting = line_interesting[line_interesting[:, 6].argsort()]
+    #
+    # print('Line interesting:', line_interesting.shape)
+    # draw_lfeat(line_interesting, img)
+    #
+    # # Match the lines into pairs
+    # list_pair = line_match(line_interesting, param)
+    # print('List pair:', list_pair)
+    # draw_listpair(list_pair, line_interesting, img)
 
-    # Remove the 11th column for post-processing
-    line_newC = np.delete(line_newC, 10, axis=1)
-    line_new_new = label_line_features(img, edges, line_newC, param)
-    print(line_new_new.shape)
-
-    # Keep the lines that are curvature / discontinuities
-    relevant_lines = np.where(line_new_new[:, 10] != 0)[0]
-    line_interesting = line_new_new[relevant_lines]
-    # Fast sorting, done based on line angle
-    line_interesting = line_interesting[line_interesting[:, 6].argsort()]
-
-    print(line_interesting.shape)
-    list_pair = line_match(line_interesting, param)
-    print(list_pair)
 
 

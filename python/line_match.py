@@ -33,7 +33,7 @@ def line_match(LineInteresting, P):
                                 flag_relative = relative_pos(LineInteresting[i, :],LineInteresting[j,:])
 
                                 if flag_relative:
-                                    ListPair.append([LineInteresting[i, 7], LineInteresting[j, 7]])
+                                    ListPair.append([LineInteresting[i, 7].astype(int), LineInteresting[j, 7].astype(int)])
                                 # end if
                             # end if
                         # end if

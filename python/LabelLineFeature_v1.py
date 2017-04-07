@@ -67,6 +67,13 @@ def roipoly(src, poly):
     return mask
 
 
+def mask_mean(depth_img, mask):
+    if cv2.countNonZero(mask) == 0:
+        return 0
+    else:
+        return sum(depth_img[np.nonzero(mask)]) / cv2.countNonZero(mask)
+
+
 def label_line_features(depth_img, edge_img, seg_list, parameters):
     minlen = int(parameters["Cons_Lmin"])
     dis_thresh = int(parameters["thresh_label_dis"])
@@ -89,14 +96,9 @@ def label_line_features(depth_img, edge_img, seg_list, parameters):
                 mask_neg = roipoly(edge_img, win_n)
                 edge_dis_p = depth_img * mask_pos
                 edge_dis_n = depth_img * mask_neg
-                if cv2.countNonZero(edge_dis_p) == 0:
-                    mean_p = 0
-                else:
-                    mean_p = sum(depth_img[np.nonzero(edge_dis_p)]) / cv2.countNonZero(edge_dis_p)
-                if cv2.countNonZero(edge_dis_n) == 0:
-                    mean_n = 0
-                else:
-                    mean_n = sum(depth_img[np.nonzero(edge_dis_n)]) / cv2.countNonZero(edge_dis_n)
+
+                mean_p = mask_mean(depth_img, edge_dis_p)
+                mean_n = mask_mean(depth_img, edge_dis_n)
 
                 if mean_p > mean_n:
                     line[10] = 9
