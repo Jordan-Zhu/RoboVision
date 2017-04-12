@@ -32,7 +32,7 @@ def merge_listpoints(listpt, pt1, pt2, px1, px2):
 
     # print('pt1:', pt1, 'pt2:', pt2)
     # print('px1:', px1, 'px2:', px2)
-    # print('startpt1:', startpt1, 'startpt2:', startpt2, 'startpt3:', startpt3, 'startpt4:', startpt4, '\n')
+    print('startpt1:', startpt1, 'startpt2:', startpt2, 'startpt3:', startpt3, 'startpt4:', startpt4, '\n')
     # print('lp1', lp1, '\nlp2', lp2)
 
     if not startpt1 and startpt1.shape[0] < 1:

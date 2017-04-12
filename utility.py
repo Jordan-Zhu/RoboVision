@@ -108,14 +108,19 @@ def depth_discont(depth_im):
 
 
 def edge_detect(depth):
-    skel1, cnt1 = curve_discont(depth)
-    skel2, cnt2 = depth_discont(depth)
+    curve_disc, curve_con = curve_discont(depth)
+    depth_disc, depth_con = depth_discont(depth)
+
+    # squeeze_ndarr(curve_con)
+    # squeeze_ndarr(depth_con)
 
     # combine both images
-    dst = (np.logical_or(skel1, skel2)).astype('uint8')
+    dst = (np.logical_or(curve_disc, depth_disc)).astype('uint8')
     dst = create_img(dst)
     showimg(dst, "Depth + Discontinuity")
-    return dst
+
+
+    return curve_disc, curve_con, depth_disc, depth_con
 
 
 def find_contours(im, mode=cv2.RETR_CCOMP):
@@ -134,21 +139,37 @@ def find_contours(im, mode=cv2.RETR_CCOMP):
                 newcontours.append(contours[i])
 
         # Display contours
-        cv2.drawContours(blank_image, newcontours, -1, (0, 255, 0), 1)
-        cv2.imshow("contours", blank_image)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
-        return newcontours
+        draw_contours(blank_image, contours)
+
+        cntrs = np.array(newcontours)
+        # print(cntrs)
+        fix_contours(cntrs)
+
+        return cntrs
     else:
         im2, contours, hierarchy = cv2.findContours(im, mode, cv2.CHAIN_APPROX_SIMPLE)
-        cv2.drawContours(blank_image, contours, -1, (0, 255, 0), 1)
-        cv2.imshow("contours", blank_image)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+        draw_contours(blank_image, contours)
     # cv2.RETR_EXTERNAL cv2.RETR_CCOMP
 
-    return contours
+    cntrs = np.array(contours)
+    fix_contours(cntrs)
 
+    return cntrs
+
+
+def draw_contours(im, contours):
+    cv2.drawContours(im, contours, -1, (0, 255, 0), 1)
+    cv2.imshow("contours", im)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+
+# Squeezes the array and swaps the columns to match Numpy's col, row ordering
+def fix_contours(contours):
+    squeeze_ndarr(contours)
+    # ADVANCED SLICING
+    for i in range(contours.shape[0]):
+        swap_cols(contours[i], 0, 1)
 
 def showimg(img, im_name='image', type='cv', write=False, imagename='img.png'):
     if type == 'plt':

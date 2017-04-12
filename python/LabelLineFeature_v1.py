@@ -101,9 +101,9 @@ def label_line_features(depth_img, edge_img, seg_list, parameters):
                 mean_n = mask_mean(depth_img, edge_dis_n)
 
                 if mean_p > mean_n:
-                    line[10] = 9
+                    line[10] = 9    # object is on the negative side of the line
                 else:
-                    line[10] = 10
+                    line[10] = 10   # object is on the positive side of the line
             else:
                 line[10] = 13   # Line is a curvature
     print('count:', count)

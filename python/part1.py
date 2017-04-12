@@ -13,15 +13,12 @@ from python.line_match import line_match
 
 
 def initContours(img):
-    edges = edge_detect(img)
-    cntrs = np.asarray(find_contours(edges))
+    # edges = edge_detect(img)
+    curve_disc, curve_con, depth_disc, depth_con = edge_detect(img)
 
-    squeeze_ndarr(cntrs)
-
-    seg_list = lineseg(cntrs, tol=2)
+    seg_curve = lineseg(curve_con, tol=2)
+    seg_depth = lineseg(depth_con, tol=2)
     # ADVANCED SLICING
-    for i in range(seg_list.shape[0]):
-        swap_cols(seg_list[i], 0, 1)
     for i in range(cntrs.shape[0]):
         swap_cols(cntrs[i], 0, 1)
     return seg_list, edges, cntrs
@@ -71,7 +68,14 @@ if __name__ == '__main__':
     P = sio.loadmat('Parameter.mat')
     param = P['P']
 
-    edges = edge_detect(img)
+    curve_disc, curve_con, depth_disc, depth_con = edge_detect(img)
+    # print('curve_con:', curve_con)
+    seg_curve = lineseg(curve_con, tol=2)
+    drawedgelist(seg_curve)
+
+    LineFeature_curve, ListPoint_curve = create_linefeatures(seg_curve, curve_con, im_size)
+    Line_new, ListPoint_new, line_merged = merge_lines(LineFeature_curve, ListPoint_curve, 10, im_size)
+    draw_lfeat(Line_new, img)
 
     # seg_list, edges, cntrs = initContours(img)
     #

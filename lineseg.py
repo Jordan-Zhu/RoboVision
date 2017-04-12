@@ -27,6 +27,7 @@
 
 import numpy as np
 from maxlinedev import maxlinedev
+from utility import swap_cols
 
 def lineseg(edgelist, tol):
     num_contours = edgelist.shape[0]
@@ -79,7 +80,13 @@ def lineseg(edgelist, tol):
         # list = np.asarray(list, dtype=np.int32)
         seglist.append(list)
     # end-for
-    return np.array(seglist)
+    seglist = np.array(seglist)
+
+    # ADVANCED SLICING
+    for i in range(seglist.shape[0]):
+        swap_cols(seglist[i], 0, 1)
+
+    return seglist
 # end-lineseg
 
 

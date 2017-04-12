@@ -8,6 +8,7 @@ def calc_inf(y2, y1, x2, x1):
 
 def find_star(x, y, idx, ListEdges):
     # print('x', x, 'y', y, ListEdges[idx])
+    # print(ListEdges[idx][:, 0])
     sty = np.where(ListEdges[idx][:, 0] == y)
     stx = np.where(ListEdges[idx][:, 1] == x)
     # print(sty, stx)
@@ -26,8 +27,9 @@ def create_linefeatures(ListSegments, ListEdges, imgsize):
 
     for i, curr in enumerate(ListSegments):
         for j in range(curr.shape[0] - 1):
-            y1, x1 = curr[j].astype(int)
-            y2, x2 = curr[j + 1].astype(int)
+            x1, y1 = curr[j].astype(int)
+            x2, y2 = curr[j + 1].astype(int)
+            # print('x1', x1, 'y1', y1, 'x2', x2, 'y2', y2)
 
             slope = round((y2 - y1) / (x2 - x1), 4) if ((x2 - x1) != 0) else calc_inf(y2, y1, x2, x1)
             lin_ind1 = get_lin_index(x1, y1, imgsize)
@@ -45,11 +47,12 @@ def create_linefeatures(ListSegments, ListEdges, imgsize):
             if LineFeature[c0 - 2][8: 10] == [lin_ind1, lin_ind2] and c0 > 2:
                 del (LineFeature[c0 - 1])
                 del (ListPoint[c0 - 1])
+                print('Duplicate removed')
                 c0 -= 1
 
     len_lp = len(ListPoint)
     LPP = []
     for cnt in range(len_lp):
-        LPP.append([np.ravel_multi_index((ListPoint[cnt][:, 0], ListPoint[cnt][:, 1]), imgsize, order='F')])
+        LPP.append(np.ravel_multi_index((ListPoint[cnt][:, 0], ListPoint[cnt][:, 1]), imgsize, order='F'))
 
     return np.array(LineFeature), np.array(LPP)
