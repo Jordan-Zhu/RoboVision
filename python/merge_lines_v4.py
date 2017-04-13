@@ -144,7 +144,7 @@ def merge_lines(lines, listpt, thresh, imgsize):
                 lines = append(lines, [[int(y1), int(x1) + 1, int(y2), int(x2) + 1, line_len, slope, alpha, 0, lind1, lind2]], axis=0)
                 out.append([val1, val2])
 
-                listpt = merge_listpoints(listpt, pt1, pt2, lind1, lind2)
+                # listpt = merge_listpoints(listpt, pt1, pt2, lind1, lind2)
                 # Merged lines, so don't check the other pairs
                 break
             else:

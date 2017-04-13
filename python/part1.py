@@ -14,10 +14,10 @@ from python.line_match import line_match
 
 def initContours(img):
     # edges = edge_detect(img)
-    curve_disc, curve_con, depth_disc, depth_con = edge_detect(img)
+    curve_disc, curve_con, depth_disc, depth_con, edges = edge_detect(img)
 
-    seg_curve = lineseg(curve_con, tol=2)
-    seg_depth = lineseg(depth_con, tol=2)
+    seg_list = lineseg(edges, tol=2)
+    cntrs = find_contours(img)
     # ADVANCED SLICING
     for i in range(cntrs.shape[0]):
         swap_cols(cntrs[i], 0, 1)
@@ -68,13 +68,22 @@ if __name__ == '__main__':
     P = sio.loadmat('Parameter.mat')
     param = P['P']
 
-    curve_disc, curve_con, depth_disc, depth_con = edge_detect(img)
+    curve_disc, curve_con, depth_disc, depth_con, dst = edge_detect(img)
     # print('curve_con:', curve_con)
     seg_curve = lineseg(curve_con, tol=2)
+    seg_disc = lineseg(depth_con, tol=2)
+    seg_list, edges, cntrs = initContours(img)
+    drawedgelist(seg_list)
     drawedgelist(seg_curve)
 
     LineFeature_curve, ListPoint_curve = create_linefeatures(seg_curve, curve_con, im_size)
     Line_new, ListPoint_new, line_merged = merge_lines(LineFeature_curve, ListPoint_curve, 10, im_size)
+    print('Line_new size:', Line_new.shape)
+    draw_lfeat(Line_new, img)
+
+    LineFeature_disc, ListPoint_disc = create_linefeatures(seg_disc, depth_con, im_size)
+    Line_new, ListPoint_new, line_merged = merge_lines(LineFeature_disc, ListPoint_disc, 10, im_size)
+    print('Line_new size:', Line_new.shape)
     draw_lfeat(Line_new, img)
 
     # seg_list, edges, cntrs = initContours(img)

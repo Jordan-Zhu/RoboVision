@@ -120,7 +120,7 @@ def edge_detect(depth):
     showimg(dst, "Depth + Discontinuity")
 
 
-    return curve_disc, curve_con, depth_disc, depth_con
+    return curve_disc, curve_con, depth_disc, depth_con, dst
 
 
 def find_contours(im, mode=cv2.RETR_CCOMP):
