@@ -43,10 +43,8 @@ def classify_curves(src, list_lines, list_points, window_size):
         win = np.array(get_ordering(pt1, pt2, pt3, pt4))
         mask4 = roipoly(src, win)
 
-        a1 = 0 if cv2.countNonZero(mask4) == 0 else sum(src[np.nonzero(mask4)]) / cv2.countNonZero(mask4)
-
         # Get mask of values on the line
-        lx = list_points[index]
+        lx = [list_points[index]]
         # print(lx)
         temp_list = []
         for ii in lx:
@@ -73,13 +71,22 @@ def classify_curves(src, list_lines, list_points, window_size):
         for i in temp_list:
             # print(i[1], i[0])
             mask5.append(src[i[1], i[0]])
-
+        mask5 = np.array(mask5)
         # print('mask5', mask5)
-        a2 = 0 if not mask5 else np.mean(mask5)
+        # Eliminate zeros
+        mask5 = mask5[np.nonzero(mask5)]
+
+        # Average values in the mask
+        mask4_size = cv2.countNonZero(mask4)
+        a1 = 0 if cv2.countNonZero(mask4) == 0 else sum(src[np.nonzero(mask4)]) / mask4_size
+
+        # print('mask5', np.mean(mask5))
+        mask5_size = mask5.shape[0]
+        a2 = 0 if cv2.countNonZero(mask5) == 0 else np.mean(mask5)
 
         # print('A1', a1, '\nA2', a2, '\n')
 
-        b1 = cv2.countNonZero(mask4) * a1 - len(mask5) * a2
+        b1 = mask4_size * a1 - mask5_size * a2
         try:
             b11 = float(b1) / (cv2.countNonZero(mask4) - len(mask5))
         except ZeroDivisionError:

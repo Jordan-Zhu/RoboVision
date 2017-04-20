@@ -22,6 +22,19 @@ def squeeze_arr(arr):
     return res
 
 
+def alt_merge_lp(listpt, pt1, pt2):
+    line_start = listpt[pt1]
+    line_end = listpt[pt2]
+
+    listpt = delete(listpt, max(pt1, pt2))
+    listpt = delete(listpt, min(pt1, pt2))
+
+    merged = r_[line_start, line_end]
+    listpt = append(listpt, array(merged))
+
+    return listpt
+
+
 def merge_listpoints(listpt, pt1, pt2, px1, px2):
     lp1 = listpt[pt1]
     lp2 = listpt[pt2]
@@ -145,6 +158,7 @@ def merge_lines(lines, listpt, thresh, imgsize):
                 out.append([val1, val2])
 
                 # listpt = merge_listpoints(listpt, pt1, pt2, lind1, lind2)
+                listpt = alt_merge_lp(listpt, pt1, pt2)
                 # Merged lines, so don't check the other pairs
                 break
             else:

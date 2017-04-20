@@ -27,6 +27,8 @@ def create_linefeatures(ListSegments, ListEdges, imgsize):
 
     for i, curr in enumerate(ListSegments):
         for j in range(curr.shape[0] - 1):
+            # print('i', i, 'j', j)
+            # print('curr', curr)
             x1, y1 = curr[j].astype(int)
             x2, y2 = curr[j + 1].astype(int)
             # print('x1', x1, 'y1', y1, 'x2', x2, 'y2', y2)
@@ -47,7 +49,7 @@ def create_linefeatures(ListSegments, ListEdges, imgsize):
             if LineFeature[c0 - 2][8: 10] == [lin_ind1, lin_ind2] and c0 > 2:
                 del (LineFeature[c0 - 1])
                 del (ListPoint[c0 - 1])
-                print('Duplicate removed')
+                # print('Duplicate removed')
                 c0 -= 1
 
     len_lp = len(ListPoint)

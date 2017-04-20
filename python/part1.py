@@ -34,7 +34,7 @@ def draw_lfeat(line_feature, img):
         x2 = int(e[3])
         y2 = int(e[2])
         color = (rand.randint(0, 255), rand.randint(0, 255), rand.randint(0, 255))
-        cv2.line(blank_image, (x1, y1), (x2, y2), color, 3)
+        cv2.line(blank_image, (x1, y1), (x2, y2), color, 1)
 
     cv2.namedWindow('Line features', cv2.WINDOW_NORMAL)
     cv2.imshow('Line features', blank_image)
@@ -69,22 +69,57 @@ if __name__ == '__main__':
     param = P['P']
 
     curve_disc, curve_con, depth_disc, depth_con, dst = edge_detect(img)
-    # print('curve_con:', curve_con)
-    seg_curve = lineseg(curve_con, tol=2)
-    seg_disc = lineseg(depth_con, tol=2)
-    seg_list, edges, cntrs = initContours(img)
-    drawedgelist(seg_list)
-    drawedgelist(seg_curve)
+    height = img.shape[0]
+    width = img.shape[1]
+    blank_image = np.zeros((height, width, 3), np.uint8)
+    # draw_contours(blank_image, dst)
+    # drawedgelist(dst)
 
-    LineFeature_curve, ListPoint_curve = create_linefeatures(seg_curve, curve_con, im_size)
-    Line_new, ListPoint_new, line_merged = merge_lines(LineFeature_curve, ListPoint_curve, 10, im_size)
-    print('Line_new size:', Line_new.shape)
-    draw_lfeat(Line_new, img)
+    # print(dst.shape)
 
-    LineFeature_disc, ListPoint_disc = create_linefeatures(seg_disc, depth_con, im_size)
-    Line_new, ListPoint_new, line_merged = merge_lines(LineFeature_disc, ListPoint_disc, 10, im_size)
-    print('Line_new size:', Line_new.shape)
+    # Remove extra dimensions from data
+    res = lineseg(dst, tol=2)
+    seglist = []
+    for i in range(res.shape[0]):
+        # print('shape', res[i].shape)
+        if res[i].shape[0] > 2:
+            # print(res[i])
+            # print(res[i][0])
+            seglist.append(np.concatenate((res[i], [res[i][0]])))
+        else:
+            seglist.append(res[i])
+
+    seglist = np.array(seglist)
+
+    # seg_curve = lineseg(curve_con, tol=1)
+    # seg_disc = lineseg(depth_con, tol=1)
+    # seg_list = np.hstack((seg_curve, seg_disc))
+
+    # print(seg_disc)
+    # seg_list, edges, cntrs = initContours(img)
+    # print(dst.shape)
+
+    # drawedgelist(seglist)
+
+    # drawedgelist(seg_curve)
+
+    LineFeature, ListPoint = create_linefeatures(seglist, dst, im_size)
+    Line_new, ListPoint_new, line_merged = merge_lines(LineFeature, ListPoint, 10, im_size)
     draw_lfeat(Line_new, img)
+    # print(line_merged)
+
+    line_newC = classify_curves(img, Line_new, ListPoint_new, 11)
+    draw_convex(line_newC, img)
+
+    # LineFeature_curve, ListPoint_curve = create_linefeatures(seg_curve, curve_con, im_size)
+    # Line_new, ListPoint_new, line_merged = merge_lines(LineFeature_curve, ListPoint_curve, 10, im_size)
+    # print('Line_new size:', Line_new.shape)
+    # draw_lfeat(Line_new, img)
+    #
+    # LineFeature_disc, ListPoint_disc = create_linefeatures(seg_disc, depth_con, im_size)
+    # Line_new, ListPoint_new, line_merged = merge_lines(LineFeature_disc, ListPoint_disc, 10, im_size)
+    # print('Line_new size:', Line_new.shape)
+    # draw_lfeat(Line_new, img)
 
     # seg_list, edges, cntrs = initContours(img)
     #

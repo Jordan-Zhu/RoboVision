@@ -38,10 +38,11 @@ def lineseg(edgelist, tol):
         arr = np.squeeze(edgelist[i])
         temp.append(arr)
 
+
     seglist = []
 
     for i in range(num_contours):
-        num_edges = edgelist[i][:, 0].shape[0]
+        num_edges = edgelist[i].shape[0]
 
         # Fill in the x and y coordinate matrices.
         x = np.empty(num_edges)
@@ -67,7 +68,7 @@ def lineseg(edgelist, tol):
                 last = first + index
                 # Double check
                 (maxdev, index) = maxlinedev(x[first:last], y[first:last])
-            # end - if
+            # end - while
 
             num_pts += 1
             list = np.concatenate((list, np.array([[x[last], y[last]]], dtype=np.int32)))

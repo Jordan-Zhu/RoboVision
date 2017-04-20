@@ -89,8 +89,8 @@ def curve_discont(depth_im):
     blur = cv2.bilateralFilter(median, 9, 25, 25)
     dimg1 = auto_canny(blur)
     skel1 = morpho(dimg1)
-    showimg(create_img(skel1), "Morphology + canny on depth image")
-    cnt1 = find_contours(create_img(skel1))
+    # showimg(create_img(skel1), "Morphology + canny on depth image")
+    cnt1 = find_contours(create_img(skel1), cv2.RETR_EXTERNAL)
 
     return skel1, cnt1
 
@@ -101,7 +101,7 @@ def depth_discont(depth_im):
     dimg2 = clahe(depthimg, iter=2)
     dimg2 = auto_canny(dimg2)
     skel2 = morpho(dimg2)
-    showimg(dimg2, "Depth discontinuity w/ tone balancing")
+    # showimg(dimg2, "Depth discontinuity w/ tone balancing")
     cnt2 = find_contours(create_img(skel2), cv2.RETR_EXTERNAL)
 
     return skel2, cnt2
@@ -117,10 +117,61 @@ def edge_detect(depth):
     # combine both images
     dst = (np.logical_or(curve_disc, depth_disc)).astype('uint8')
     dst = create_img(dst)
-    showimg(dst, "Depth + Discontinuity")
+    # showimg(dst, "Depth + Discontinuity")
+    skel_dst = morpho(dst)
+    out = mask_contours(create_img(skel_dst))
+    res = []
+    # print(np.squeeze(out[0]))
+    # print(out[0][0])
+    for i in range(len(out)):
+        # Add the first point to the end so the shape closes
+        current = np.squeeze(out[i])
+        # print('current', current)
+        # print('first', out[i][0])
+        if current.shape[0] > 2:
+            # res.append(np.concatenate((current, out[i][0])))
+            # print(res[-1])
+            res.append(current)
+        # print(np.concatenate((np.squeeze(out[i]), out[i][0])))
+
+    res = np.array(res)
+    sqz_contours(res)
+
+    dst = find_contours(create_img(skel_dst), cv2.RETR_EXTERNAL)
+    # showimg(dst, "Depth + Discontinuity")
 
 
-    return curve_disc, curve_con, depth_disc, depth_con, dst
+    return curve_disc, curve_con, depth_disc, depth_con, res
+
+
+def mask_contours(im):
+    # showimg(im)
+    height = im.shape[0]
+    width = im.shape[1]
+    blank_image = np.zeros((height, width, 3), np.uint8)
+    im2, contours, hierarchy = cv2.findContours(im, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+    cntrs = []
+    cntrs.append(contours)
+    cntr1 = contours
+    cv2.drawContours(im, contours, -1, (0, 0, 0), 1, 8)
+    cv2.drawContours(blank_image, contours, -1, (0, 255, 0), 1, 8)
+    # cv2.imshow("CONTOURS", blank_image)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
+
+    blank_image = np.zeros((height, width, 3), np.uint8)
+    im2, contours, hierarchy = cv2.findContours(im, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+    # print(hierarchy)
+    # print(contours)
+    # draw_contours(blank_image, contours)
+    cv2.drawContours(blank_image, contours, -1, (0, 255, 0), 1, 8)
+    # cv2.imshow("CONTOURS 2", blank_image)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
+    cntrs.append(contours)
+    cntr2 = contours
+
+    return cntr1 + cntr2
 
 
 def find_contours(im, mode=cv2.RETR_CCOMP):
@@ -131,41 +182,70 @@ def find_contours(im, mode=cv2.RETR_CCOMP):
     height = im.shape[0]
     width = im.shape[1]
     blank_image = np.zeros((height, width, 3), np.uint8)
+    img = normalize_depth(im, colormap=True)
     if mode == cv2.RETR_CCOMP:
-        im2, contours, hierarchy = cv2.findContours(im, mode, cv2.CHAIN_APPROX_SIMPLE)
+        im2, contours, hierarchy = cv2.findContours(im, mode, cv2.CHAIN_APPROX_NONE)
         newcontours = []
         for i in range(len(contours)):
             if hierarchy[0][i, 2] < 0:
+                # color = (rand.randint(0, 255), rand.randint(0, 255), rand.randint(0, 255))
+                # cv2.drawContours(blank_image, contours, i, color, 1, 8)
                 newcontours.append(contours[i])
 
         # Display contours
-        draw_contours(blank_image, contours)
+        # draw_contours(blank_image, contours)
+        # cv2.imshow("CONTOURS", blank_image)
+        # cv2.waitKey(0)
+        # cv2.destroyAllWindows()
 
         cntrs = np.array(newcontours)
         # print(cntrs)
-        fix_contours(cntrs)
+        sqz_contours(cntrs)
 
         return cntrs
     else:
-        im2, contours, hierarchy = cv2.findContours(im, mode, cv2.CHAIN_APPROX_SIMPLE)
-        draw_contours(blank_image, contours)
+        im2, contours, hierarchy = cv2.findContours(im, mode, cv2.CHAIN_APPROX_NONE)
+        # draw_contours(blank_image, contours)
     # cv2.RETR_EXTERNAL cv2.RETR_CCOMP
 
     cntrs = np.array(contours)
-    fix_contours(cntrs)
+    sqz_contours(cntrs)
 
     return cntrs
 
 
 def draw_contours(im, contours):
-    cv2.drawContours(im, contours, -1, (0, 255, 0), 1)
+    height = im.shape[0]
+    width = im.shape[1]
+    overlay = np.zeros((height, width, 3), np.uint8)
+    output = np.zeros((height, width, 3), np.uint8)
+    alpha = 0.5
+
+    # cv2.putText(overlay, "ROI Poly: alpha={}".format(alpha), (10, 30),
+    #             cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0, 0, 255), 3)
+
+    for i in range(len(contours)):
+        color = (rand.randint(0, 255), rand.randint(0, 255), rand.randint(0, 255))
+        cv2.drawContours(im, contours, i, color, 1, 8)
+        cv2.imshow("contours", im)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+    # cv2.addWeighted(overlay, alpha, output, 1 - alpha,
+    #                 0, output)
     cv2.imshow("contours", im)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
 
+# XORs contours so new contours are preserved while maintaining the initial contours.
+# def fix_contours(contours):
+#
+#     for i in range(len(contours)):
+
+
+
 # Squeezes the array and swaps the columns to match Numpy's col, row ordering
-def fix_contours(contours):
+def sqz_contours(contours):
     squeeze_ndarr(contours)
     # ADVANCED SLICING
     for i in range(contours.shape[0]):
