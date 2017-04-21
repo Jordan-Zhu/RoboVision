@@ -52,21 +52,6 @@ def classify_curves(src, list_lines, list_points, window_size):
             # print(x1, ",", y1)
             temp_list.append([c1[0], r1[0]])
 
-        # new_list = [int(i) for i in temp_list[0], int(j) for j in temp_list[1]]
-        # temp_list = np.squeeze(np.array(temp_list))
-        # print(temp_list)
-        # new_list = np.vstack(([temp_list[0].T], [temp_list[1].T])).T
-        # print(new_list)
-        # points = np.array([[164, 65], [164, 544], [165, 385], [164, 546]])
-        # for i in range(1, 10):
-        #     cv2.line(img, (points[i][0], points[i][1]), (points[i]))
-        # cv2.fillConvexPoly(img, np.array(temp_list), (255,255,255))
-        # #
-        # cv2.namedWindow('Points', cv2.WINDOW_NORMAL)
-        # cv2.imshow('Points', img)
-        # cv2.waitKey(0)
-        # cv2.destroyAllWindows()
-
         mask5 = []
         for i in temp_list:
             # print(i[1], i[0])

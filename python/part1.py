@@ -62,7 +62,7 @@ def draw_listpair(list_pair, line_feature, img):
 
 
 if __name__ == '__main__':
-    img = cv2.imread('../img/learn0.png', -1)
+    img = cv2.imread('../img/learn35.png', -1)
     im_size = img.shape
 
     P = sio.loadmat('Parameter.mat')
@@ -75,7 +75,7 @@ if __name__ == '__main__':
     # draw_contours(blank_image, dst)
     # drawedgelist(dst)
 
-    # print(dst.shape)
+    print(dst)
 
     # Remove extra dimensions from data
     res = lineseg(dst, tol=2)
@@ -103,13 +103,13 @@ if __name__ == '__main__':
 
     # drawedgelist(seg_curve)
 
-    LineFeature, ListPoint = create_linefeatures(seglist, dst, im_size)
-    Line_new, ListPoint_new, line_merged = merge_lines(LineFeature, ListPoint, 10, im_size)
-    draw_lfeat(Line_new, img)
+    # LineFeature, ListPoint = create_linefeatures(seglist, dst, im_size)
+    # Line_new, ListPoint_new, line_merged = merge_lines(LineFeature, ListPoint, 10, im_size)
+    # draw_lfeat(Line_new, img)
     # print(line_merged)
 
-    line_newC = classify_curves(img, Line_new, ListPoint_new, 11)
-    draw_convex(line_newC, img)
+    # line_newC = classify_curves(img, Line_new, ListPoint_new, 11)
+    # draw_convex(line_newC, img)
 
     # LineFeature_curve, ListPoint_curve = create_linefeatures(seg_curve, curve_con, im_size)
     # Line_new, ListPoint_new, line_merged = merge_lines(LineFeature_curve, ListPoint_curve, 10, im_size)

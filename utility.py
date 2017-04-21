@@ -227,9 +227,9 @@ def draw_contours(im, contours):
     for i in range(len(contours)):
         color = (rand.randint(0, 255), rand.randint(0, 255), rand.randint(0, 255))
         cv2.drawContours(im, contours, i, color, 1, 8)
-        cv2.imshow("contours", im)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+        # cv2.imshow("contours", im)
+        # cv2.waitKey(0)
+        # cv2.destroyAllWindows()
     # cv2.addWeighted(overlay, alpha, output, 1 - alpha,
     #                 0, output)
     cv2.imshow("contours", im)
