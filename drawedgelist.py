@@ -27,10 +27,9 @@ def drawedgelist(edgelist, *args, **kwargs):
     if rowscols is None or rowscols == []:
         xmax = []
         ymax = []
-        for n, items in enumerate(edgelist):
-            idx = n # edgelist.index(n)
-            xmax.append(np.amax(edgelist[idx][:, 0]))
-            ymax.append(np.amax(edgelist[idx][:, 1]))
+        for idx, edges in enumerate(edgelist):
+            xmax.append(np.amax(edges[:, 0]))
+            ymax.append(np.amax(edges[:, 1]))
 
         # Get the rows and cols as the bounds of the line segment
         # with an added buffer on the sides.
@@ -54,7 +53,7 @@ def drawedgelist(edgelist, *args, **kwargs):
         for i in range(listlen):
             # Draw the line segments.
             color = (rand.randint(0, 255), rand.randint(0, 255), rand.randint(0, 255))
-            cv2.line(blank_image, (x[i], y[i]), (x[i + 1], y[i + 1]), color, thickness=1)
+            cv2.line(blank_image, (x[i], y[i]), (x[i + 1], y[i + 1]), color, thickness=2)
         # Join the first and last line of the contour.
         # cv2.line(blank_image, (x[0], y[0]), (x[listlen], y[listlen]), (0, 255, 0), thickness=1)
 

@@ -25,8 +25,10 @@ def initContours(img):
 
 
 def draw_lfeat(line_feature, img):
-    blank_image = normalize_depth(img, colormap=True)
-    # blank_image = np.zeros_like(img)
+    # blank_image = normalize_depth(img, colormap=True)
+    height = img.shape[0]
+    width = img.shape[1]
+    blank_image = np.zeros((height, width, 3), np.uint8)
 
     for i, e in enumerate(line_feature):
         x1 = int(e[1])
@@ -63,6 +65,7 @@ def draw_listpair(list_pair, line_feature, img):
 
 if __name__ == '__main__':
     img = cv2.imread('../img/learn35.png', -1)
+    img = img[50:, 50:480]
     im_size = img.shape
 
     P = sio.loadmat('Parameter.mat')
@@ -91,6 +94,8 @@ if __name__ == '__main__':
 
     seglist = np.array(seglist)
 
+    print(seglist)
+
     # seg_curve = lineseg(curve_con, tol=1)
     # seg_disc = lineseg(depth_con, tol=1)
     # seg_list = np.hstack((seg_curve, seg_disc))
@@ -99,13 +104,13 @@ if __name__ == '__main__':
     # seg_list, edges, cntrs = initContours(img)
     # print(dst.shape)
 
-    # drawedgelist(seglist)
+    drawedgelist(seglist)
 
     # drawedgelist(seg_curve)
 
-    # LineFeature, ListPoint = create_linefeatures(seglist, dst, im_size)
-    # Line_new, ListPoint_new, line_merged = merge_lines(LineFeature, ListPoint, 10, im_size)
-    # draw_lfeat(Line_new, img)
+    LineFeature, ListPoint = create_linefeatures(seglist, dst, im_size)
+    Line_new, ListPoint_new, line_merged = merge_lines(LineFeature, ListPoint, 10, im_size)
+    draw_lfeat(Line_new, img)
     # print(line_merged)
 
     # line_newC = classify_curves(img, Line_new, ListPoint_new, 11)

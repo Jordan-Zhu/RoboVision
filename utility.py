@@ -136,6 +136,7 @@ def edge_detect(depth):
 
     res = np.array(res)
     sqz_contours(res)
+    # squeeze_ndarr(res)
 
     dst = find_contours(create_img(skel_dst), cv2.RETR_EXTERNAL)
     # showimg(dst, "Depth + Discontinuity")
@@ -234,7 +235,7 @@ def draw_contours(im, contours):
     #                 0, output)
     cv2.imshow("contours", im)
     cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    # cv2.destroyAllWindows()
 
 
 # XORs contours so new contours are preserved while maintaining the initial contours.
@@ -395,8 +396,8 @@ def draw_convex_py(line_feature, img):
 
 
 def draw_lf(line_feature, img):
-    blank_image = normalize_depth(img, colormap=True)
-    # blank_image = np.zeros_like(img)
+    # blank_image = normalize_depth(img, colormap=True)
+    blank_image = np.zeros_like(img)
 
     # print(line_feature[0])
     for i, e in enumerate(line_feature):
