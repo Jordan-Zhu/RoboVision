@@ -47,13 +47,20 @@ def drawedgelist(edgelist, *args, **kwargs):
         x = edgelist[idx][:, 0]
         y = edgelist[idx][:, 1]
 
+        blank_image = np.zeros((480, 640, 3), np.uint8)
+
         # Find the length of the arrays for index positions.
         # Either array can do since the points are in pairs.
         listlen = x.size - 1
         for i in range(listlen):
             # Draw the line segments.
             color = (rand.randint(0, 255), rand.randint(0, 255), rand.randint(0, 255))
-            cv2.line(blank_image, (x[i], y[i]), (x[i + 1], y[i + 1]), color, thickness=2)
+            cv2.line(blank_image, (x[i], y[i]), (x[i + 1], y[i + 1]), color, thickness=1)
+            # print('x', x[i], 'y', y[i], 'x1', x[i + 1], 'y1', y[i + 1])
+            # cv2.imshow("Edge List", blank_image)
+            # cv2.waitKey(0)
+            # cv2.destroyAllWindows()
+
         # Join the first and last line of the contour.
         # cv2.line(blank_image, (x[0], y[0]), (x[listlen], y[listlen]), (0, 255, 0), thickness=1)
 

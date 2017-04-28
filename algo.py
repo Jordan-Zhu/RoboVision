@@ -1,7 +1,7 @@
 # Robot Grasping Algorithm
 
 # Importing the necessary packages:
-import cv2
+from cv2 import *
 import numpy as np
 import scipy.io as sio
 from matplotlib import pyplot as plt

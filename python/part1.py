@@ -64,8 +64,8 @@ def draw_listpair(list_pair, line_feature, img):
 
 
 if __name__ == '__main__':
-    img = cv2.imread('../img/learn35.png', -1)
-    img = img[50:, 50:480]
+    img = cv2.imread('../img/learn0.png', -1)
+    # img = img[50:, 50:480]
     im_size = img.shape
 
     P = sio.loadmat('Parameter.mat')
@@ -78,7 +78,7 @@ if __name__ == '__main__':
     # draw_contours(blank_image, dst)
     # drawedgelist(dst)
 
-    print(dst)
+    # print(dst)
 
     # Remove extra dimensions from data
     res = lineseg(dst, tol=2)
@@ -94,7 +94,7 @@ if __name__ == '__main__':
 
     seglist = np.array(seglist)
 
-    print(seglist)
+    # print(seglist)
 
     # seg_curve = lineseg(curve_con, tol=1)
     # seg_disc = lineseg(depth_con, tol=1)
@@ -152,6 +152,9 @@ if __name__ == '__main__':
     # list_pair = line_match(line_interesting, param)
     # print('List pair:', list_pair)
     # draw_listpair(list_pair, line_interesting, img)
+
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
 
 
