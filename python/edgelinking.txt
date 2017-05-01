@@ -1,0 +1,49 @@
+Pre-conditions: Edgelink takes a binary edge image, edges already thinned, and minlength of interest, defaults to 1 if omitted. 
+
+Post-conditions: List of edges, image with pixels labeled with edge number. 
+
+=========================== EDGELINK ===========================
+
+Make sure edges are thinned. Use 'thin' rather than 'skel' to obtain
+the same thinned result, with fewer extra junctions.
+
+Find endings and junctions in edge data.
+    - Call co-function FINDENDSJUNCTIONS to label junctions and endings.
+    - Create a sparse matrix to mark junction locations. A value of 
+      1 indicates a junctions, a value of 2 indicates we have visited
+      the junction.
+
+1) Form tracks from each unlabeled endpoint until we encounter another 
+endpoint or junction.
+    - Call co-function TRACKEDGE 
+
+2) Call available pixels with edge number = 0 so that we get a list of
+available neighboring pixels that can be linked to and a list of all
+neighboring pixels that are also junctions.
+    - Call AVAILABLEPIXELS
+
+For all adjacent junctions, create a 2-element edgetrack to each
+adjacent junction.
+
+Check if adjacent junction has some untracked pixels that
+are also adjacent to the initial junction. Thus we need to get
+available pixels adjacent to junction.
+    - Call AVAILABLEPIXELS
+
+If both junctions have untracked neighbors that need checking
+    - Find untracked neighbors common to both junctions.
+    - If one of the junctions j or k is closer to this
+      common neighbor as the 2nd element. When we call trackedge
+      we set the avoidJunction flag to prevent the track
+      immediately connecting back to the other junction.
+    - Edge segment is junction-junction
+
+Track any remaining unlabeled pixels adjacent to this junction k.
+
+Mark that we have visited junction (rj(k) cj(k))
+
+Finally track any remaining pixels adjacent to original junction j.
+
+3) Scan through the image looking for any unlabeled pixels. These should
+correspond to isolated loops that have no junctions or endpoints.
+

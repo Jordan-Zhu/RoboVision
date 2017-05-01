@@ -1,30 +1,31 @@
-from utility import *
+import numpy as np
+import scipy.ndimage as ndimage
 
 
-def findendsjunctions(edge_im, contours):
-    kernel = np.zeros((3, 3), np.uint8)
-    visited = np.zeros_like(contours)
+def findendsjunctions(edge_im):
+	# Set up look up table to find junctions. To do this
+	# we use the functions defined to test that the center
+	# pixel within a 3x3 neighborhood is a junction.
+	junctions = ndimage.generic_filter(edge_im, junction, size=(3,3))
 
-    for c in contours:
-        for i in range(c.shape[0]):
-            kernel[1, 1] = edge_im[c[i]]
-            kernel[0, 0] = edge_im[c[i][0] - 1, c[i][1] - 1]
-            kernel[0, 1] = edge_im[c[i][0] - 1, c[i][1]]
-            kernel[0, 2] = edge_im[c[i][0] - 1, c[i][1] + 1]
-            kernel[1, 0] = edge_im[c[i][0], c[i][1] - 1]
-            kernel[1, 2] = edge_im[c[i][0], c[i][1] + 1]
-            kernel[2, 0] = edge_im[c[i][0] + 1, c[i][1] - 1]
-            kernel[2, 1] = edge_im[c[i][0] + 1, c[i][1]]
-            kernel[2, 2] = edge_im[c[i][0] + 1, c[i][1] + 1]
-            marked = np.count_nonzero(kernel)
-            if marked >= 4: # junction
+	ends = ndimage.generic_filter(edge_im, ending, size=(3,3))
 
 
 
+def junction(x):
+
+	a = [x[1], x[2], x[3], x[6], x[9], x[8], x[7], x[4]].T
+	b = [x[2], x[3], x[6], x[9], x[8], x[7], x[4], x[1]].T
+	crossings = sum(abs(a - b))
+
+	b = x[5] and crossings >= 6
+	return b
 
 
-
-if __name__ == '__main__':
-    kernel = np.zeros((3, 3), np.uint8)
-
-    #
+def ending(x):
+	a = [x[1], x[2], x[3], x[6], x[9], x[8], x[7], x[4]].T
+	b = [x[2], x[3], x[6], x[9], x[8], x[7], x[4], x[1]].T
+    crossings = sum(abs(a - b));
+    
+    b = x[5] and crossings == 2
+    return b
