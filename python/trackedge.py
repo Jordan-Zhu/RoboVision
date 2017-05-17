@@ -52,4 +52,4 @@ def trackedge(rstart, cstart, edge_no, r2, c2, avoidJunctions):
 
 # Normalizes a vector to unit magnitude.
 def unitvector(v):
-	return np.sqrt(v.dot(v))
+	return np.divide(v, np.sqrt(v.dot(v)))
