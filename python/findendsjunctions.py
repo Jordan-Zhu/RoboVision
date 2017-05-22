@@ -12,7 +12,7 @@ def findendsjunctions(edge_im):
     ends = ndimage.generic_filter(edge_im, ending, size=(3, 3))
     [re, ce] = np.nonzero(ends)
 
-    return rj, cj, re, ce
+    return [rj, cj, re, ce]
 
 
 def junction(x):
