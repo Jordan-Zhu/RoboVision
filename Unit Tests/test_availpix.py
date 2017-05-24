@@ -40,6 +40,11 @@ if __name__ == '__main__':
     cstart = ce[0]
 
     start = timer()
-    ra, ca, rj, cj = ap.availablepixels(rstart, cstart, edge_im, rows, cols, junct)
+    ra, ca, rj, cj = ap.availablepixels(edge_im, rows, cols, junct, rstart, cstart)
     end = timer()
     print('time elapsed:', end - start, 's')
+
+    print('ra', ra)
+    print('ca', ca)
+    print('rj', rj)
+    print('cj', cj)
