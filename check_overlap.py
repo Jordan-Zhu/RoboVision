@@ -3,11 +3,10 @@ import math
 from scipy.spatial.distance import pdist, squareform
 
 
-# Written 10/4/2016
 # Check overlap between two lines
 # according to types of triangle that 3 points of end points of the line make.
 # ---------------
-# 10/13 - Added angle function
+
 
 def angle_between(x,y,z):
     # angle = @(x,y,z) acosd((y^2+z^2-x^2)/(2*y*z)) ;   % cosine law

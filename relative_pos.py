@@ -1,5 +1,4 @@
 
-# Written 10/1/2016
 
 
 def relative_pos(line1, line2):

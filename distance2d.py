@@ -1,6 +1,6 @@
 import math
 
-# Written 10/4/2016
+
 # Calculates the distance between the midpoint of a smaller line 
 # from a larger line.
 

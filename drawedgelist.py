@@ -13,7 +13,7 @@
 #
 # Author: Jordan Zhu
 #
-# July 2016 - Original version.
+
 
 import sys
 import cv2

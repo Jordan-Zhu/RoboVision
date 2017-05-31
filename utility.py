@@ -33,21 +33,6 @@ def create_img(mat):
 
     return mask
 
-def grad_dir(img):
-    # compute x and y derivatives
-    # OpenCV's Sobel operator gives better results than numpy gradient
-    sobelx = cv2.Sobel(img, cv2.CV_64F, 1, 0, ksize=-1)
-    sobely = cv2.Sobel(img, cv2.CV_64F, 0, 1, ksize=-1)
-
-    # calculate gradient direction angles
-    # phase needs 64-bit input
-    angle = cv2.phase(sobelx, sobely)
-
-    # truncates number
-    gradir = np.fix(180 + angle)
-
-    return gradir
-
 
 # Contrast Limited Adaptive Histogram Equalization
 # Improves the contrast of our image.
