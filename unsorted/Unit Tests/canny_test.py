@@ -21,23 +21,23 @@ from itertools import groupby
 
 
 if __name__ == '__main__':
-    im1 = cv2.imread('cylinder2.png')
-    gray1 = cv2.cvtColor(im1, cv2.COLOR_BGR2GRAY)
-    blurred1 = cv2.GaussianBlur(gray1, (3, 3), 0)
+    im1 = cv2.imread('bw_lambda.png')
+    # gray1 = cv2.cvtColor(im1, cv2.COLOR_BGR2GRAY)
+    # blurred1 = cv2.GaussianBlur(gray1, (3, 3), 0)
 
-    can1 = auto_canny(blurred1, sigma=1)
-    can1 = create_img(morpho(can1))
+    # can1 = auto_canny(blurred1, sigma=1)
+    # can1 = create_img(im1)
 
-    cv2.imshow("Slide1", im1)
-    cv2.imshow("Edges 1", can1)
-    cv2.waitKey(0)
+    # cv2.imshow("Slide1", im1)
+    # cv2.imshow("Edges 1", can1)
+    # cv2.waitKey(0)
 
     height = im1.shape[0]
     width = im1.shape[1]
     blank_image = np.zeros((height, width, 3), np.uint8)
 
     # ctr1 = mask_contours(can1)
-    im2, ctr1, hierarchy = cv2.findContours(can1, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+    im2, ctr1, hierarchy = cv2.findContours(im1, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
     res = []
     for i in range(len(ctr1)):
         current = np.squeeze(ctr1[i])

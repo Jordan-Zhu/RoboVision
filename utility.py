@@ -1,4 +1,4 @@
-import cv2 as cv2
+import cv2
 import matplotlib as plt
 import numpy as np
 import random as rand

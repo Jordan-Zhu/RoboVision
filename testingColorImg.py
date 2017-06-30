@@ -14,7 +14,8 @@ import LabelLineFeature_v1 as LabelLineFeature_v1
 from line_match import line_match
 
 
-img = cv2.imread("img/Slide2.jpg", 0)
+# img = cv2.imread("img/Slide2.jpg", 0)
+img = cv2.imread("unsorted/Unit Tests/lambda.png", 0)
 im_size = img.shape
 returnedCanny = cv2.Canny(img, 50, 150, apertureSize = 3)
 
