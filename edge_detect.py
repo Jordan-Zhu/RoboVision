@@ -127,8 +127,8 @@ def mask_contours(im):
         cv2.drawContours(blank_image, contours, x, (int(randA*255), int(randB*255), int(randC*255)), 1, 8)
     cv2.imshow("CONTOURS", blank_image)
     #cv2.imwrite("checking_2.png", blank_image)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    #cv2.waitKey(0)
+    #cv2.destroyAllWindows()
 
 
     cntr1 = contours
