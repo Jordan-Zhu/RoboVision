@@ -185,12 +185,10 @@ def create_img(mat):
 
 def choosePoints(event,x,y,flags,param):
     global mouseX,mouseY
-    print("running")
-    print(event)
     if event == 4:
         #cv2.circle(img,(x,y),100,(255,0,0),-1)
-        mouseX,mouseY = x,y
-        print(mouseX, mouseY)
+        print("clicked")
+        mouseX, mouseY = x,y
 """
 
 img = np.zeros((512,512,3), np.uint8)

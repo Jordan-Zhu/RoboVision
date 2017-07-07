@@ -15,8 +15,55 @@ from line_match import line_match
 
 
 if __name__ == '__main__':
+    
+    ##These methods are for the picture resizing
+
+    mouseX = []
+    mouseY = []
+    numC = 0
+
+    def choosePoints(event,x,y,flags,param):
+        global mouseX,mouseY, numC
+        
+
+        if event == 4:
+            #cv2.circle(img,(x,y),100,(255,0,0),-1)
+            print(x,y)
+            numC += 1
+            print(numC, "clicked")
+            mouseX.append(x)
+            mouseY.append(y)
+            print(mouseX, mouseY, "bruh")
+
+    imgC = cv2.imread('img/clearn0.png', -1)
+
+    cv2.imshow('image',imgC)
+    cv2.setMouseCallback('image', choosePoints)
+    while(numC != 2):
+        key = cv2.waitKey(1) & 0xFF
+        if key == ord("r"):
+            print(mouseX, mouseY, "printing mousey")
+            break
+
+    print(mouseX, mouseY, "printing mousey")
+    cv2.destroyAllWindows()
+
     # Read in depth image, -1 specifies w/ alpha channel.
     img = cv2.imread('img/learn0.png', -1)
+    #input_var = input("Enter x1, x2, y1, y2 with spaces in between (put 0 0 0 0 for no change) ")
+    #dimensions = list(map(int, input_var.split()))
+    #print(dimensions, "dimensions")
+    #if(dimensions.count(0) != 4):
+    #    img = img[dimensions[0]:dimensions[1], dimensions[2]:dimensions[3]]
+    #cv2.namedWindow('imageResize')
+    
+    #cv2.destroyAllWindows()
+
+    img = img[mouseY[0]:mouseY[1], mouseX[0]:mouseX[1]]
+    imgC = imgC[mouseY[0]:mouseY[1], mouseX[0]:mouseX[1]]
+    cv2.imshow('cropped', imgC)
+    cv2.waitKey(0)
+
     im_size = img.shape
     height = img.shape[0]
     width = img.shape[1]
@@ -46,7 +93,7 @@ if __name__ == '__main__':
     drawedgelist(seglist)
 
     # ******* SECTION 2 *******
-    # SEGMENT AND LABEL THE CURVATURE LINES (CONVEX/CONCAVE).
+    # SEGMENT AND LArrrBEL THE CURVATURE LINES (CONVEX/CONCAVE).
     LineFeature, ListPoint = Lseg_to_Lfeat_v4.create_linefeatures(seglist, dst, im_size)
     Line_new, ListPoint_new, line_merged = merge_lines_v4.merge_lines(LineFeature, ListPoint, 10, im_size)
 
