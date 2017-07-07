@@ -17,39 +17,43 @@ from line_match import line_match
 if __name__ == '__main__':
     
     ##These methods are for the picture resizing
-
     mouseX = []
     mouseY = []
     numC = 0
 
+    ###Event 4 means that the right key was clicked
+    ###This saves the points that are clicked on the image
     def choosePoints(event,x,y,flags,param):
         global mouseX,mouseY, numC
         
 
         if event == 4:
             #cv2.circle(img,(x,y),100,(255,0,0),-1)
-            print(x,y)
             numC += 1
-            print(numC, "clicked")
             mouseX.append(x)
             mouseY.append(y)
-            print(mouseX, mouseY, "bruh")
-
+    
+    #Opens up the color image for user to click on
     imgC = cv2.imread('img/clearn0.png', -1)
-
     cv2.imshow('image',imgC)
     cv2.setMouseCallback('image', choosePoints)
+    
+    #checks and makes sure 2 points were clicked
+    #if 2 points were clicked it exits the loop
     while(numC != 2):
         key = cv2.waitKey(1) & 0xFF
-        if key == ord("r"):
+        
+        """if key == ord("r"):
             print(mouseX, mouseY, "printing mousey")
-            break
-
-    print(mouseX, mouseY, "printing mousey")
+            break"""
+    
+    
+    #Closes color image once user clicks twice
     cv2.destroyAllWindows()
 
     # Read in depth image, -1 specifies w/ alpha channel.
     img = cv2.imread('img/learn0.png', -1)
+    print(height1, width1, "h and w")
     #input_var = input("Enter x1, x2, y1, y2 with spaces in between (put 0 0 0 0 for no change) ")
     #dimensions = list(map(int, input_var.split()))
     #print(dimensions, "dimensions")
@@ -59,16 +63,21 @@ if __name__ == '__main__':
     
     #cv2.destroyAllWindows()
 
+    #crops the depth image
     img = img[mouseY[0]:mouseY[1], mouseX[0]:mouseX[1]]
+    
+    #For convenience, to see what you cropped
     imgC = imgC[mouseY[0]:mouseY[1], mouseX[0]:mouseX[1]]
     cv2.imshow('cropped', imgC)
-    cv2.waitKey(0)
+    
+    
+    #cv2.waitKey(0)
 
     im_size = img.shape
     height = img.shape[0]
     width = img.shape[1]
     blank_image = np.zeros((height, width, 3), np.uint8)
-
+    
     P = sio.loadmat('Parameter.mat')
     param = P['P']
 

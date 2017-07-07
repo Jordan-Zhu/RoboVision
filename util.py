@@ -37,7 +37,6 @@ def morpho(img):
 
 
 def showimg(img, im_name='image', write=False, imagename='img.png'):
-        cv2.namedWindow(im_name, cv2.WINDOW_NORMAL)
         cv2.imshow(im_name, img)
         #cv2.waitKey(0)
         #cv2.destroyAllWindows()
@@ -129,9 +128,6 @@ def draw_contours(im, contours):
 
 
 def draw_lf(line_feature, img):
-    # blank_image = normalize_depth(img, colormap=True)
-    blank_image = np.zeros_like(img)
-
     # print(line_feature[0])
     for i, e in enumerate(line_feature):
         x1 = int(e[1])
@@ -139,16 +135,16 @@ def draw_lf(line_feature, img):
         x2 = int(e[3])
         y2 = int(e[2])
         color = (rand.randint(0, 255), rand.randint(0, 255), rand.randint(0, 255))
-        cv2.line(blank_image, (x1, y1), (x2, y2), color, 2)
+        cv2.line(img, (x1, y1), (x2, y2), color, 2)
         # cv2.namedWindow('Convex lines', cv2.WINDOW_NORMAL)
         # cv2.imshow('Convex lines', blank_image)
         # cv2.waitKey(0)
         # cv2.destroyAllWindows()
-
-    cv2.namedWindow('Line features', cv2.WINDOW_NORMAL)
-    cv2.imshow('Line features', blank_image)
+    cv2.imshow("blank again", img)
+    #cv2.imwrite("checking_2.png", blank_image)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+
 
 
 def draw_listpair(list_pair, line_feature, img):
@@ -182,27 +178,3 @@ def create_img(mat):
     masked = np.ma.masked_where(mask <= 0, mask)
 
     return mask
-
-def choosePoints(event,x,y,flags,param):
-    global mouseX,mouseY
-    if event == 4:
-        #cv2.circle(img,(x,y),100,(255,0,0),-1)
-        print("clicked")
-        mouseX, mouseY = x,y
-"""
-
-img = np.zeros((512,512,3), np.uint8)
-cv2.namedWindow('image')
-cv2.setMouseCallback('image',draw_circle)
-then, in a infinite processing loop (or whatever you want)"""
-
-"""while(1):
-    cv2.imshow('image',img)
-    k = cv2.waitKey(20)
-    if k == 27:
-        break
-    elif k == ord('a'):
-        print mouseX,mouseY
-
-elif k == ord('a'):
-    print mouseX,mouseY"""

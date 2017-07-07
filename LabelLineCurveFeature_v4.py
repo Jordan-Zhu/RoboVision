@@ -108,9 +108,8 @@ def classify_curves(src, list_lines, list_points, window_size):
         else:
             res.append(np.append(list_lines[index], [13]))
 
-    cv2.namedWindow('Points', cv2.WINDOW_NORMAL)
-    cv2.imshow('Points', img)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    #cv2.imshow('Points', img)
+    #cv2.waitKey(0)
+    #cv2.destroyAllWindows()
 
     return np.asarray(res)

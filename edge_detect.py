@@ -103,12 +103,11 @@ def mask_contours(im):
     blank_image = np.zeros((height, width, 3), np.uint8)
     #im = tryConnected(im)
     im2, contours, hierarchy = cv2.findContours(im, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_NONE)
-
     print(type(contours), "type contours")
     print(hierarchy, "hierarchy")
 
     #cv2.drawContours(im, contours, -1, (0, 0, 0), 1, 8)
-    contours = fixOverlap(contours)
+    #contours = fixOverlap(contours)
 
     """
     for x in range(len(contours)):
@@ -118,22 +117,28 @@ def mask_contours(im):
 
     
     """
-
-
+    contourCopy = copy.deepcopy(contours)
+    totalDel = 0
     for x in range(len(contours)):
-        randC = random.uniform(0, 1)
-        randB = random.uniform(0,1)
-        randA = random.uniform(0,1)
-        cv2.drawContours(blank_image, contours, x, (int(randA*255), int(randB*255), int(randC*255)), 1, 8)
+        area = cv2.contourArea(contours[x])
+        #filters out a few contours that are too small to be of use
+        # and also negative contours that wrap around things
+        if(area < 500):
+            del contourCopy[x-totalDel]
+            totalDel += 1
+        else:    
+            randC = random.uniform(0,1)
+            randB = random.uniform(0,1)
+            randA = random.uniform(0,1)
+
+            cv2.drawContours(blank_image, contours, x, (int(randA*255), int(randB*255), int(randC*255)), 1, 8)
     cv2.imshow("CONTOURS", blank_image)
     #cv2.imwrite("checking_2.png", blank_image)
     #cv2.waitKey(0)
     #cv2.destroyAllWindows()
 
-
-    cntr1 = contours
-    print(len(cntr1), "len cntr1")
-    print(len(cntr1[0]), "len cntr1")
+    print(len(contourCopy), "len cntr1")
+    print(len(contours), "len cntr1 old")
 
 
 
@@ -164,7 +169,7 @@ def mask_contours(im):
     #print(len(cntr2[0]), "len cntr2")
     """
 
-    return cntr1
+    return contourCopy
 
 
 def fixOverlap(contours):
