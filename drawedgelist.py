@@ -20,8 +20,8 @@ import cv2
 import numpy as np
 import random as rand
 
-
-def drawedgelist(edgelist, *args, **kwargs):
+###OLD DRAW EDGELIST, currently not working#############
+"""def drawedgelist2(edgelist, *args, **kwargs):
     rowscols = kwargs.get('rowscols', None)
 
     if rowscols is None or rowscols == []:
@@ -70,11 +70,17 @@ def drawedgelist(edgelist, *args, **kwargs):
     #cv2.waitKey(0)
     #cv2.destroyAllWindows()
     print(edgelist)
-
 """
-def drawedgelist2(edgelist, *args, **kwargs):
-    listlen = x.size - 1
-        for i in range(listlen):
-            # Draw the line segments.
+
+#######FIXED DRAWEDGELIST (WORKS)#######
+def drawedgelist(edgelist, blank_image):
+    
+    ##Goes through every contour of edge list
+    for i in range(len(edgelist)):
+        #Goes through every edge of that contours
+        for j in range(len(edgelist[i])-1):
+            # Draws the line segments.
             color = (rand.randint(0, 255), rand.randint(0, 255), rand.randint(0, 255))
-            cv2.line(blank_image, (x[i], y[i]), (x[i + 1], y[i + 1]), color, thickness=1)"""
+            cv2.line(blank_image, (edgelist[i][j][0], edgelist[i][j][1]), (edgelist[i][j+1][0], edgelist[i][j+1][1]), color, thickness=1)
+    
+    cv2.imshow("Edgelist", blank_image)

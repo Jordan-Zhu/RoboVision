@@ -53,7 +53,6 @@ if __name__ == '__main__':
 
     # Read in depth image, -1 specifies w/ alpha channel.
     img = cv2.imread('img/learn0.png', -1)
-    print(height1, width1, "h and w")
     #input_var = input("Enter x1, x2, y1, y2 with spaces in between (put 0 0 0 0 for no change) ")
     #dimensions = list(map(int, input_var.split()))
     #print(dimensions, "dimensions")
@@ -99,7 +98,7 @@ if __name__ == '__main__':
 
     seglist = np.array(seglist)
 
-    drawedgelist(seglist)
+    drawedgelist(seglist, blank_image)
 
     # ******* SECTION 2 *******
     # SEGMENT AND LArrrBEL THE CURVATURE LINES (CONVEX/CONCAVE).
