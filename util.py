@@ -140,7 +140,7 @@ def draw_lf(line_feature, img):
         # cv2.imshow('Convex lines', blank_image)
         # cv2.waitKey(0)
         # cv2.destroyAllWindows()
-    cv2.imshow("blank again", img)
+    cv2.imshow("line features", img)
     #cv2.imwrite("checking_2.png", blank_image)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
