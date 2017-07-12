@@ -16,9 +16,9 @@ def create_img(mat):
     return mask
     
 
-def edge_detect(depth):
-    curve_disc, curve_con = cd.curve_discont(depth)
-    depth_disc, depth_con = dd.depth_discont(depth)
+def edge_detect(depthC, depthD):
+    curve_disc, curve_con = cd.curve_discont(depthC)
+    depth_disc, depth_con = dd.depth_discont(depthD)
 
     # squeeze_ndarr(curve_con)
     # squeeze_ndarr(depth_con)
@@ -108,6 +108,8 @@ def mask_contours(im):
     width = im.shape[1]
     #print(im)
     blank_image = np.zeros((height, width, 3), np.uint8)
+    blank_image2 = np.zeros((height, width, 3), np.uint8)
+
     #im = tryConnected(im)
     im2, contours, hierarchy = cv2.findContours(im, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_NONE)
     print(type(contours), "type contours")
@@ -127,12 +129,18 @@ def mask_contours(im):
     contourCopy = copy.deepcopy(contours)
     totalDel = 0
     for x in range(len(contours)):
-        area = cv2.contourArea(contours[x])
+        area = cv2.contourArea(contours[x], oriented=True)
         print(area)
         #filters out a few contours that are too small to be of use
         # and also negative contours that wrap around things
         if(area < 500):
             del contourCopy[x-totalDel]
+            print("deleted")
+            randC = random.uniform(0, 1)
+            randB = random.uniform(0, 1)
+            randA = random.uniform(0, 1)
+
+            cv2.drawContours(blank_image2, contours, x, (int(randA * 255), int(randB * 255), int(randC * 255)), 1, 8)
             totalDel += 1
         else:    
             randC = random.uniform(0,1)
@@ -141,6 +149,8 @@ def mask_contours(im):
 
             cv2.drawContours(blank_image, contours, x, (int(randA*255), int(randB*255), int(randC*255)), 1, 8)
     cv2.imshow("CONTOURS", blank_image)
+    cv2.imshow("CONTOURS DELETED", blank_image2)
+
     #cv2.imwrite("checking_2.png", blank_image)
     #cv2.waitKey(0)
     #cv2.destroyAllWindows()

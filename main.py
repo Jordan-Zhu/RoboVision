@@ -51,8 +51,10 @@ if __name__ == '__main__':
     #Closes color image once user clicks twice
     cv2.destroyAllWindows()
 
-    # Read in depth image, -1 specifies w/ alpha channel.
-    img = cv2.imread('img/learn0.png', -1)
+    # Read in depth image, -1 means w/ alpha channel.
+    # This keeps in the holes with no depth data as just black.
+    depth_im = 'img/learn0.png'
+    img = cv2.imread(depth_im, -1)
     #input_var = input("Enter x1, x2, y1, y2 with spaces in between (put 0 0 0 0 for no change) ")
     #dimensions = list(map(int, input_var.split()))
     #print(dimensions, "dimensions")
@@ -80,9 +82,27 @@ if __name__ == '__main__':
     P = sio.loadmat('Parameter.mat')
     param = P['P']
 
+    # evenly increases the contrast of the entire image
+    # ref: http://docs.opencv.org/3.1.0/d5/daf/tutorial_py_histogram_equalization.html
+    def clahe(img, iter=1):
+        for i in range(0, iter):
+            clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+            img = clahe.apply(img)
+        return img
+
+
+    # Open a copy of the depth image
+    # to change the contrast on the full-sized image
+    img2 = cv2.imread(depth_im, -1)
+    img2 = util.normalize_depth(img2)
+    img2 = clahe(img2, iter=2)
+    # crops the image
+    img2 = img2[mouseY[0]:mouseY[1], mouseX[0]:mouseX[1]]
+
+
     # ******* SECTION 1 *******
     # FIND DEPTH / CURVATURE DISCONTINUITIES.
-    curve_disc, curve_con, depth_disc, depth_con, dst = edge_detect(img)
+    curve_disc, curve_con, depth_disc, depth_con, dst = edge_detect(img, img2)
 
     # Remove extra dimensions from data
     res = lineseg(dst, tol=2)
@@ -93,6 +113,7 @@ if __name__ == '__main__':
             # print(res[i])
             # print(res[i][0])
             seglist.append(np.concatenate((res[i], [res[i][0]])))
+
         else:
             seglist.append(res[i])
 
