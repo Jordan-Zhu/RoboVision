@@ -16,7 +16,6 @@ def auto_canny(image, sigma=0.33):
     # return the edged image
     return edged
 
-
 def normalize_depth(depthimg, colormap=False):
     # Normalize depth image to range 0-255.
     min, max, minloc, maxloc = cv2.minMaxLoc(depthimg)
@@ -54,35 +53,16 @@ def find_contours(im, mode=cv2.RETR_CCOMP):
     width = im.shape[1]
     blank_image = np.zeros((height, width, 3), np.uint8)
     img = normalize_depth(im, colormap=True)
-    if mode == cv2.RETR_CCOMP:
-        im2, contours, hierarchy = cv2.findContours(im, mode, cv2.CHAIN_APPROX_NONE)
-        newcontours = []
-        for i in range(len(contours)):
-            if hierarchy[0][i, 2] < 0:
-                # color = (rand.randint(0, 255), rand.randint(0, 255), rand.randint(0, 255))
-                # cv2.drawContours(blank_image, contours, i, color, 1, 8)
-                newcontours.append(contours[i])
-
-        # Display contours
-        # draw_contours(blank_image, contours)
-        # cv2.imshow("CONTOURS", blank_image)
-        # cv2.waitKey(0)
-        # cv2.destroyAllWindows()
-
-        cntrs = np.array(newcontours)
-        # print(cntrs)
-        sqz_contours(cntrs)
-
-        return cntrs
-    else:
-        im2, contours, hierarchy = cv2.findContours(im, mode, cv2.CHAIN_APPROX_NONE)
+    im2, contours, hierarchy = cv2.findContours(im, mode, cv2.CHAIN_APPROX_NONE)
+    contours = np.squeeze(contours)
+    #draw_contours(im, contours)
         # draw_contours(blank_image, contours)
     # cv2.RETR_EXTERNAL cv2.RETR_CCOMP
 
-    cntrs = np.array(contours)
-    sqz_contours(cntrs)
+    contours = np.array(contours)
+    contours = np.squeeze(contours)
 
-    return cntrs
+    return contours
 
 
 def swap_cols(arr, frm, to):
@@ -90,6 +70,7 @@ def swap_cols(arr, frm, to):
 
 
 def squeeze_ndarr(arr):
+    #np.squeeze(ndarr)
     temp = []
     for i in range(arr.shape[0]):
         temp.append(np.squeeze(arr[i]))
@@ -123,7 +104,7 @@ def draw_contours(im, contours):
     # cv2.addWeighted(overlay, alpha, output, 1 - alpha,
     #                 0, output)
     cv2.imshow("contours", im)
-    cv2.waitKey(0)
+    #cv2.waitKey(0)
     # cv2.destroyAllWindows()
 
 

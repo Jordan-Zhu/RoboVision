@@ -68,6 +68,9 @@ def edge_detect(depth):
 
     skel_dst = util.morpho(dst)
     out = mask_contours(create_img(skel_dst))
+
+
+    ######CHECK WHAT THE POINT OF THIS IS################
     res = []
     # print(np.squeeze(out[0]))
     # print(out[0][0])
@@ -84,6 +87,10 @@ def edge_detect(depth):
 
     res = np.array(res)
     util.sqz_contours(res)
+
+    out = np.asarray(out)
+    print(len(out), print(out.shape), "out")
+    print(len(res), print(res.shape), "res")
     # squeeze_ndarr(res)
 
     #What is the point of this line
@@ -121,6 +128,7 @@ def mask_contours(im):
     totalDel = 0
     for x in range(len(contours)):
         area = cv2.contourArea(contours[x])
+        print(area)
         #filters out a few contours that are too small to be of use
         # and also negative contours that wrap around things
         if(area < 500):
