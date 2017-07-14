@@ -16,7 +16,7 @@ def create_img(mat):
     return mask
     
 
-def edge_detect(depthC, depthD):
+def edge_detect(depthC, depthD, numImg):
     curve_disc, curve_con = cd.curve_discont(depthC)
     depth_disc, depth_con = dd.depth_discont(depthD)
 
@@ -67,7 +67,7 @@ def edge_detect(depthC, depthD):
 
 
     skel_dst = util.morpho(dst)
-    out = mask_contours(create_img(skel_dst))
+    out = mask_contours(create_img(skel_dst), numImg)
 
 
     ######CHECK WHAT THE POINT OF THIS IS################
@@ -102,7 +102,7 @@ def edge_detect(depthC, depthD):
     return curve_disc, curve_con, depth_disc, depth_con, res
 
 
-def mask_contours(im):
+def mask_contours(im, numImg):
     # showimg(im)
     height = im.shape[0]
     width = im.shape[1]
@@ -130,12 +130,10 @@ def mask_contours(im):
     totalDel = 0
     for x in range(len(contours)):
         area = cv2.contourArea(contours[x], oriented=True)
-        print(area)
         #filters out a few contours that are too small to be of use
         # and also negative contours that wrap around things
         if(area < 500):
             del contourCopy[x-totalDel]
-            print("deleted")
             randC = random.uniform(0, 1)
             randB = random.uniform(0, 1)
             randA = random.uniform(0, 1)
@@ -149,7 +147,10 @@ def mask_contours(im):
 
             cv2.drawContours(blank_image, contours, x, (int(randA*255), int(randB*255), int(randC*255)), 1, 8)
     cv2.imshow("CONTOURS", blank_image)
+    cv2.imwrite("Contours%d.png"%numImg, blank_image)
     cv2.imshow("CONTOURS DELETED", blank_image2)
+    cv2.imwrite("CONTOURS DELETED%d.png"%numImg, blank_image2)
+
 
     #cv2.imwrite("checking_2.png", blank_image)
     #cv2.waitKey(0)
@@ -160,32 +161,6 @@ def mask_contours(im):
 
 
 
-
-    """
-    blank_image = np.zeros((height, width, 3), np.uint8)
-    im2, contours, hierarchy = cv2.findContours(im, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    print(hierarchy, "heirarchy")
-    # print(hierarchy)
-    # print(contours)
-    # draw_contours(blank_image, contours)
-    
-    for x in range(len(contours)):
-        randC = random.uniform(0, 1)
-        randB = random.uniform(0,1)
-        randA = random.uniform(0,1)
-        cv2.drawContours(blank_image, contours, x, (int(randA*255), int(randB*255), int(randC*255)), 1, 8)
-
-    uniquePoints = np.unique(contours[2])
-    print(len(uniquePoints), len(contours[2]), "unique")
-    cv2.imshow("CONTOURS 2", blank_image)
-    cv2.imwrite('checking_3.png', blank_image)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-    #cntrs.append(contours)
-    #cntr2 = contours
-    #print(len(cntr2), "len cntr2")
-    #print(len(cntr2[0]), "len cntr2")
-    """
 
     return contourCopy
 
