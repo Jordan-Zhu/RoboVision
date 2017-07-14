@@ -2,7 +2,9 @@ import cv2 as cv2
 import numpy as np
 import random as rand
 from skimage import morphology
-
+import copy
+from mpl_toolkits.mplot3d import Axes3D
+import matplotlib.pyplot as plt
 
 def auto_canny(image, sigma=0.33):
     # compute the median of the single channel pixel intensities
@@ -45,6 +47,8 @@ def showimg(img, im_name='image', write=False, imagename='img.png'):
 
 
 def find_contours(im, mode=cv2.RETR_CCOMP):
+    ####IS THERE ANY POINT TO THIS FUNCTION?#######
+    
     # im = cv2.imread('circle.png')
     # error: (-215) scn == 3 || scn == 4 in function cv::ipp_cvtColor
     # imgray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
@@ -108,8 +112,9 @@ def draw_contours(im, contours):
     # cv2.destroyAllWindows()
 
 
-def draw_lf(line_feature, img):
+def draw_lf(line_feature, img, numImg):
     # print(line_feature[0])
+    print(numImg)
     for i, e in enumerate(line_feature):
         x1 = int(e[1])
         y1 = int(e[0])
@@ -121,9 +126,10 @@ def draw_lf(line_feature, img):
         # cv2.imshow('Convex lines', blank_image)
         # cv2.waitKey(0)
         # cv2.destroyAllWindows()
-    cv2.imshow("line features", img)
-    #cv2.imwrite("checking_2.png", blank_image)
-    cv2.waitKey(0)
+    #cv2.imshow("line features", img)
+    #cv2.imwrite("line_features%d.png" %numImg, img)
+    #cv2.waitKey(0)
+    print("ran")
     cv2.destroyAllWindows()
 
 
@@ -143,7 +149,7 @@ def draw_listpair(list_pair, line_feature, img):
 
     cv2.namedWindow('Line features', cv2.WINDOW_NORMAL)
     cv2.imshow('Line features', blank_image)
-    cv2.waitKey(0)
+    #cv2.waitKey(0)
     cv2.destroyAllWindows()
 
 def swap_indices(arr):
@@ -159,3 +165,53 @@ def create_img(mat):
     masked = np.ma.masked_where(mask <= 0, mask)
 
     return mask
+
+#Passes in a depth image and turns it into a pointcloud
+def depthToPC(img, blank_image, cx, cy, f):
+    #img is the depth image, blank_image is for the pointcloud
+    newblank_image = copy.deepcopy(blank_image)
+
+    xVal = []
+    yVal = []
+    zVal = []
+    for yCoord in range(len(img)):
+        for xCoord in range(len(img[0])):
+            x, y, z = depthTo3d(img, xCoord, yCoord, cx, cy, f)
+            """z = img[yCoord][xCoord]
+                                                x = (xCoord - cx) * z / f
+                                                y = (yCoord - cy) * z / f"""
+            #print(y, x)
+            #print("blank_imageyx", blank_image[yCoord][xCoord])
+            newblank_image[yCoord][xCoord] = (x, y, z)
+            if(xCoord%20 == 0 and yCoord%20 == 0):
+                xVal.append(int(x))
+                yVal.append(int(y))
+                zVal.append(int(z))
+    """for yCoord in range(len(img)):
+                    for xCoord in range(len(img[0])):
+                        color_img[yCoord][xCoord] = np.abs((newblank_image[yCoord][xCoord])*255)/maxNum"""
+
+    create3dPlot(xVal, yVal, zVal)
+
+    return newblank_image
+
+#DepthTo3d
+def depthTo3d(img, x, y, cx, cy, f):
+    z = img[y][x]
+    x = (x - cx) * z / f
+    y = (y - cy) * z / f
+    return x, y, z
+
+def create3dPlot(xVal, yVal, zVal):
+    newFig = plt.figure()
+    ax = newFig.add_subplot(111, projection='3d')
+    x = xVal
+    y = yVal
+    z = zVal
+    ax.scatter(x, y, z, c="r", marker="o")
+    ax.set_xlabel('X Label')
+    ax.set_ylabel('Y Label')
+    ax.set_zlabel('Z Label')
+
+    plt.savefig('foo.png')
+
