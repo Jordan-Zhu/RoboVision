@@ -174,6 +174,9 @@ def depthToPC(img, blank_image, cx, cy, f):
     xVal = []
     yVal = []
     zVal = []
+    maxNum = 215
+    minNum = -106
+    rangeN = maxNum-minNum
     for yCoord in range(len(img)):
         for xCoord in range(len(img[0])):
             x, y, z = depthTo3d(img, xCoord, yCoord, cx, cy, f)
@@ -183,15 +186,34 @@ def depthToPC(img, blank_image, cx, cy, f):
             #print(y, x)
             #print("blank_imageyx", blank_image[yCoord][xCoord])
             newblank_image[yCoord][xCoord] = (x, y, z)
-            if(xCoord%20 == 0 and yCoord%20 == 0):
+            if(xCoord%20 == 0 or yCoord%20 == 0):
                 xVal.append(int(x))
                 yVal.append(int(y))
                 zVal.append(int(z))
+
+            """color = (abs(x/rangeN), abs(y/rangeN), abs(z/rangeN))
+                                                if(int(x)%10 == 0 and int(y)%10 == 0):
+                                                    ax.scatter(int(x), int(z), int(y), c=color, marker="o")"""
+
+
     """for yCoord in range(len(img)):
                     for xCoord in range(len(img[0])):
                         color_img[yCoord][xCoord] = np.abs((newblank_image[yCoord][xCoord])*255)/maxNum"""
 
-    create3dPlot(xVal, yVal, zVal)
+    #create3dPlot(xVal, yVal, zVal)
+    np.save("saveX.p", xVal)
+    np.save("saveY.p", yVal)
+    np.save("saveZ.p", zVal)
+
+
+
+    """ax.set_xlabel('X Label')
+                ax.set_ylabel('Y Label')
+                ax.set_zlabel('Z Label')
+                ax.view_init(elev = 30, azim = 300)
+                plt.draw()
+                plt.pause(1)"""
+
 
     return newblank_image
 
@@ -212,6 +234,23 @@ def create3dPlot(xVal, yVal, zVal):
     ax.set_xlabel('X Label')
     ax.set_ylabel('Y Label')
     ax.set_zlabel('Z Label')
+    plt.savefig('foo1.png')
+    plt.close(fig)
 
-    plt.savefig('foo.png')
-
+def fixHoles(img):
+    prox = [(-1, -1), (-1, 0), (-1, 1),
+            (0, -1),           (0, 1),
+            (1, -1), (1, 0), (1, 1)]
+    for y in range(len(img)):
+        for x in range(len(img[0])):
+            if(img[y][x] == 0):
+                total = 0
+                totalNear = 0
+                for eachProx in range(len(prox)):
+                    newY = y + prox[eachProx][0]
+                    newX = x + prox[eachProx][1]
+                    if(img[newY][newX] != 0):
+                        total += img[newY][newX]
+                        totalNear += 1
+                img[y][x] = total//totalNear
+    return img
