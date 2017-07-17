@@ -34,7 +34,7 @@ def create_linefeatures(ListSegments, ListEdges, imgsize):
             # print('curr', curr)
             x1, y1 = curr[j].astype(int)
             x2, y2 = curr[j + 1].astype(int)
-            print('x1', x1, 'y1', y1, 'x2', x2, 'y2', y2)
+            # print('x1', x1, 'y1', y1, 'x2', x2, 'y2', y2)
 
             # finds the positive angle of the line to the horizontal
             slope = round((y2 - y1) / (x2 - x1), 4) if ((x2 - x1) != 0) else calc_inf(y2, y1, x2, x1)

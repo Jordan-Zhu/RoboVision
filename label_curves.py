@@ -63,9 +63,17 @@ def mask_mean(src, mask):
         return sum(src[np.nonzero(val_mask)]) / cv2.countNonZero(val_mask)
 
 
-def create_mask(src, win_p, win_n):
+def remove_points(lp, roi):
+    line_mask = np.invert(np.in1d(lp, roi))
+    print(lp, "lp")
+    print(line_mask, "line mask")
+    roi = roi[:][line_mask]
+    cv2.imshow("roi after", roi)
+
+def create_mask(src, lp, win_p, win_n):
     mask_p = roipoly(src, win_p)
     mask_n = roipoly(src, win_n)
+    # remove_points(lp, mask_p)
     mean_p = mask_mean(src, mask_p)
     mean_n = mask_mean(src, mask_n)
     return mean_p, mean_n
@@ -105,7 +113,18 @@ def label_curves(src, list_lines, list_point):
         pt1, pt2, pt3, pt4, startpt, endpt = get_orientation(line)
         win_p, win_n = create_windows(pt1, pt2, pt3, pt4, startpt, endpt)
         # print(win_p, "win p", win_n, "win n")
-        mean_p, mean_n = create_mask(src, win_p, win_n)
+        # y, x = np.unravel_index([list_point[i]], src.shape, order='F')
+        # print(y, "y", x, "x")
+        # print(list_point[i].shape)
+        # pts = []
+        # if len(list_point[i]) > 2:
+        #     for i in range(len(y)):
+        #         pts.append([y[0][i], x[0][i]])
+        # elif len(list_point[i]) == 1:
+        #     pts.append([y[0], x[0]])
+        # print(pts)
+
+        mean_p, mean_n = create_mask(src, list_point[i], win_p, win_n)
         # print(mean_p, 'mean p', mean_n, 'mean n')
 
         if line[10] == 12:
