@@ -128,7 +128,7 @@ def draw_lf(line_feature, img, numImg):
         # cv2.destroyAllWindows()
     #cv2.imshow("line features", img)
     #cv2.imwrite("line_features%d.png" %numImg, img)
-    #cv2.waitKey(0)
+    cv2.waitKey(0)
     print("ran")
     cv2.destroyAllWindows()
 
@@ -147,9 +147,9 @@ def draw_listpair(list_pair, line_feature, img):
             y2 = int(line[2])
             cv2.line(blank_image, (x1, y1), (x2, y2), color, 2)
 
-    cv2.namedWindow('Line features', cv2.WINDOW_NORMAL)
+    # cv2.namedWindow('Line features', cv2.WINDOW_NORMAL)
     cv2.imshow('Line features', blank_image)
-    #cv2.waitKey(0)
+    cv2.waitKey(0)
     cv2.destroyAllWindows()
 
 def swap_indices(arr):

@@ -30,8 +30,6 @@ for x in range(len(contours)):
         cv2.drawContours(blank_image, contours, x, (int(randA*255), int(randB*255), int(randC*255)), 1, 8)
 
 cv2.imshow("CONTOURS", blank_image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
 print(len(contours), "contours")
 print(len(contours[0]), "contours")
 
@@ -43,22 +41,21 @@ res = []
 for i in range(len(out)):
     # Add the first point to the end so the shape closes
     current = np.squeeze(out[i])
-    # print('current', current)
-    # print('first', out[i][0])
     if current.shape[0] > 2:
-        # res.append(np.concatenate((current, out[i][0])))
-        # print(res[-1])
         res.append(current)
-    # print(np.concatenate((np.squeeze(out[i]), out[i][0])))
 
 res = np.array(res)
 util.sqz_contours(res)
 
-res = lineseg.lineseg(res, tol=200)
+res = lineseg.lineseg(res, tol=2)
 print(res, "res")
 """
 for x in range(len(res)):
     for y in range(lan ):
 """
 
-drawedgelist.drawedgelist(res, img)
+blank_image = np.zeros((height, width, 3), np.uint8)
+drawedgelist.drawedgelist(res, blank_image)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
