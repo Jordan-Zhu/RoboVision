@@ -1,7 +1,7 @@
 import cv2 as cv2
 import numpy as np
 import util as util
-
+from scipy import stats
 
 def grad_dir(img):
     # compute x and y derivatives
@@ -22,11 +22,17 @@ def grad_dir(img):
 def curve_discont(depth_im):
     ###NEEDS IMPROVEMENT, NOT THAT GREAT ATM########
     # Gradient of depth img
+    #cv2.imshow("bruh-1", depth_im)
     graddir = grad_dir(depth_im)
-    print(graddir)
-    print(np.amin(graddir), "min", np.amax(graddir), "max")
+    #print(np.amin(graddir), "min", np.amax(graddir), "max")
     # Threshold image to get it in the RGB color space
     dimg1 = (((graddir - graddir.min()) / (graddir.max() - graddir.min())) * 255.9).astype(np.uint8)
+    #print(dimg1, "dimg1")
+    ####For fixing holes in just curve image#####
+    """backgroundVal = stats.mode(dimg1, axis=None)[0]
+                print(backgroundVal, "backgroundVal")
+                dimg1 = util.fixHoles(depth_im, dimg1, backgroundVal)"""
+
     cv2.imshow("bruh", dimg1)
     # Eliminate salt-and-pepper noise
     median = cv2.medianBlur(dimg1, 13)
