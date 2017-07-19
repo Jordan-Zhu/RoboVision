@@ -7,6 +7,7 @@ def depth_discont(depth_im):
     # Depth discontinuity
     # depthimg = util.normalize_depth(depth_im)
     # dimg2 = clahe(depthimg, iter=2)
+    #depth_im = util.fixHoles2(depth_im)
     dimg2 = util.auto_canny(depth_im)
     skel2 = util.morpho(dimg2)
     util.showimg(dimg2, "Depth discontinuity w/ tone balancing")

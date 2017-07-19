@@ -16,7 +16,7 @@ def create_img(mat):
     return mask
     
 
-def edge_detect(depthC, depthD, numImg):
+def edge_detect(depthC, depthD, origImg, numImg):
     curve_disc, curve_con = cd.curve_discont(depthC)
     depth_disc, depth_con = dd.depth_discont(depthD)
 
@@ -67,7 +67,7 @@ def edge_detect(depthC, depthD, numImg):
 
 
     skel_dst = util.morpho(dst)
-    out = mask_contours(create_img(skel_dst), numImg)
+    out = mask_contours(create_img(skel_dst), origImg, numImg)
 
 
     ######CHECK WHAT THE POINT OF THIS IS################
@@ -102,7 +102,7 @@ def edge_detect(depthC, depthD, numImg):
     return curve_disc, curve_con, depth_disc, depth_con, res
 
 
-def mask_contours(im, numImg):
+def mask_contours(im, origImg, numImg):
     # showimg(im)
     height = im.shape[0]
     width = im.shape[1]
@@ -129,16 +129,32 @@ def mask_contours(im, numImg):
     contourCopy = copy.deepcopy(contours)
     totalDel = 0
     for x in range(len(contours)):
+        mask = np.zeros(origImg.shape,np.uint8)
+        cv2.drawContours(mask,[contours[x]],0,255,-1)
+        pixelpoints = np.transpose(np.nonzero(mask))
+        #print(pixelpoints, "pixelpoints testing")
+        count = 0
+        for pixel in range(len(pixelpoints)):
+            newY = pixelpoints[pixel][0]
+            newX = pixelpoints[pixel][1]
+            if(origImg[newY][newX] == 0):
+                count+=1
+        print(x, count, len(pixelpoints), "contour num, pixel points and count")
+
         area = cv2.contourArea(contours[x], oriented=True)
         #filters out a few contours that are too small to be of use
         # and also negative contours that wrap around things
-        if(area < 500):
+        #This means that this contour has a lot of holes and should be deleted 
+        # or len(pixelpoints)*.3 < count
+        if(area < 500 or len(pixelpoints)*.3 < count):
             del contourCopy[x-totalDel]
             randC = random.uniform(0, 1)
             randB = random.uniform(0, 1)
             randA = random.uniform(0, 1)
-
-            cv2.drawContours(blank_image2, contours, x, (int(randA * 255), int(randB * 255), int(randC * 255)), 1, 8)
+            if(len(pixelpoints)*.3 < count):
+                cv2.drawContours(blank_image2, contours, x, (int(randA * 255), int(randB * 255), int(randC * 255)), 1, 8)
+            else:
+                print("something")
             totalDel += 1
         else:    
             randC = random.uniform(0,1)

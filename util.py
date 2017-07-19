@@ -6,6 +6,7 @@ import copy
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 
+
 def auto_canny(image, sigma=0.33):
     # compute the median of the single channel pixel intensities
     v = np.median(image)
@@ -167,7 +168,12 @@ def create_img(mat):
     return mask
 
 #Passes in a depth image and turns it into a pointcloud
-def depthToPC(img, blank_image, cx, cy, f):
+def depthToPC(img, blank_image, cx, cy, f, mouseY, mouseX):
+    #Fixing cx cy since image was cropped
+    cx = cx - mouseX
+    cy = cy - mouseY
+
+
     #img is the depth image, blank_image is for the pointcloud
     newblank_image = copy.deepcopy(blank_image)
 
@@ -186,7 +192,7 @@ def depthToPC(img, blank_image, cx, cy, f):
             #print(y, x)
             #print("blank_imageyx", blank_image[yCoord][xCoord])
             newblank_image[yCoord][xCoord] = (x, y, z)
-            if(xCoord%20 == 0 or yCoord%20 == 0):
+            if(xCoord%10 == 0 or yCoord%10 == 0):
                 xVal.append(int(x))
                 yVal.append(int(y))
                 zVal.append(int(z))
@@ -201,9 +207,9 @@ def depthToPC(img, blank_image, cx, cy, f):
                         color_img[yCoord][xCoord] = np.abs((newblank_image[yCoord][xCoord])*255)/maxNum"""
 
     #create3dPlot(xVal, yVal, zVal)
-    np.save("saveX.p", xVal)
-    np.save("saveY.p", yVal)
-    np.save("saveZ.p", zVal)
+    np.save("saveX", xVal)
+    np.save("saveY", yVal)
+    np.save("saveZ", zVal)
 
 
 
@@ -219,9 +225,14 @@ def depthToPC(img, blank_image, cx, cy, f):
 
 #DepthTo3d
 def depthTo3d(img, x, y, cx, cy, f):
-    z = img[y][x]
-    x = (x - cx) * z / f
-    y = (y - cy) * z / f
+    z = img[y][x]*.1
+    if(z == 0):
+        x = (x - cx)/ (f)
+        y = (y - cy)/ (f)
+
+    else:
+        x = (x - cx) * z / (f)
+        y = (y - cy) * z / (f)
     return x, y, z
 
 def create3dPlot(xVal, yVal, zVal):
@@ -237,7 +248,31 @@ def create3dPlot(xVal, yVal, zVal):
     plt.savefig('foo1.png')
     plt.close(fig)
 
-def fixHoles(img):
+def fixHoles(img, gradImg, backgroundVal):
+    """prox = [(-1, -1), (-1, 0), (-1, 1),
+                        (0, -1),           (0, 1),
+                        (1, -1), (1, 0), (1, 1)]
+                for y in range(len(img)):
+                    for x in range(len(img[0])):
+                        if(img[y][x] == 0):
+                            total = 0
+                            totalNear = 0
+                            for eachProx in range(len(prox)):
+                                for upTen in range(10):
+                                    newY = y + prox[eachProx][0]*upTen
+                                    newX = x + prox[eachProx][1]*upTen
+                                    if(img[newY][newX] != 0):
+                                        total += img[newY][newX]
+                                        totalNear += 1
+                            img[y][x] = total//totalNear
+                return img"""
+    for y in range(len(img)):
+        for x in range(len(img[0])):
+            if(img[y][x] == 0):
+                print(gradImg[y][x], backgroundVal, "grad and background")
+                gradImg[y][x] = backgroundVal
+    return gradImg
+def fixHoles2(img):
     prox = [(-1, -1), (-1, 0), (-1, 1),
             (0, -1),           (0, 1),
             (1, -1), (1, 0), (1, 1)]
@@ -247,10 +282,11 @@ def fixHoles(img):
                 total = 0
                 totalNear = 0
                 for eachProx in range(len(prox)):
-                    newY = y + prox[eachProx][0]
-                    newX = x + prox[eachProx][1]
-                    if(img[newY][newX] != 0):
-                        total += img[newY][newX]
-                        totalNear += 1
+                    for upTen in range(10):
+                        newY = y + prox[eachProx][0]*upTen
+                        newX = x + prox[eachProx][1]*upTen
+                        if(img[newY][newX] != 0):
+                            total += img[newY][newX]
+                            totalNear += 1
                 img[y][x] = total//totalNear
     return img
