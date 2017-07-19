@@ -3,24 +3,25 @@ import numpy as np
 import util as util
 
 global window_size
+global buffer_zone
 
 
 def vertical_line(line):
     line[11] = 1
     # [y ; x-ts]
-    return [line[0], line[1] - window_size], \
-           [line[0], line[1] + window_size], \
-           [line[2], line[3] - window_size], \
-           [line[2], line[3] + window_size]
+    return [line[0] - buffer_zone, line[1] - window_size - buffer_zone], \
+           [line[0] + buffer_zone, line[1] + window_size + buffer_zone], \
+           [line[2] - buffer_zone, line[3] - window_size - buffer_zone], \
+           [line[2] + buffer_zone, line[3] + window_size + buffer_zone]
 
 
 def horizontal_line(line):
     line[11] = 2
     # [y-ts ; x]
-    return [line[0] - window_size, line[1]], \
-           [line[0] + window_size, line[1]], \
-           [line[2] - window_size, line[3]], \
-           [line[2] + window_size, line[3]]
+    return [line[0] - window_size - buffer_zone, line[1] - buffer_zone], \
+           [line[0] + window_size + buffer_zone, line[1] + buffer_zone], \
+           [line[2] - window_size - buffer_zone, line[3] - buffer_zone], \
+           [line[2] + window_size + buffer_zone, line[3] + buffer_zone]
 
 def get_orientation(line):
     startpt = [line[0], line[1]]
@@ -81,6 +82,13 @@ def create_mask(src, lp, win_p, win_n):
 # concave/convex of a curvature
 def label_convexity(lp_curr, mask_p, mask_n):
     mean_win = (mask_p + mask_n) / 2
+    print("Window mean:", mean_win, "| LP mean:", lp_curr, "| mask_P:", mask_p, "| mask_N:", mask_n)
+    if lp_curr <= mask_p and lp_curr <= mask_n:
+        return 3
+    elif lp_curr > mask_p and lp_curr > mask_n:
+        return 4
+    else:
+        return 4
     # if lp_curr > mean_win:
     #     # convex
     #     return 3
@@ -90,7 +98,7 @@ def label_convexity(lp_curr, mask_p, mask_n):
     # else:
     #     print("wat")
     #     return -1
-    return 3 if lp_curr >= mean_win else 4
+    # return 3 if lp_curr >= mean_win else 4
 
 
 # obj on left/right side of discontinuity
@@ -101,7 +109,9 @@ def label_pose(mask_p, mask_n):
 
 def label_curves(src, list_lines, list_point):
     global window_size
-    window_size = 5
+    window_size = 10
+    global buffer_zone
+    buffer_zone = 2
     # strategy:
     # make window on both sides of line
     # run test for curv or disc
@@ -129,10 +139,12 @@ def label_curves(src, list_lines, list_point):
 
         if line[10] == 12:
             y, x = np.unravel_index([list_point[i]], src.shape, order='F')
+            print("Y:", y, "\nX:", x)
             mean_lp = np.mean(src[y, x])
             # print(mean_lp, "mean lp")
             # mean_lp = np.mean(src[list_point[i]])
             label = label_convexity(mean_lp, mean_p, mean_n)
+            print(label, "curv label")
         elif line[10] == 13:
             label = label_pose(mean_p, mean_n)
         else:

@@ -22,15 +22,23 @@ def squeeze_arr(arr):
     return res
 
 
-def alt_merge_lp(listpt, pt1, pt2):
+def alt_merge_lp(listpt, pt1, pt2, lind1, lind2):
     line_start = listpt[pt1]
     line_end = listpt[pt2]
 
-    listpt = delete(listpt, max(pt1, pt2))
-    listpt = delete(listpt, min(pt1, pt2))
+    # Delete the listpoints that are going to be merged
+    # listpt = delete(listpt, max(pt1, pt2))
+    # listpt = delete(listpt, min(pt1, pt2))
+    del listpt[max(pt1, pt2)]
+    del listpt[min(pt1, pt2)]
 
     merged = r_[line_start, line_end]
-    listpt = append(listpt, array(merged))
+    merged_new = unique(r_[line_start, line_end])
+    print(merged, "%d %d merged" %(pt1, pt2))
+    # print(merged_new, "NEW merged")
+    # listpt = append(listpt, [array(merged)], axis=0)
+    listpt.append(merged_new)
+    print(listpt[-1], "end of listpoint")
 
     return listpt
 
@@ -116,6 +124,7 @@ def merge_lines(lines, listpt, thresh, imgsize):
     # All lines that can be merged. Merging lines
     # will group them together and then add the grouping to the list
     out = [[n] for n in range(0, lines.shape[0])]
+    new_lp = listpt.tolist()
 
     # Get unique start and end points. These are what we check
     unique_pts = sort(unique(lines[:, 8:10]))
@@ -136,6 +145,7 @@ def merge_lines(lines, listpt, thresh, imgsize):
             if abs(alph1 - alph2) > thresh or compare(temp1, temp2):
                 continue
 
+            # Get the unique start and end points of the two lines
             lind1, lind2 = sort([int(i) for i in list(filter(lambda e: e not in [ptx], chain(temp1 + temp2)))])
             y1, x1 = unravel_index([lind1], imgsize, order='F')
             y2, x2 = unravel_index([lind2], imgsize, order='F')
@@ -158,7 +168,7 @@ def merge_lines(lines, listpt, thresh, imgsize):
                 out.append([val1, val2])
 
                 # listpt = merge_listpoints(listpt, pt1, pt2, lind1, lind2)
-                listpt = alt_merge_lp(listpt, pt1, pt2)
+                listpt = alt_merge_lp(new_lp, pt1, pt2, lind1, lind2)
                 # Merged lines, so don't check the other pairs
                 break
             else:
