@@ -12,6 +12,7 @@ def math_stuff(x1, y1, x2, y2):
     slope = float((y2 - y1) / (x2 - x1) if ((x2 - x1) != 0) else inf)
     line_len = sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
     alpha = degrees(atan(-slope))
+    alpha = 180+alpha if alpha < 0 else alpha
     return slope, line_len, alpha
 
 
