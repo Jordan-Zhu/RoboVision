@@ -59,15 +59,15 @@ def roipoly(src, poly):
 def mask_mean(src, mask):
     val_mask = src * mask
     if cv2.countNonZero(val_mask) == 0:
-        return 0
+        return 100000
     else:
         return sum(src[np.nonzero(val_mask)]) / cv2.countNonZero(val_mask)
 
 
 def remove_points(lp, roi):
     line_mask = np.invert(np.in1d(lp, roi))
-    print(lp, "lp")
-    print(line_mask, "line mask")
+    # print(lp, "lp")
+    # print(line_mask, "line mask")
     roi = roi[:][line_mask]
     cv2.imshow("roi after", roi)
 
@@ -109,9 +109,9 @@ def label_pose(mask_p, mask_n):
 
 def label_curves(src, list_lines, list_point):
     global window_size
-    window_size = 10
+    window_size = 5
     global buffer_zone
-    buffer_zone = 2
+    buffer_zone = 0
     # append results of test to col 12
     col_label = np.zeros((list_lines.shape[0], 2))
     list_lines = np.hstack((list_lines, col_label))
@@ -135,6 +135,7 @@ def label_curves(src, list_lines, list_point):
         # print(mean_p, 'mean p', mean_n, 'mean n')
 
         if line[10] == 12:
+            print(len(list_point[i]), "num list point")
             y, x = np.unravel_index([list_point[i]], src.shape, order='F')
             # print("Y:", y, "\nX:", x)
             mean_lp = np.mean(src[y, x])
@@ -142,7 +143,7 @@ def label_curves(src, list_lines, list_point):
             # mean_lp = np.mean(src[list_point[i]])
             label = label_convexity(mean_lp, mean_p, mean_n)
             print(label, "curv label")
-        elif line[10] == 13:
+        elif line[10] == 13 or line[10] == 14:
             label = label_pose(mean_p, mean_n)
         else:
             label = 0
