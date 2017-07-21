@@ -42,6 +42,8 @@ def create_linefeatures(ListSegments, idx, ListEdges, imgsize):
         linelen = sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
         # tangent
         alpha = degrees(atan(-slope))
+        alpha = 180 + alpha if alpha < 0 else alpha
+        # print(alpha)
 
         LineFeature.append([y1, x1, y2, x2, linelen, slope, alpha, c0, lin_ind1, lin_ind2])
         c0 += 1

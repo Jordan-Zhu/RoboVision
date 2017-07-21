@@ -247,8 +247,11 @@ if __name__ == '__main__':
             # LineFeature, ListPoint = Lseg_to_Lfeat_v4.create_linefeatures(seglist, dst, im_size)
             LineFeature, ListPoint = lfc.create_linefeatures(seglist[j], j, dst, im_size)
 
-            Line_new, ListPoint_new, line_merged = merge_lines_v4.merge_lines(LineFeature, ListPoint, 10, im_size)
+            # print("angles\n", LineFeature[:, 6])
+
+            Line_new, ListPoint_new, line_merged = merge_lines_v4.merge_lines(LineFeature, ListPoint, 20, im_size)
             print(line_merged, "merged")
+            print("angles\n", Line_new[:, 6])
             # Line_new = LineFeature
             # ListPoint_new = ListPoint
 
@@ -303,7 +306,7 @@ if __name__ == '__main__':
 
 
             # line_newC = LabelLineCurveFeature_v4.classify_curves(curve_disc, depth_disc, Line_new, ListPoint_new, 11)
-            line_new = cc.classify_curves(curve_disc, depth_disc, Line_new, ListPoint_new, 5)
+            line_new = cc.classify_curves(curve_disc, depth_disc, Line_new, ListPoint_new, 10)
 
             # print(line_new)
 
@@ -409,7 +412,7 @@ if __name__ == '__main__':
         # # Match the lines into pairs
 
             list_pair = line_match(line_new, param)
-            #
+
             print('List pair:', list_pair)
             blank_im = np.zeros((height, width, 3), np.uint8)
             util.draw_listpair(list_pair, line_new, img)
