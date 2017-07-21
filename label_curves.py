@@ -58,10 +58,12 @@ def roipoly(src, poly):
 
 def mask_mean(src, mask):
     val_mask = src * mask
-    if cv2.countNonZero(val_mask) == 0:
+    mask_size = cv2.countNonZero(mask)
+    num_nonzero = cv2.countNonZero(val_mask)
+    if num_nonzero == 0 or num_nonzero / mask_size < 0.05:
         return 100000
     else:
-        return sum(src[np.nonzero(val_mask)]) / cv2.countNonZero(val_mask)
+        return sum(src[np.nonzero(val_mask)]) / num_nonzero
 
 
 def remove_points(lp, roi):
@@ -81,14 +83,14 @@ def create_mask(src, lp, win_p, win_n):
 
 # concave/convex of a curvature
 def label_convexity(lp_curr, mask_p, mask_n):
-    mean_win = (mask_p + mask_n) / 2
+    # mean_win = (mask_p + mask_n) / 2
     #print("Window mean:", mean_win, "| LP mean:", lp_curr, "| mask_P:", mask_p, "| mask_N:", mask_n)
     if lp_curr <= mask_p and lp_curr <= mask_n:
-        return 3
+        return 31 if mask_p >= mask_n else 32
     elif lp_curr > mask_p and lp_curr > mask_n:
-        return 4
+        return 41 if mask_p >= mask_n else 42
     else:
-        return 4
+        return 40
     # if lp_curr > mean_win:
     #     # convex
     #     return 3
