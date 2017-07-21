@@ -411,7 +411,7 @@ if __name__ == '__main__':
 
         # # Match the lines into pairs
 
-            list_pair = line_match(line_new, param)
+            list_pair = line_match(line_new, param, blank_image)
 
             print('List pair:', list_pair)
             blank_im = np.zeros((height, width, 3), np.uint8)

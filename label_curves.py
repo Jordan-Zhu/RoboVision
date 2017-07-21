@@ -82,7 +82,7 @@ def create_mask(src, lp, win_p, win_n):
 # concave/convex of a curvature
 def label_convexity(lp_curr, mask_p, mask_n):
     mean_win = (mask_p + mask_n) / 2
-    print("Window mean:", mean_win, "| LP mean:", lp_curr, "| mask_P:", mask_p, "| mask_N:", mask_n)
+    #print("Window mean:", mean_win, "| LP mean:", lp_curr, "| mask_P:", mask_p, "| mask_N:", mask_n)
     if lp_curr <= mask_p and lp_curr <= mask_n:
         return 3
     elif lp_curr > mask_p and lp_curr > mask_n:
@@ -135,14 +135,14 @@ def label_curves(src, list_lines, list_point):
         # print(mean_p, 'mean p', mean_n, 'mean n')
 
         if line[10] == 12:
-            print(len(list_point[i]), "num list point")
+            #print(len(list_point[i]), "num list point")
             y, x = np.unravel_index([list_point[i]], src.shape, order='F')
             # print("Y:", y, "\nX:", x)
             mean_lp = np.mean(src[y, x])
             # print(mean_lp, "mean lp")
             # mean_lp = np.mean(src[list_point[i]])
             label = label_convexity(mean_lp, mean_p, mean_n)
-            print(label, "curv label")
+            #print(label, "curv label")
         elif line[10] == 13 or line[10] == 14:
             label = label_pose(mean_p, mean_n)
         else:
