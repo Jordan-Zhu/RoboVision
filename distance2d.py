@@ -6,8 +6,7 @@ import math
 
 
 def distance2d(line1, line2):
-    # LineFeature = [y1 x1 y2 x2 L m];
-    # L is length of the line
+    # LineFeature = [y1 x1 y2 x2 length slope];
     if line1[4] < line2[4]:
         big_line = line1
         other_line = line2
@@ -15,7 +14,7 @@ def distance2d(line1, line2):
         big_line = line2
         other_line = line1
 
-    # some math stuff
+    # midpoints
     x0 = (big_line[1] + big_line[3]) / 2
     y0 = (big_line[0] + big_line[2]) / 2
 

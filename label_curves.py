@@ -112,9 +112,6 @@ def label_curves(src, list_lines, list_point):
     window_size = 10
     global buffer_zone
     buffer_zone = 2
-    # strategy:
-    # make window on both sides of line
-    # run test for curv or disc
     # append results of test to col 12
     col_label = np.zeros((list_lines.shape[0], 2))
     list_lines = np.hstack((list_lines, col_label))
@@ -139,7 +136,7 @@ def label_curves(src, list_lines, list_point):
 
         if line[10] == 12:
             y, x = np.unravel_index([list_point[i]], src.shape, order='F')
-            print("Y:", y, "\nX:", x)
+            # print("Y:", y, "\nX:", x)
             mean_lp = np.mean(src[y, x])
             # print(mean_lp, "mean lp")
             # mean_lp = np.mean(src[list_point[i]])

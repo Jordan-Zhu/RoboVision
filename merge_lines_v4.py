@@ -34,11 +34,11 @@ def alt_merge_lp(listpt, pt1, pt2, lind1, lind2):
 
     merged = r_[line_start, line_end]
     merged_new = unique(r_[line_start, line_end])
-    print(merged, "%d %d merged" %(pt1, pt2))
+    # print(merged, "%d %d merged" %(pt1, pt2))
     # print(merged_new, "NEW merged")
     # listpt = append(listpt, [array(merged)], axis=0)
     listpt.append(merged_new)
-    print(listpt[-1], "end of listpoint")
+    # print(listpt, "end of listpoint")
 
     return listpt
 

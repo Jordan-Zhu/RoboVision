@@ -38,7 +38,7 @@ import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
 
-    for numImg in [2]:
+    for numImg in [3]:
 
         ##These methods are for the picture resizing
 
@@ -247,9 +247,10 @@ if __name__ == '__main__':
             # LineFeature, ListPoint = Lseg_to_Lfeat_v4.create_linefeatures(seglist, dst, im_size)
             LineFeature, ListPoint = lfc.create_linefeatures(seglist[j], j, dst, im_size)
 
-            # Line_new, ListPoint_new, line_merged = merge_lines_v4.merge_lines(LineFeature, ListPoint, 10, im_size)
-            Line_new = LineFeature
-            ListPoint_new = ListPoint
+            Line_new, ListPoint_new, line_merged = merge_lines_v4.merge_lines(LineFeature, ListPoint, 10, im_size)
+            print(line_merged, "merged")
+            # Line_new = LineFeature
+            # ListPoint_new = ListPoint
 
             # print(Line_new.shape, "NEW line size")
             # print(ListPoint_new.shape, "NEW list point size")
@@ -407,8 +408,8 @@ if __name__ == '__main__':
 
         # # Match the lines into pairs
 
-        list_pair = line_match(line_new, param)
+            list_pair = line_match(line_new, param)
 
-        print('List pair:', list_pair)
-        blank_im = np.zeros((height, width, 3), np.uint8)
-        util.draw_listpair(list_pair, line_new, img)
+            print('List pair:', list_pair)
+            blank_im = np.zeros((height, width, 3), np.uint8)
+            util.draw_listpair(list_pair, line_new, img)

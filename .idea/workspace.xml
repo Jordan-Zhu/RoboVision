@@ -1,50 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/main.py" line="350" mnemonic="3" />
+    <bookmark url="file://$PROJECT_DIR$/main.py" line="351" mnemonic="3" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9698a6a6-bf7b-4a19-add3-f49d8340dfdc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/merge_lines_new.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CONTOURS DELETED0.png" afterPath="$PROJECT_DIR$/CONTOURS DELETED0.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CONTOURS DELETED11.png" afterPath="$PROJECT_DIR$/CONTOURS DELETED11.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CONTOURS DELETED2.png" afterPath="$PROJECT_DIR$/CONTOURS DELETED2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contours0.png" afterPath="$PROJECT_DIR$/Contours0.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contours11.png" afterPath="$PROJECT_DIR$/Contours11.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contours2.png" afterPath="$PROJECT_DIR$/Contours2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Curvature012.png" afterPath="$PROJECT_DIR$/Curvature012.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Curvature014.png" afterPath="$PROJECT_DIR$/Curvature014.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Curvature07.png" afterPath="$PROJECT_DIR$/Curvature07.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Curvature09.png" afterPath="$PROJECT_DIR$/Curvature09.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Curvature1110.png" afterPath="$PROJECT_DIR$/Curvature1110.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Curvature118.png" afterPath="$PROJECT_DIR$/Curvature118.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Edgelist00.png" afterPath="$PROJECT_DIR$/Edgelist00.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Edgelist01.png" afterPath="$PROJECT_DIR$/Edgelist01.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Edgelist02.png" afterPath="$PROJECT_DIR$/Edgelist02.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Edgelist03.png" afterPath="$PROJECT_DIR$/Edgelist03.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Edgelist04.png" afterPath="$PROJECT_DIR$/Edgelist04.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Edgelist110.png" afterPath="$PROJECT_DIR$/Edgelist110.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Edgelist111.png" afterPath="$PROJECT_DIR$/Edgelist111.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Edgelist112.png" afterPath="$PROJECT_DIR$/Edgelist112.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Edgelist113.png" afterPath="$PROJECT_DIR$/Edgelist113.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Edgelist114.png" afterPath="$PROJECT_DIR$/Edgelist114.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Edgelist20.png" afterPath="$PROJECT_DIR$/Edgelist20.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Edgelist21.png" afterPath="$PROJECT_DIR$/Edgelist21.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Edgelist22.png" afterPath="$PROJECT_DIR$/Edgelist22.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Edgelist23.png" afterPath="$PROJECT_DIR$/Edgelist23.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Edgelist24.png" afterPath="$PROJECT_DIR$/Edgelist24.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Edgelist25.png" afterPath="$PROJECT_DIR$/Edgelist25.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Label012.png" afterPath="$PROJECT_DIR$/Label012.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Label014.png" afterPath="$PROJECT_DIR$/Label014.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Label07.png" afterPath="$PROJECT_DIR$/Label07.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Label09.png" afterPath="$PROJECT_DIR$/Label09.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Label1110.png" afterPath="$PROJECT_DIR$/Label1110.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Label118.png" afterPath="$PROJECT_DIR$/Label118.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/saveX.p.npy" afterPath="$PROJECT_DIR$/saveX.p.npy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/saveY.p.npy" afterPath="$PROJECT_DIR$/saveY.p.npy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/saveZ.p.npy" afterPath="$PROJECT_DIR$/saveZ.p.npy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/saveX.npy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/saveY.npy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/saveZ.npy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/t_distance2d.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/CONTOURS DELETED0.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/CONTOURS DELETED1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/CONTOURS DELETED11.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/CONTOURS DELETED2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/CONTOURS DELETED3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/CONTOURS DELETED4.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Contours0.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Contours1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Contours11.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Contours2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Contours3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Contours4.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Curvature0.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Curvature010.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Curvature011.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Curvature012.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Curvature014.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Curvature016.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Curvature07.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Curvature08.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Curvature09.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Curvature1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Curvature1110.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Curvature1113.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Curvature1114.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Curvature116.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Curvature117.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Curvature118.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Curvature119.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Curvature2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Curvature211.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Curvature214.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Curvature215.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Curvature217.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Curvature27.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Curvature28.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Curvature3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist00.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist01.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist02.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist03.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist04.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist10.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist11.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist110.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist111.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist112.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist113.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist114.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist12.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist13.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist14.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist15.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist20.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist21.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist22.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist23.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist24.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist25.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist30.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist31.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist32.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist33.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist34.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist40.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist41.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist42.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist43.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Edgelist44.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Label0.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Label010.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Label011.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Label012.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Label014.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Label016.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Label07.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Label08.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Label09.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Label1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Label1110.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Label1113.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Label1114.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Label116.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Label117.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Label118.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Label119.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Label2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Label211.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Label214.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Label215.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Label217.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Label27.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Label28.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Label3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/foo.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/distance2d.py" afterPath="$PROJECT_DIR$/distance2d.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/label_curves.py" afterPath="$PROJECT_DIR$/label_curves.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/line_match.py" afterPath="$PROJECT_DIR$/line_match.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/merge_lines_v4.py" afterPath="$PROJECT_DIR$/merge_lines_v4.py" />
     </list>
@@ -60,7 +123,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/RoboVision$py_build.coverage" NAME="py_build Coverage Results" MODIFIED="1491955382627" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Unit Tests" />
-    <SUITE FILE_PATH="coverage/RoboVision$main.coverage" NAME="main Coverage Results" MODIFIED="1500507660651" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RoboVision$main.coverage" NAME="main Coverage Results" MODIFIED="1500667505953" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RoboVision$test_trackedge.coverage" NAME="test_trackedge Coverage Results" MODIFIED="1496253761507" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Unit Tests" />
     <SUITE FILE_PATH="coverage/RoboVision$applylut_test__1_.coverage" NAME="applylut_test (1) Coverage Results" MODIFIED="1493761792330" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Unit Tests" />
     <SUITE FILE_PATH="coverage/RoboVision$part1.coverage" NAME="part1 Coverage Results" MODIFIED="1496253917534" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python" />
@@ -79,7 +142,9 @@
     <SUITE FILE_PATH="coverage/RoboVision$algo.coverage" NAME="algo Coverage Results" MODIFIED="1480365928342" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RoboVision$zeroElimMedianHoleFill.coverage" NAME="zeroElimMedianHoleFill Coverage Results" MODIFIED="1478636833925" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RoboVision$drawedgelist.coverage" NAME="drawedgelist Coverage Results" MODIFIED="1473360115246" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RoboVision$t_distance2d.coverage" NAME="t_distance2d Coverage Results" MODIFIED="1500665095394" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RoboVision$line_match.coverage" NAME="line_match Coverage Results" MODIFIED="1477592406268" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RoboVision$Unittests_in_test_distance2d_py.coverage" NAME="Unittests in test_distance2d.py Coverage Results" MODIFIED="1500665002986" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RoboVision$LabelLineCurveFeature_v4.coverage" NAME="LabelLineCurveFeature_v4 Coverage Results" MODIFIED="1490824372681" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python" />
     <SUITE FILE_PATH="coverage/RoboVision$LabelLineFeature_v4.coverage" NAME="LabelLineFeature_v4 Coverage Results" MODIFIED="1478634280742" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RoboVision$Unittests_in_testingLineseg_py.coverage" NAME="Unittests in testingLineseg.py Coverage Results" MODIFIED="1499898112141" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -101,14 +166,78 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="250" column="34" lean-forward="true" selection-start-line="250" selection-start-column="34" selection-end-line="250" selection-end-column="34" />
+            <state relative-caret-position="96">
+              <caret line="131" column="35" lean-forward="true" selection-start-line="131" selection-start-column="35" selection-end-line="131" selection-end-column="35" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="line_match.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/line_match.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="15" column="34" lean-forward="false" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="distance2d.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/distance2d.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" column="47" lean-forward="false" selection-start-line="8" selection-start-column="47" selection-end-line="8" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Plot_3d.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Plot_3d.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="13" lean-forward="true" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="t_distance2d.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/t_distance2d.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="23" lean-forward="false" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="relative_pos.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/relative_pos.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="classify_curves.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/classify_curves.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="232">
+              <caret line="70" column="51" lean-forward="false" selection-start-line="70" selection-start-column="51" selection-end-line="70" selection-end-column="51" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -116,45 +245,11 @@
       <file leaf-file-name="merge_lines_v4.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/merge_lines_v4.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="162" column="38" lean-forward="true" selection-start-line="162" selection-start-column="38" selection-end-line="162" selection-end-column="38" />
+            <state relative-caret-position="147">
+              <caret line="167" column="40" lean-forward="false" selection-start-line="167" selection-start-column="40" selection-end-line="167" selection-end-column="40" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Lseg_to_Lfeat_v4.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Lseg_to_Lfeat_v4.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="481">
-              <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Line_feat_contours.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Line_feat_contours.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="53" column="29" lean-forward="false" selection-start-line="53" selection-start-column="29" selection-end-line="53" selection-end-column="29" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="drawedgelist.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/drawedgelist.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="88" column="48" lean-forward="false" selection-start-line="88" selection-start-column="48" selection-end-line="88" selection-end-column="48" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -162,29 +257,10 @@
       <file leaf-file-name="label_curves.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/label_curves.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="51" column="45" lean-forward="false" selection-start-line="51" selection-start-column="45" selection-end-line="51" selection-end-column="45" />
+            <state relative-caret-position="549">
+              <caret line="113" column="19" lean-forward="false" selection-start-line="113" selection-start-column="19" selection-end-line="113" selection-end-column="19" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Contours4.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Contours4.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="merge_lines_new.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/merge_lines_new.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-119">
-              <caret line="23" column="20" lean-forward="false" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -206,8 +282,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Lseg_to_Lfeat_py.py" />
-        <option value="$PROJECT_DIR$/Unit Tests/test_lp.py" />
         <option value="$PROJECT_DIR$/Unit Tests/py_build.py" />
         <option value="$PROJECT_DIR$/python/line_match_v2.py" />
         <option value="$PROJECT_DIR$/img/__init__.py" />
@@ -238,7 +312,6 @@
         <option value="$PROJECT_DIR$/trackedge.py" />
         <option value="$PROJECT_DIR$/drawedgelist.py" />
         <option value="$PROJECT_DIR$/check_overlap.py" />
-        <option value="$PROJECT_DIR$/distance2d.py" />
         <option value="$PROJECT_DIR$/LabelLineFeature_v1.py" />
         <option value="$PROJECT_DIR$/relative_pos.py" />
         <option value="$PROJECT_DIR$/curv_disc.py" />
@@ -251,12 +324,15 @@
         <option value="$PROJECT_DIR$/LabelLineCurveFeature_v4.py" />
         <option value="$PROJECT_DIR$/util.py" />
         <option value="$PROJECT_DIR$/classify_curves.py" />
-        <option value="$PROJECT_DIR$/label_curves.py" />
         <option value="$PROJECT_DIR$/Lseg_to_Lfeat_v4.py" />
         <option value="$PROJECT_DIR$/Line_feat_contours.py" />
         <option value="$PROJECT_DIR$/merge_lines_new.py" />
-        <option value="$PROJECT_DIR$/merge_lines_v4.py" />
+        <option value="$PROJECT_DIR$/label_curves.py" />
+        <option value="$PROJECT_DIR$/test_distance2d.py" />
+        <option value="$PROJECT_DIR$/distance2d.py" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/merge_lines_v4.py" />
+        <option value="$PROJECT_DIR$/line_match.py" />
       </list>
     </option>
   </component>
@@ -304,13 +380,13 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/GitHub/PortableGit_624c8416ee51e205b3f892d1d904e06e6f3c57c8/mingw32/bin/git.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/scratch" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -344,25 +420,6 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.main">
-    <configuration default="false" name="part1" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/python" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="RoboVision" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python/part1.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
     <configuration default="false" name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -382,41 +439,6 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="canny_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/unsorted/Unit Tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="RoboVision" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/unsorted/Unit Tests/canny_test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Unittests in testingLineseg.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="RoboVision" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/testingLineseg.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method />
-    </configuration>
     <configuration default="false" name="Unittests in testing_linefeat.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -431,6 +453,58 @@
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;$PROJECT_DIR$/testing_linefeat.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Unittests in scratch" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="C:\ProgramData\Anaconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="RoboVision" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="_new_pattern" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/scratch&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Unittests in t_distance2d.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="RoboVision" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/t_distance2d.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method />
+    </configuration>
+    <configuration default="false" name="t_distance2d" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="RoboVision" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/t_distance2d.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
@@ -616,19 +690,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.part1" />
-      <item index="1" class="java.lang.String" itemvalue="Python.main" />
-      <item index="2" class="java.lang.String" itemvalue="Python.canny_test" />
-      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in testingLineseg.py" />
-      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in testing_linefeat.py" />
+      <item index="0" class="java.lang.String" itemvalue="Python.main" />
+      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in testing_linefeat.py" />
+      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in scratch" />
+      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in t_distance2d.py" />
+      <item index="4" class="java.lang.String" itemvalue="Python.t_distance2d" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.main" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in testing_linefeat.py" />
-        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in testingLineseg.py" />
-        <item index="3" class="java.lang.String" itemvalue="Python.canny_test" />
-        <item index="4" class="java.lang.String" itemvalue="Python.part1" />
+        <item index="1" class="java.lang.String" itemvalue="Python.t_distance2d" />
+        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in t_distance2d.py" />
+        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in scratch" />
+        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in testing_linefeat.py" />
       </list>
     </recent_temporary>
     <configuration default="true" type="tests" factoryName="Attests">
@@ -669,20 +743,20 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_testing_linefeat_py - 2017.07.12 at 18h 32m 37s.xml">
-      <configuration name="Unittests in testing_linefeat.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test_distance2d_py - 2017.07.21 at 15h 16m 59s.xml">
+      <configuration name="Unittests in test_distance2d.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_testing_linefeat_py - 2017.07.12 at 18h 35m 29s.xml">
-      <configuration name="Unittests in testing_linefeat.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test_distance2d_py - 2017.07.21 at 15h 17m 28s.xml">
+      <configuration name="Unittests in test_distance2d.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_testing_linefeat_py - 2017.07.12 at 18h 37m 45s.xml">
-      <configuration name="Unittests in testing_linefeat.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test_distance2d_py - 2017.07.21 at 15h 21m 04s.xml">
+      <configuration name="Unittests in test_distance2d.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_testing_linefeat_py - 2017.07.12 at 18h 38m 54s.xml">
-      <configuration name="Unittests in testing_linefeat.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test_distance2d_py - 2017.07.21 at 15h 22m 38s.xml">
+      <configuration name="Unittests in test_distance2d.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_testing_linefeat_py - 2017.07.12 at 18h 39m 06s.xml">
-      <configuration name="Unittests in testing_linefeat.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test_distance2d_py - 2017.07.21 at 15h 23m 23s.xml">
+      <configuration name="Unittests in test_distance2d.py" configurationId="tests" />
     </history-entry>
     <history-entry file="Unittests_in_testing_linefeat_py - 2017.07.12 at 18h 39m 16s.xml">
       <configuration name="Unittests in testing_linefeat.py" configurationId="tests" />
@@ -702,26 +776,25 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12811127" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39775282" sideWeight="0.503125" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.53154576" sideWeight="0.496875" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41955835" sideWeight="0.496875" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12737921" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280757" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39905363" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921347" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
     </layout>
@@ -767,27 +840,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/relative_pos.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/unsorted/part1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="55" lean-forward="true" selection-start-line="9" selection-start-column="55" selection-end-line="9" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/trackedge.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="7" lean-forward="false" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/unsorted/Unit Tests/lambda.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -909,36 +961,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/distance2d.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="8" column="38" lean-forward="false" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/edge_detect.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="29" column="22" lean-forward="false" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/line_match.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="38" lean-forward="false" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/classify_curves.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="23" column="46" lean-forward="false" selection-start-line="23" selection-start-column="46" selection-end-line="23" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#10#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1004,11 +1031,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Contours4.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Contours0.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -1027,19 +1049,24 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/merge_lines_new.py">
+    <entry file="file://$PROJECT_DIR$/Contours4.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lseg_to_Lfeat_v4.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-119">
-          <caret line="23" column="20" lean-forward="false" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
+        <state relative-caret-position="396">
+          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Line_feat_contours.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
+        <state relative-caret-position="549">
           <caret line="53" column="29" lean-forward="false" selection-start-line="53" selection-start-column="29" selection-end-line="53" selection-end-column="29" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
@@ -1049,49 +1076,101 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/drawedgelist.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
+        <state relative-caret-position="549">
           <caret line="88" column="48" lean-forward="false" selection-start-line="88" selection-start-column="48" selection-end-line="88" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/label_curves.py">
+    <entry file="file://$PROJECT_DIR$/merge_lines_new.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="51" column="45" lean-forward="false" selection-start-line="51" selection-start-column="45" selection-end-line="51" selection-end-column="45" />
+        <state relative-caret-position="309">
+          <caret line="23" column="20" lean-forward="false" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Lseg_to_Lfeat_v4.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="481">
-          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/merge_lines_v4.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="162" column="38" lean-forward="true" selection-start-line="162" selection-start-column="38" selection-end-line="162" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="250" column="34" lean-forward="true" selection-start-line="250" selection-start-column="34" selection-end-line="250" selection-end-column="34" />
+        <state relative-caret-position="96">
+          <caret line="131" column="35" lean-forward="true" selection-start-line="131" selection-start-column="35" selection-end-line="131" selection-end-column="35" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/merge_lines_v4.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="167" column="40" lean-forward="false" selection-start-line="167" selection-start-column="40" selection-end-line="167" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/label_curves.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="549">
+          <caret line="113" column="19" lean-forward="false" selection-start-line="113" selection-start-column="19" selection-end-line="113" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/distance2d.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="47" lean-forward="false" selection-start-line="8" selection-start-column="47" selection-end-line="8" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/line_match.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="15" column="34" lean-forward="false" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/t_distance2d.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="23" lean-forward="false" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Plot_3d.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="13" lean-forward="true" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/relative_pos.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classify_curves.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="70" column="51" lean-forward="false" selection-start-line="70" selection-start-column="51" selection-end-line="70" selection-end-column="51" />
+          <folding />
         </state>
       </provider>
     </entry>
