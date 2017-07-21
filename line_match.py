@@ -1,14 +1,17 @@
 from check_overlap import check_overlap
 from relative_pos import relative_pos
 from distance2d import distance2d
-
+import copy
+import random as rand
+import cv2
+import numpy as np
 # Written 10/27/2016
 
 # Input: LineInteresting, P(Parameters)
 # Output: ListPair
 
 
-def line_match(LineInteresting, P):
+def line_match(LineInteresting, P, blankimage):
     # Constants
     minlen = int(P["Cons_Lmin"])
     delta_angle = int(P["Cons_AlphaD"])
@@ -29,8 +32,22 @@ def line_match(LineInteresting, P):
                 if(LineInteresting[j, 4] > minlen) and (LineInteresting[j, 12] == 3):
                     # If it is in range of the slope constraint
                     print(j, "also less than min and not concave")
+                    print(LineInteresting[i, 6], LineInteresting[j, 6], "angles")
+
+                    blank_image = np.zeros((blankimage.shape[0], blankimage.shape[1], 3), np.uint8)
+
+                    color = (rand.randint(0, 255), rand.randint(0, 255), rand.randint(0, 255))
+                    cv2.line(blank_image, (int(LineInteresting[i][1]), int(LineInteresting[i][0])), (int(LineInteresting[i][3]), int(LineInteresting[i][2])), color, thickness=1)
+                    cv2.line(blank_image, (int(LineInteresting[j][1]), int(LineInteresting[j][0])), (int(LineInteresting[j][3]), int(LineInteresting[j][2])), (255,255,255), thickness=1)
+                    cv2.imshow("lines%d"%i, blank_image)
+                    cv2.waitKey(0)
+
+
                     if abs(LineInteresting[i, 6] - LineInteresting[j, 6]) <= delta_angle or (abs(LineInteresting[i,6] - LineInteresting[j,6]) >= (180-delta_angle)):
                         print("past the angle")
+                        print(LineInteresting[i, 12], LineInteresting[j, 12])
+
+
                         if(LineInteresting[i, 12] != LineInteresting[j, 12]):
                             d = distance2d(LineInteresting[i, :], LineInteresting[j, :])
                             print(d, "d value")
