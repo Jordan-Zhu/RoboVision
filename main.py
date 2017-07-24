@@ -201,13 +201,13 @@ if __name__ == '__main__':
 
         # FIND DEPTH / CURVATURE DISCONTINUITIES.
 
-        curve_disc, curve_con, depth_disc, depth_con, dst = edge_detect(img, img2, img, numImg)
+        curve_disc, curve_con, depth_disc, depth_con, edgelist = edge_detect(img, img2, img, numImg)
 
     
 
         # Remove extra dimensions from data
 
-        res = lineseg(dst, tol=2)
+        res = lineseg(edgelist, tol=2)
 
         seglist = []
 
@@ -232,7 +232,9 @@ if __name__ == '__main__':
     
 
         seglist = np.array(seglist)
-        # print(seglist, "seglist")
+        print(edgelist.shape, "edgelist shape")
+        # print(edgelist[0])
+        print(seglist.shape, "seglist shape")
 
     
 
@@ -245,7 +247,7 @@ if __name__ == '__main__':
         # SEGMENT AND LABEL THE CURVATURE LINES (CONVEX/CONCAVE).
         for j in range(seglist.shape[0]):
             # LineFeature, ListPoint = Lseg_to_Lfeat_v4.create_linefeatures(seglist, dst, im_size)
-            LineFeature, ListPoint = lfc.create_linefeatures(seglist[j], j, dst, im_size)
+            LineFeature, ListPoint = lfc.create_linefeatures(seglist[j], j, edgelist, im_size)
 
             # print("angles\n", LineFeature[:, 6])
 
@@ -346,15 +348,23 @@ if __name__ == '__main__':
                     elif e[12] == 2:
                         # Orange
                         color = (0, 165, 255)
-                    # convex of curv
-                    elif e[12] == 3:
+                    # convex/left of curv
+                    elif e[12] == 31:
                         # Pink
                         color = (194, 89, 254)
+                    # convex/right
+                    elif e[12] == 32:
+                        # lavender
+                        color = (255, 182, 193)
+                        # color = (194, 89, 254)
                     # concave of curv
                     elif e[12] == 4:
                         # Purple
                         color = (128, 0, 128)
-
+                    # Remove
+                    elif e[12] == -1:
+                        # Yellow
+                        color = (0, 255, 255)
                     else:
                         # Red is a 'hole' line
                         color = (0, 0, 255)
@@ -368,8 +378,8 @@ if __name__ == '__main__':
                 cv2.imwrite("Label%d%d.png" % (numImg, i), img)
                 # cv2.waitKey(0)
                 # cv2.destroyAllWindows()
-
-            line_new = lc.label_curves(img, line_new, ListPoint_new)
+            # print(edgelist[j], "edgelist[j]")
+            line_new = lc.label_curves(img, line_new, ListPoint_new, edgelist[j])
 
             blank_im = np.zeros((height, width, 3), np.uint8)
             draw_label(line_new, blank_im, j)
