@@ -38,7 +38,7 @@ import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
 
-    for numImg in [3]:
+    for numImg in [0]:
 
         ##These methods are for the picture resizing
 
@@ -177,18 +177,25 @@ if __name__ == '__main__':
 
         img2 = cv2.imread(depth_im, -1)
 
+        old_height = img2.shape[0]
+
+        old_width = img2.shape[1]
+        
+        old_blank_image = np.zeros((old_height, old_width, 3), np.uint8)
+        
+        util.depthToPC(img2, old_blank_image, 320, 240, 300, mouseY[0], mouseX[0])
+
+
         img2 = util.normalize_depth(img2)
 
         img2 = clahe(img2, iter=2)
+        
 
         # crops the image
 
         img2 = img2[mouseY[0]:mouseY[1], mouseX[0]:mouseX[1]]
 
         
-        util.depthToPC(img2, blank_image, 320, 240, 53, mouseY[0], mouseX[0])
-
-
 
 
 

@@ -179,8 +179,8 @@ def create_img(mat):
 #Passes in a depth image and turns it into a pointcloud
 def depthToPC(img, blank_image, cx, cy, f, mouseY, mouseX):
     #Fixing cx cy since image was cropped
-    cx = cx - mouseX
-    cy = cy - mouseY
+    #cx = cx - mouseX
+    #cy = cy - mouseY
 
 
     #img is the depth image, blank_image is for the pointcloud
@@ -191,8 +191,15 @@ def depthToPC(img, blank_image, cx, cy, f, mouseY, mouseX):
     zVal = []
     maxNum = 215
     minNum = -106
+    newX = []
+    newY = []
+    newZ = []
     rangeN = maxNum-minNum
     for yCoord in range(len(img)):
+        newX = []
+        newY = []
+        newZ = []
+        
         for xCoord in range(len(img[0])):
             x, y, z = depthTo3d(img, xCoord, yCoord, cx, cy, f)
             """z = img[yCoord][xCoord]
@@ -201,14 +208,21 @@ def depthToPC(img, blank_image, cx, cy, f, mouseY, mouseX):
             #print(y, x)
             #print("blank_imageyx", blank_image[yCoord][xCoord])
             newblank_image[yCoord][xCoord] = (x, y, z)
-            if(xCoord%10 == 0 or yCoord%10 == 0):
+            """newX.append(int(x))
+                                                newY.append(int(y))
+                                                newZ.append(int(z))"""
+            if(xCoord%10 == 0 and yCoord%10 == 0):
                 xVal.append(int(x))
                 yVal.append(int(y))
                 zVal.append(int(z))
+                
+        """xVal.append(newX)
+                                yVal.append(newY)
+                                zVal.append(newZ)"""
 
-            """color = (abs(x/rangeN), abs(y/rangeN), abs(z/rangeN))
-                                                if(int(x)%10 == 0 and int(y)%10 == 0):
-                                                    ax.scatter(int(x), int(z), int(y), c=color, marker="o")"""
+        """color = (abs(x/rangeN), abs(y/rangeN), abs(z/rangeN))
+                                            if(int(x)%10 == 0 and int(y)%10 == 0):
+                                                ax.scatter(int(x), int(z), int(y), c=color, marker="o")"""
 
 
     """for yCoord in range(len(img)):
@@ -234,14 +248,9 @@ def depthToPC(img, blank_image, cx, cy, f, mouseY, mouseX):
 
 #DepthTo3d
 def depthTo3d(img, x, y, cx, cy, f):
-    z = img[y][x]*.1
-    if(z == 0):
-        x = (x - cx)/ (f)
-        y = (y - cy)/ (f)
-
-    else:
-        x = (x - cx) * z / (f)
-        y = (y - cy) * z / (f)
+    z = img[y][x]
+    x = (x - cx) * (z/(f))
+    y = (y - cy) * (z/(f))
     return x, y, z
 
 def create3dPlot(xVal, yVal, zVal):
@@ -281,6 +290,8 @@ def fixHoles(img, gradImg, backgroundVal):
                 print(gradImg[y][x], backgroundVal, "grad and background")
                 gradImg[y][x] = backgroundVal
     return gradImg
+
+
 def fixHoles2(img):
     prox = [(-1, -1), (-1, 0), (-1, 1),
             (0, -1),           (0, 1),
