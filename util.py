@@ -158,7 +158,7 @@ def draw_listpair(list_pair, line_feature, img):
         cv2.line(img, (x3, y3), (x4, y4), color, 2)
 
     # cv2.namedWindow('Line features', cv2.WINDOW_NORMAL)
-    cv2.imshow('Line features', img)
+    cv2.imshow('*~ALL THE PAIRS~*', img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 

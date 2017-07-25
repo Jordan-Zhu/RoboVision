@@ -82,44 +82,28 @@ def get_mean(src, lp, win_p, win_n):
     return mean_p, mean_n
 
 # concave/convex of a curvature
-def label_convexity(lp_curr, mean_p, mean_n, points_p, points_n):
+def label_convexity(lp_curr, mean_p, mean_n):
     # mean_win = (mask_p + mask_n) / 2
-    thres = 0.99
-    print("| LP mean:", lp_curr, "| mean_P:", mean_p, "| mean_N:", mean_n, "p count", points_p, "n count", points_n)
+
+    print("| LP mean:", lp_curr, "| mean_P:", mean_p, "| mean_N:", mean_n)
     if lp_curr <= mean_p and lp_curr <= mean_n:
-        if mean_p >= mean_n and points_n >= points_p:
+        if mean_p >= mean_n:
             return 31
-        elif mean_n >= mean_p and points_p >= points_n:
+        elif mean_n >= mean_p:
             return 32
         else:
             return -1
         # return 31 if mask_p >= mask_n and points_p >= points_ else 32
     elif lp_curr > mean_p or lp_curr > mean_n:
         return 4
-    # if lp_curr > mask_p and lp_curr > mask_n or lp_curr / mask_p > thres or lp_curr / mask_n > thres:
-    #     return 4
-    # elif lp_curr <= mask_p and lp_curr <= mask_n:
-    #     return 31 if mask_p >= mask_n else 32
-    # else:
-    #     return 4
-    # if lp_curr > mean_win:
-    #     # convex
-    #     return 3
-    # elif lp_curr < mean_win:
-    #     # concave
-    #     return 4
-    # else:
-    #     print("wat")
-    #     return -1
-    # return 3 if lp_curr >= mean_win else 4
 
 
 # obj on left/right side of discontinuity
-def label_pose(mean_p, mean_n, points_p, points_n):
-    print("| mean_P:", mean_p, "| mean_N:", mean_n, "p count", points_p, "n count", points_n)
-    if mean_p >= mean_n and points_n >= points_p:
+def label_pose(mean_p, mean_n, count_p, count_n):
+    print("| mean_P:", mean_p, "| mean_N:", mean_n, "p count", count_p, "n count", count_n)
+    if mean_p >= mean_n and count_n >= count_p:
         return 1
-    elif mean_n >= mean_p and points_p >= points_n:
+    elif mean_n >= mean_p and count_p >= count_n:
         return 2
     else:
         return -1
@@ -131,19 +115,15 @@ def remove_lines(src, contour, win_p, win_n):
     mask_p = roipoly(src, win_p)
     mask_n = roipoly(src, win_n)
 
+    """
     tp = np.nonzero(mask_p)
     tn = np.nonzero(mask_n)
-    # print(np.nonzero(mask_p), "win p")
-    # print(np.nonzero(mask_n), "win n")
+
     pixels_p = np.squeeze(np.dstack((tp[0], tp[1])))
     pixels_n = np.squeeze(np.dstack((tn[0], tn[1])))
-    # print(pixels_p, "pixels p")
-    # print(pixels_n, "pixels n")
-    # mask_p = src * mask_p
-    # mask_n = src * mask_n
+    """
+
     mask = np.zeros((src.shape[1], src.shape[0]), dtype=np.uint8)
-    mask2 = np.zeros((src.shape[0], src.shape[1], 3), np.uint8)
-    # print(contour, "contour")
     cv2.drawContours(mask, [contour], 0, 255, -1)
 
     # drawwwwwwwwwwwwwwwwing
@@ -165,15 +145,12 @@ def remove_lines(src, contour, win_p, win_n):
     #
     # cv2.imshow("contour + windows", output)
     # cv2.waitKey(0)
-    pixelpoints = np.transpose(np.nonzero(mask))
 
-    tc = np.nonzero(mask)
-    contour = np.squeeze(np.dstack((tc[0], tc[1])))
-
-    # points_p = np.count_nonzero(np.nonzero(mask_p) == np.nonzero(mask))
-    # points_n = np.count_nonzero(np.nonzero(mask_n) == np.nonzero(mask))
+    # tc = np.nonzero(mask)
+    # contour = np.squeeze(np.dstack((tc[0], tc[1])))
 
     im_c = np.transpose(mask)
+
     # cv2.imshow("mask_p", mask_p)
     # cv2.imshow("mask_n", mask_n)
     # cv2.imshow("Contour!", im_c)
@@ -182,9 +159,7 @@ def remove_lines(src, contour, win_p, win_n):
     count_p = np.count_nonzero(np.logical_and(mask_p, im_c))
     count_n = np.count_nonzero(np.logical_and(mask_n, im_c))
 
-    # cv2.imshow("AND", count_p)
-
-    points_p = 0
+    """points_p = 0
     points_n = 0
     for z in range(len(pixels_p)):
         if (contour == pixels_p[z]).all(1).any():
@@ -193,12 +168,8 @@ def remove_lines(src, contour, win_p, win_n):
     for z in range(len(pixels_n)):
         if (contour == pixels_n[z]).all(1).any():
             points_n += 1
+    """
 
-    # print("counts:\np = ", points_p, "\nn = ", points_n)
-
-
-    # print(np.count_nonzero(np.nonzero(points_p)[0] == np.nonzero(mask)[0]), "nonzero")
-    # print((np.nonzero(points_p)[0] == np.nonzero(mask)[0]).sum(), "nonzero")
     return count_p, count_n
 
 
@@ -211,37 +182,21 @@ def label_curves(src, list_lines, list_point, contour):
     # append results of test to col 12
     col_label = np.zeros((list_lines.shape[0], 2))
     list_lines = np.hstack((list_lines, col_label))
-    # print(list_lines, "Lines")
-    # print(contour, "contour")
+
     for i, line in enumerate(list_lines):
         pt1, pt2, pt3, pt4, startpt, endpt = get_orientation(line)
         win_p, win_n = create_windows(pt1, pt2, pt3, pt4, startpt, endpt)
-        # print(win_p, "win p", win_n, "win n")
-        # y, x = np.unravel_index([list_point[i]], src.shape, order='F')
-        # print(y, "y", x, "x")
-        # print(list_point[i].shape)
-        # pts = []
-        # if len(list_point[i]) > 2:
-        #     for i in range(len(y)):
-        #         pts.append([y[0][i], x[0][i]])
-        # elif len(list_point[i]) == 1:
-        #     pts.append([y[0], x[0]])
-        # print(pts)
-        points_p, points_n = remove_lines(src, contour, win_p, win_n)
+
+        count_p, count_n = remove_lines(src, contour, win_p, win_n)
         mean_p, mean_n = get_mean(src, list_point[i], win_p, win_n)
-        # print(mean_p, 'mean p', mean_n, 'mean n')
 
         if line[10] == 12:
-            #print(len(list_point[i]), "num list point")
             y, x = np.unravel_index([list_point[i]], src.shape, order='F')
-            # print("Y:", y, "\nX:", x)
             mean_lp = np.mean(src[y, x])
-            # print(mean_lp, "mean lp")
-            # mean_lp = np.mean(src[list_point[i]])
-            label = label_convexity(mean_lp, mean_p, mean_n, points_p, points_n)
+            label = label_convexity(mean_lp, mean_p, mean_n)
             print(label, "curv label")
         elif line[10] == 13 or line[10] == 14:
-            label = label_pose(mean_p, mean_n, points_p, points_n)
+            label = label_pose(mean_p, mean_n, count_p, count_n)
             print(label, "disc label")
         else:
             label = 0
