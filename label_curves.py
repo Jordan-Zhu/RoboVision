@@ -73,7 +73,7 @@ def remove_points(lp, roi):
     roi = roi[:][line_mask]
     cv2.imshow("roi after", roi)
 
-def create_mask(src, lp, win_p, win_n):
+def get_mean(src, lp, win_p, win_n):
     mask_p = roipoly(src, win_p)
     mask_n = roipoly(src, win_n)
     # remove_points(lp, mask_p)
@@ -82,19 +82,19 @@ def create_mask(src, lp, win_p, win_n):
     return mean_p, mean_n
 
 # concave/convex of a curvature
-def label_convexity(lp_curr, mask_p, mask_n, points_p, points_n):
+def label_convexity(lp_curr, mean_p, mean_n, points_p, points_n):
     # mean_win = (mask_p + mask_n) / 2
     thres = 0.99
-    print("| LP mean:", lp_curr, "| mask_P:", mask_p, "| mask_N:", mask_n, "p count", points_p, "n count", points_n)
-    if lp_curr <= mask_p and lp_curr <= mask_n:
-        if mask_p >= mask_n and points_p >= points_n:
+    print("| LP mean:", lp_curr, "| mean_P:", mean_p, "| mean_N:", mean_n, "p count", points_p, "n count", points_n)
+    if lp_curr <= mean_p and lp_curr <= mean_n:
+        if mean_p >= mean_n and points_n >= points_p:
             return 31
-        elif mask_n >= mask_p and points_n >= points_p:
+        elif mean_n >= mean_p and points_p >= points_n:
             return 32
         else:
             return -1
         # return 31 if mask_p >= mask_n and points_p >= points_ else 32
-    elif lp_curr > mask_p or lp_curr > mask_n:
+    elif lp_curr > mean_p or lp_curr > mean_n:
         return 4
     # if lp_curr > mask_p and lp_curr > mask_n or lp_curr / mask_p > thres or lp_curr / mask_n > thres:
     #     return 4
@@ -115,10 +115,11 @@ def label_convexity(lp_curr, mask_p, mask_n, points_p, points_n):
 
 
 # obj on left/right side of discontinuity
-def label_pose(mask_p, mask_n, points_p, points_n):
-    if mask_p >= mask_n and points_p >= points_n:
+def label_pose(mean_p, mean_n, points_p, points_n):
+    print("| mean_P:", mean_p, "| mean_N:", mean_n, "p count", points_p, "n count", points_n)
+    if mean_p >= mean_n and points_n >= points_p:
         return 1
-    elif mask_n <= mask_p and points_n <= points_p:
+    elif mean_n >= mean_p and points_p >= points_n:
         return 2
     else:
         return -1
@@ -129,22 +130,41 @@ def label_pose(mask_p, mask_n, points_p, points_n):
 def remove_lines(src, contour, win_p, win_n):
     mask_p = roipoly(src, win_p)
     mask_n = roipoly(src, win_n)
-    # cv2.imshow("mask_p", mask_p)
-    # cv2.imshow("mask_n", mask_n)
+
     tp = np.nonzero(mask_p)
     tn = np.nonzero(mask_n)
-    print(np.nonzero(mask_p), "win p")
-    print(np.nonzero(mask_n), "win n")
+    # print(np.nonzero(mask_p), "win p")
+    # print(np.nonzero(mask_n), "win n")
     pixels_p = np.squeeze(np.dstack((tp[0], tp[1])))
     pixels_n = np.squeeze(np.dstack((tn[0], tn[1])))
-    print(pixels_p, "pixels p")
-    print(pixels_n, "pixels n")
+    # print(pixels_p, "pixels p")
+    # print(pixels_n, "pixels n")
     # mask_p = src * mask_p
     # mask_n = src * mask_n
-    mask = np.zeros(src.shape, np.uint8)
+    mask = np.zeros((src.shape[1], src.shape[0]), dtype=np.uint8)
+    mask2 = np.zeros((src.shape[0], src.shape[1], 3), np.uint8)
     # print(contour, "contour")
     cv2.drawContours(mask, [contour], 0, 255, -1)
-    cv2.imshow("mask", np.transpose(mask))
+
+    # drawwwwwwwwwwwwwwwwing
+    # contour2 = util.swap_indices(contour)
+    # cv2.drawContours(mask2, [contour2], 0, 255, -1)
+    #
+    # output = mask2
+    # overlay = output.copy()
+    #
+    # alpha = 0.3
+    # win_p = util.swap_indices(win_p).astype(int)
+    # win_n = util.swap_indices(win_n).astype(int)
+    # cv2.fillConvexPoly(overlay, win_p,
+    #                    (0, 255, 0))
+    # cv2.fillConvexPoly(overlay, win_n,
+    #                    (0, 0, 255))
+    # cv2.addWeighted(overlay, alpha, output, 1 - alpha,
+    #                 0, output)
+    #
+    # cv2.imshow("contour + windows", output)
+    # cv2.waitKey(0)
     pixelpoints = np.transpose(np.nonzero(mask))
 
     tc = np.nonzero(mask)
@@ -152,6 +172,17 @@ def remove_lines(src, contour, win_p, win_n):
 
     # points_p = np.count_nonzero(np.nonzero(mask_p) == np.nonzero(mask))
     # points_n = np.count_nonzero(np.nonzero(mask_n) == np.nonzero(mask))
+
+    im_c = np.transpose(mask)
+    # cv2.imshow("mask_p", mask_p)
+    # cv2.imshow("mask_n", mask_n)
+    # cv2.imshow("Contour!", im_c)
+    # print(mask_p.shape, "mask shape")
+    # print(im_c.shape, "contour im")
+    count_p = np.count_nonzero(np.logical_and(mask_p, im_c))
+    count_n = np.count_nonzero(np.logical_and(mask_n, im_c))
+
+    # cv2.imshow("AND", count_p)
 
     points_p = 0
     points_n = 0
@@ -163,12 +194,12 @@ def remove_lines(src, contour, win_p, win_n):
         if (contour == pixels_n[z]).all(1).any():
             points_n += 1
 
-    print("counts:\np = ", points_p, "\nn = ", points_n)
+    # print("counts:\np = ", points_p, "\nn = ", points_n)
 
 
     # print(np.count_nonzero(np.nonzero(points_p)[0] == np.nonzero(mask)[0]), "nonzero")
     # print((np.nonzero(points_p)[0] == np.nonzero(mask)[0]).sum(), "nonzero")
-    return points_p, points_n
+    return count_p, count_n
 
 
 
@@ -197,7 +228,7 @@ def label_curves(src, list_lines, list_point, contour):
         #     pts.append([y[0], x[0]])
         # print(pts)
         points_p, points_n = remove_lines(src, contour, win_p, win_n)
-        mean_p, mean_n = create_mask(src, list_point[i], win_p, win_n)
+        mean_p, mean_n = get_mean(src, list_point[i], win_p, win_n)
         # print(mean_p, 'mean p', mean_n, 'mean n')
 
         if line[10] == 12:
@@ -211,6 +242,7 @@ def label_curves(src, list_lines, list_point, contour):
             print(label, "curv label")
         elif line[10] == 13 or line[10] == 14:
             label = label_pose(mean_p, mean_n, points_p, points_n)
+            print(label, "disc label")
         else:
             label = 0
         line[12] = label

@@ -38,7 +38,7 @@ import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
 
-    for numImg in [0]:
+    for numImg in [3]:
 
         ##These methods are for the picture resizing
 
@@ -123,6 +123,7 @@ if __name__ == '__main__':
         #crops the depth image
 
         img = img[mouseY[0]:mouseY[1], mouseX[0]:mouseX[1]]
+        final_im = util.normalize_depth(img, colormap=True)
         #img = util.fixHoles(img)
 
         #For convenience, to see what you cropped
@@ -427,9 +428,13 @@ if __name__ == '__main__':
         #
 
         # # Match the lines into pairs
+        #     print(line_new.shape, 'before')
+            delet_these = np.where(np.logical_or(line_new[:, 12] == 4, line_new[:, 12] == -1))
+            line_new = np.delete(line_new, delet_these, axis=0)
+            # print(line_new.shape, 'after')
 
             list_pair = line_match(line_new, param, blank_image)
 
             print('List pair:', list_pair)
             blank_im = np.zeros((height, width, 3), np.uint8)
-            util.draw_listpair(list_pair, line_new, img)
+            util.draw_listpair(list_pair, line_new, final_im)

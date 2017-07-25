@@ -136,14 +136,14 @@ def draw_lf(line_feature, img, numImg):
 
 
 def draw_listpair(list_pair, line_feature, img):
-    blank_image = normalize_depth(img, colormap=True)
+    # blank_image = normalize_depth(img, colormap=True)
 
     for i in range(len(list_pair)):
         color = (rand.randint(0, 255), rand.randint(0, 255), rand.randint(0, 255))
         # line in the list of lines
         line1 = line_feature[list_pair[i][0]]
         line2 = line_feature[list_pair[i][1]]
-        print(line1, line2)
+        # print(line1, line2)
         x1 = int(line1[1])
         y1 = int(line1[0])
         x2 = int(line1[3])
@@ -154,11 +154,11 @@ def draw_listpair(list_pair, line_feature, img):
         x4 = int(line2[3])
         y4 = int(line2[2])
 
-        cv2.line(blank_image, (x1, y1), (x2, y2), color, 2)
-        cv2.line(blank_image, (x3, y3), (x4, y4), color, 2)
+        cv2.line(img, (x1, y1), (x2, y2), color, 2)
+        cv2.line(img, (x3, y3), (x4, y4), color, 2)
 
     # cv2.namedWindow('Line features', cv2.WINDOW_NORMAL)
-    cv2.imshow('Line features', blank_image)
+    cv2.imshow('Line features', img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
