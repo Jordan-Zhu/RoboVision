@@ -16,7 +16,7 @@ def line_match(LineInteresting, P, blankimage):
     minlen = 20
     delta_angle = int(P["Cons_AlphaD"])
     min_dist = 10
-    max_dist = int(P["Cons_Dmax"])
+    max_dist = 200
     print(minlen, delta_angle, min_dist, max_dist, "parameter values")
 
     rowsize = LineInteresting.shape[0]

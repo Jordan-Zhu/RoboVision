@@ -19,13 +19,13 @@ def auto_canny(image, sigma=0.33):
     # return the edged image
     return edged
 
-def normalize_depth(depthimg, colormap=False):
+def normalize_depth(depthimg, colormap=None):
     # Normalize depth image to range 0-255.
     min, max, minloc, maxloc = cv2.minMaxLoc(depthimg)
     adjmap = np.zeros_like(depthimg)
     dst = cv2.convertScaleAbs(depthimg, adjmap, 255 / (max - min), -min)
-    if colormap == True:
-        return cv2.applyColorMap(dst, cv2.COLORMAP_JET)
+    if colormap:
+        return cv2.applyColorMap(dst, colormap)
     else:
         return dst
 

@@ -123,7 +123,7 @@ if __name__ == '__main__':
         #crops the depth image
 
         img = img[mouseY[0]:mouseY[1], mouseX[0]:mouseX[1]]
-        final_im = util.normalize_depth(img, colormap=True)
+        final_im = util.normalize_depth(img, colormap=cv2.COLORMAP_BONE)
         #img = util.fixHoles(img)
 
         #For convenience, to see what you cropped
