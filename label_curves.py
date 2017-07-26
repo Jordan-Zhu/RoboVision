@@ -66,6 +66,13 @@ def mask_mean(src, mask):
         return sum(src[np.nonzero(val_mask)]) / num_nonzero
 
 
+def line_mean(img, y, x):
+    points = img[y, x]
+    num_nonzero = cv2.countNonZero(points)
+    # print(num_nonzero, "non zero", np.sum(points), "sum")
+    return np.sum(points) / num_nonzero
+
+
 def remove_points(lp, roi):
     line_mask = np.invert(np.in1d(lp, roi))
     # print(lp, "lp")
@@ -193,7 +200,7 @@ def label_curves(src, list_lines, list_point, contour):
 
         if line[10] == 12:
             y, x = np.unravel_index([list_point[i]], src.shape, order='F')
-            mean_lp = np.mean(src[y, x])
+            mean_lp = line_mean(src, y, x)
             label = label_convexity(mean_lp, mean_p, mean_n)
             print(label, "curv label")
         elif line[10] == 13 or line[10] == 14:

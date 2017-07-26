@@ -215,7 +215,7 @@ if __name__ == '__main__':
 
         # Remove extra dimensions from data
 
-        res = lineseg(edgelist, tol=2)
+        res = lineseg(edgelist, tol=5)
 
         seglist = []
 
@@ -260,8 +260,9 @@ if __name__ == '__main__':
             # print("angles\n", LineFeature[:, 6])
 
             Line_new, ListPoint_new, line_merged = merge_lines_v4.merge_lines(LineFeature, ListPoint, 20, im_size)
-            print(line_merged, "merged")
-            print("angles\n", Line_new[:, 6])
+            # print(line_merged, "merged")
+            # print("angles\n", Line_new[:, 6])
+
             # Line_new = LineFeature
             # ListPoint_new = ListPoint
 
@@ -438,3 +439,4 @@ if __name__ == '__main__':
             print('List pair:', list_pair)
             blank_im = np.zeros((height, width, 3), np.uint8)
             util.draw_listpair(list_pair, line_new, final_im)
+        cv2.imshow("ALL THE PAIRS", final_im)
