@@ -75,6 +75,7 @@ import copy
 
 #######FIXED DRAWEDGELIST (WORKS)#######
 def drawedgelist(edgelist, blankimage, numImg):
+    path = "outputImg\\"
     
     ##Goes through every contour of edge list
     for i in range(len(edgelist)):
@@ -87,7 +88,7 @@ def drawedgelist(edgelist, blankimage, numImg):
             cv2.line(blank_image, (edgelist[i][j][0], edgelist[i][j][1]), (edgelist[i][j+1][0], edgelist[i][j+1][1]), color, thickness=1)
         
         cv2.imshow("Edgelist%d" %i, blank_image)
-        cv2.imwrite("Edgelist%d%d.png"% (numImg, i), blank_image)
+        cv2.imwrite(str(path) + "Edgelist%d%d.png"% (numImg, i), blank_image)
 
 
         

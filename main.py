@@ -37,6 +37,8 @@ import matplotlib.pyplot as plt
 
 
 if __name__ == '__main__':
+    # This is the directory to save images to
+    path = 'outputImg\\'
 
     for numImg in [3]:
 
@@ -340,7 +342,7 @@ if __name__ == '__main__':
                     cv2.line(img, (x1, y1), (x2, y2), color, 2)
                 # cv2.imshow("curvatures", img)
                 cv2.imshow("Curvature%d" % numImg, img)
-                cv2.imwrite("Curvature%d%d.png" % (numImg, i), img)
+                cv2.imwrite(str(path) + "Curvature%d%d.png" % (numImg, i), img)
                 # cv2.waitKey(0)
                 # cv2.destroyAllWindows()
 
@@ -384,7 +386,7 @@ if __name__ == '__main__':
                     cv2.line(img, (x1, y1), (x2, y2), color, 2)
                 # cv2.imshow("Labels", img)
                 cv2.imshow("Label%d" % numImg, img)
-                cv2.imwrite("Label%d%d.png" % (numImg, i), img)
+                cv2.imwrite(str(path) + "Label%d%d.png" % (numImg, i), img)
                 # cv2.waitKey(0)
                 # cv2.destroyAllWindows()
             # print(edgelist[j], "edgelist[j]")

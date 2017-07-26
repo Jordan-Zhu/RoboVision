@@ -103,6 +103,8 @@ def edge_detect(depthC, depthD, origImg, numImg):
 
 
 def mask_contours(im, origImg, numImg):
+    # save directory
+    path = 'outputImg\\'
     # showimg(im)
     height = im.shape[0]
     width = im.shape[1]
@@ -151,7 +153,7 @@ def mask_contours(im, origImg, numImg):
             randC = random.uniform(0, 1)
             randB = random.uniform(0, 1)
             randA = random.uniform(0, 1)
-            if(len(pixelpoints)*.3 < count):
+            if(len(pixelpoints)*.3 < count) or area < 500:
                 cv2.drawContours(blank_image2, contours, x, (int(randA * 255), int(randB * 255), int(randC * 255)), 1, 8)
             else:
                 print("something")
@@ -163,9 +165,9 @@ def mask_contours(im, origImg, numImg):
 
             cv2.drawContours(blank_image, contours, x, (int(randA*255), int(randB*255), int(randC*255)), 1, 8)
     cv2.imshow("CONTOURS", blank_image)
-    cv2.imwrite("Contours%d.png"%numImg, blank_image)
+    cv2.imwrite(str(path) + "Contours%d.png"%numImg, blank_image)
     cv2.imshow("CONTOURS DELETED", blank_image2)
-    cv2.imwrite("CONTOURS DELETED%d.png"%numImg, blank_image2)
+    cv2.imwrite(str(path) + "CONTOURS DELETED%d.png"%numImg, blank_image2)
 
 
     #cv2.imwrite("checking_2.png", blank_image)
@@ -205,7 +207,7 @@ def fixOverlap(contours):
                 
                 #checks if each row in z is equal to x,y. If any are equal, then it will delete the point from the x array
                 #reference: https://stackoverflow.com/questions/33217660/checking-if-a-numpy-array-contains-another-array
-                if((contours[z] == contours[x][y]).all(1).any()):
+                if (contours[z] == contours[x][y]).all(1).any():
                         mask[[y]] = False                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 
         #the mask contains an array such as [true, false, false]
