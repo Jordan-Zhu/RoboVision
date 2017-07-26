@@ -357,7 +357,7 @@ if __name__ == '__main__':
                         # Orange
                         color = (0, 165, 255)
                     # convex/left of curv
-                    elif e[12] == 31:
+                    elif e[12] == 3:
                         # Pink
                         color = (194, 89, 254)
                     # convex/right

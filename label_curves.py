@@ -86,16 +86,17 @@ def label_convexity(lp_curr, mean_p, mean_n):
     # mean_win = (mask_p + mask_n) / 2
 
     print("| LP mean:", lp_curr, "| mean_P:", mean_p, "| mean_N:", mean_n)
-    if lp_curr <= mean_p and lp_curr <= mean_n:
-        if mean_p >= mean_n:
-            return 31
-        elif mean_n >= mean_p:
-            return 32
-        else:
-            return -1
-        # return 31 if mask_p >= mask_n and points_p >= points_ else 32
-    elif lp_curr > mean_p or lp_curr > mean_n:
-        return 4
+    # if lp_curr <= mean_p and lp_curr <= mean_n:
+    #     if mean_p >= mean_n:
+    #         return 31
+    #     elif mean_n >= mean_p:
+    #         return 32
+    #     else:
+    #         return -1
+    #     # return 31 if mask_p >= mask_n and points_p >= points_ else 32
+    # elif lp_curr > mean_p or lp_curr > mean_n:
+    #     return 4
+    return 3 if lp_curr <= mean_p and lp_curr <= mean_n else 4
 
 
 # obj on left/right side of discontinuity
