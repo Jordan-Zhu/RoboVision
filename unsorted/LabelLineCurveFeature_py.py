@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
-from utility import get_orientation, get_ordering, normalize_depth, get_direction_py, draw_lf
+
+from legacyCode.utility import get_ordering, normalize_depth, get_direction_py
 
 
 def swap_indices(arr):

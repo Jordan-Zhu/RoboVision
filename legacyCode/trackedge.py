@@ -1,6 +1,8 @@
-import numpy as np
 import math
-import availablepixels as ap
+
+import numpy as np
+
+from legacyCode import availablepixels as ap
 
 
 def trackedge(edge_im, junct, rstart, cstart, edge_no, r2 = -1, c2 = -1, avoidJunctions = 0):

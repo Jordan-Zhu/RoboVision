@@ -1,10 +1,8 @@
 import cv2
 import scipy.io as sio
-import numpy as np
-
-from merge_lines_v3 import merge_lines
 from LabelLineCurveFeature import classify_curves
-from utility import normalize_depth
+
+from legacyCode.utility import normalize_depth
 
 
 def squeeze_array(arr):

@@ -1,4 +1,4 @@
-from utility import *
+from legacyCode.utility import *
 
 
 def findendsjunctions(edge_im, contours):

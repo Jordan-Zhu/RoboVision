@@ -1,15 +1,13 @@
 import cv2
-import scipy.io as sio
 import numpy as np
-from utility import showimg, draw_convex_py, edge_detect, find_contours, normalize_depth, draw_lf, draw_lp
+import scipy.io as sio
+from LabelLineCurveFeature_py import classify_curves
 from Lseg_to_Lfeat_py import create_linefeatures
-from lineseg import lineseg
 # from merge_lines_v3 import merge_lines
 from merge_lines_py import merge_lines
-from LabelLineCurveFeature_py import classify_curves
-from drawedgelist import drawedgelist
-from test_convexity import test_convexity
 
+from legacyCode.utility import draw_convex_py, edge_detect, find_contours, draw_lf
+from lineseg import lineseg
 
 if __name__ == '__main__':
     thresh_m = 10

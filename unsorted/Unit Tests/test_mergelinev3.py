@@ -1,10 +1,9 @@
 import cv2
-import scipy.io as sio
 import numpy as np
-from merge_lines_v3 import merge_lines
-from utility import showimg
-from Lseg_to_Lfeat_v3 import create_linefeatures
+import scipy.io as sio
 from LabelLineCurveFeature import classify_curves
+from Lseg_to_Lfeat_v3 import create_linefeatures
+from merge_lines_v3 import merge_lines
 
 
 def normalize_depth(depthimg, colormap=False):

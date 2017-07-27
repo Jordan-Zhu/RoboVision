@@ -1,40 +1,18 @@
 import cv2
-
+import numpy as np
 import scipy.io as sio
 
-import numpy as np
-
-import util as util
-
-
-
-from edge_detect import edge_detect
-
-from lineseg import lineseg
-
-from drawedgelist import drawedgelist
-
-
+import Line_feat_contours as lfc
 import classify_curves as cc
 import label_curves as lc
-import Line_feat_contours as lfc
-import Lseg_to_Lfeat_v4 as Lseg_to_Lfeat_v4
-
 import merge_lines_v4 as merge_lines_v4
-
-import LabelLineCurveFeature_v4 as LabelLineCurveFeature_v4
-
-import LabelLineFeature_v1 as LabelLineFeature_v1
-
+import util as util
+from drawedgelist import drawedgelist
+from edge_detect import edge_detect
 from line_match import line_match
+from lineseg import lineseg
 
 np.set_printoptions(threshold=np.nan)
-
-from mpl_toolkits.mplot3d import Axes3D
-
-import matplotlib.pyplot as plt
-
-
 
 if __name__ == '__main__':
     # This is the directory to save images to

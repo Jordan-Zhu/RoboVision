@@ -1,9 +1,9 @@
-from utility import *
-from lineseg import lineseg
-from drawedgelist import drawedgelist
 from collections import OrderedDict
 from itertools import groupby
 
+from drawedgelist import drawedgelist
+from legacyCode.utility import *
+from lineseg import lineseg
 
 # def draw_contours(im, contours):
 #     height = im.shape[0]

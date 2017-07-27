@@ -1,4 +1,3 @@
-import utility
 import cv2
 
 

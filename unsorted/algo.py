@@ -2,20 +2,16 @@
 
 # Importing the necessary packages:
 from cv2 import *
+
 import numpy as np
-import scipy.io as sio
-from matplotlib import pyplot as plt
-from skimage import morphology
-
-from utility import showimg, normalize_depth, edge_detect, find_contours
-from drawlinefeature import DrawLineFeature,drawconvex
-from lineseg import lineseg
-from drawedgelist import drawedgelist
-from Lseg_to_Lfeat_v2 import Lseg_to_Lfeat_v2
-from LabelLineCurveFeature_v2 import LabelLineCurveFeature_v2
-from merge_lines_v2 import merge_lines
 from LabelLineCurveFeature import classify_curves
+from Lseg_to_Lfeat_v2 import Lseg_to_Lfeat_v2
+from drawlinefeature import DrawLineFeature, drawconvex
+from merge_lines_v2 import merge_lines
 
+from drawedgelist import drawedgelist
+from legacyCode.utility import showimg, normalize_depth, edge_detect, find_contours
+from lineseg import lineseg
 
 if __name__ == '__main__':
     thresh_m = 10

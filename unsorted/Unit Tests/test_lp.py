@@ -1,8 +1,6 @@
 import cv2
 import numpy as np
 
-from utility import normalize_depth
-
 if __name__ == '__main__':
     img = cv2.imread('learn0.png', -1)
     img_size = img.shape

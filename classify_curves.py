@@ -82,8 +82,9 @@ def classify_curves(curve_im, depth_im, list_lines, list_points, window_size):
         count_c = count_roi(curve_im, win)
         count_d = count_roi(depth_im, win)
 
-        # 5 is just the number that captured most of the holes
-        if abs(count_c - count_d) <= 10 :
+        # determine if the line is a discontinuity if
+        # it shows up in both curve and depth
+        if abs(count_c - count_d) <= line[4] * .25:
             line_new.append(np.append(list_lines[i], [13]))
             # print("14, hole", count_c, count_d)
         elif count_c > count_d:

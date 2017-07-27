@@ -1,6 +1,4 @@
-import numpy as np
-
-from utility import roipoly, get_orientation, get_ordering
+from legacyCode.utility import get_orientation, get_ordering
 
 def classify_curves(src, list_lines, list_points, window_size):
     im_size = src.shape

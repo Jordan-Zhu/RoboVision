@@ -1,8 +1,8 @@
 from math import inf, sqrt, atan, degrees
-import numpy as np
-import cv2
 
-from utility import normalize_depth
+import numpy as np
+
+from legacyCode.utility import normalize_depth
 
 
 def calc_inf(y2, y1, x2, x1):

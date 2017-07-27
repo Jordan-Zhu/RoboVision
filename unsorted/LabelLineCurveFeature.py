@@ -1,9 +1,8 @@
 import cv2
 import numpy as np
-import numpy.ma as ma
-import matplotlib as plt
 
-from utility import get_orientation, get_ordering, normalize_depth
+from legacyCode.utility import get_orientation, get_ordering
+
 
 # Written 11/8/2016
 # Label Line curve feature

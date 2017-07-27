@@ -1,12 +1,13 @@
+import random
+
 import cv2
 import numpy as np
-import util as util
-import edge_detect
-import random
-import lineseg
-import drawedgelist
-import Lseg_to_Lfeat_v4 as Lseg_to_Lfeat_v4
 
+import drawedgelist
+import edge_detect
+import lineseg
+import util as util
+from legacyCode import Lseg_to_Lfeat_v4 as Lseg_to_Lfeat_v4
 
 im = cv2.imread("test1.png", 0)
 im_size = im.shape

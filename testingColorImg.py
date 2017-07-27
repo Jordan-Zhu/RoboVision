@@ -1,18 +1,10 @@
 import cv2
-import scipy.io as sio
 import numpy as np
 np.set_printoptions(threshold=np.nan)
 import util as util
 import edge_detect
 import lineseg
 import drawedgelist
-
-import Lseg_to_Lfeat_v4 as Lseg_to_Lfeat_v4
-import merge_lines_v4 as merge_lines_v4
-import LabelLineCurveFeature_v4 as LabelLineCurveFeature_v4
-import LabelLineFeature_v1 as LabelLineFeature_v1
-from line_match import line_match
-
 
 # img = cv2.imread("img/Slide2.jpg", 0)
 img = cv2.imread("unsorted/Unit Tests/lambda.png", 0)

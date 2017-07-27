@@ -10,7 +10,7 @@ def depth_discont(depth_im):
     #depth_im = util.fixHoles2(depth_im)
     dimg2 = util.auto_canny(depth_im)
     skel2 = util.morpho(dimg2)
-    util.showimg(dimg2, "Depth discontinuity w/ tone balancing")
+    util.showimg(dimg2, "Discontinuity")
     cnt2 = util.find_contours(util.create_img(skel2), cv2.RETR_EXTERNAL)
 
     return skel2, cnt2
