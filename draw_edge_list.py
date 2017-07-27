@@ -74,7 +74,7 @@ import copy
 """
 
 #######FIXED DRAWEDGELIST (WORKS)#######
-def drawedgelist(edgelist, blankimage, numImg):
+def draw_edge_list(edgelist, blankimage, numImg):
     path = "outputImg\\"
     
     ##Goes through every contour of edge list

@@ -7,10 +7,11 @@ import classify_curves as cc
 import label_curves as lc
 import merge_lines_v4 as merge_lines_v4
 import util as util
-from drawedgelist import drawedgelist
+from draw_edge_list import draw_edge_list
 from edge_detect import edge_detect
 from line_match import line_match
 from lineseg import lineseg
+from crop_image import crop_image
 
 np.set_printoptions(threshold=np.nan)
 
@@ -19,76 +20,8 @@ if __name__ == '__main__':
     path = 'outputImg\\'
 
     for numImg in [3]:
+        mouseX, mouseY = crop_image(numImg)
 
-        ##These methods are for the picture resizing
-
-        mouseX = []
-
-        mouseY = []
-
-        numC = 0
-
-    
-
-        ###Event 4 means that the right key was clicked
-
-        ###This saves the points that are clicked on the image
-
-        def choosePoints(event,x,y,flags,param):
-
-            global mouseX,mouseY, numC
-
-            
-
-    
-
-            if event == 4:
-
-                #cv2.circle(img,(x,y),100,(255,0,0),-1)
-
-                numC += 1
-
-                mouseX.append(x)
-
-                mouseY.append(y)
-
-        
-
-        #Opens up the color image for user to click on
-
-        imgC = cv2.imread('img/clearn%d.png' %numImg, -1)
-
-        cv2.imshow('image',imgC)
-
-        cv2.setMouseCallback('image', choosePoints)
-
-        
-
-        #checks and makes sure 2 points were clicked
-
-        #if 2 points were clicked it exits the loop
-
-        while(numC != 2):
-
-            key = cv2.waitKey(1) & 0xFF
-
-            
-
-            """if key == ord("r"):
-
-                print(mouseX, mouseY, "printing mousey")
-
-                break"""
-
-        
-
-        
-
-        #Closes color image once user clicks twice
-
-        cv2.destroyAllWindows()
-
-    
 
         # Read in depth image, -1 means w/ alpha channel.
 
@@ -97,93 +30,50 @@ if __name__ == '__main__':
         depth_im = 'img/learn%d.png'%numImg
 
         img = cv2.imread(depth_im, -1)
+        util.depthToPC(img2, old_blank_image, 320, 240, 300, mouseY[0], mouseX[0])
+        old_height = img2.shape[0]
+        old_width = img2.shape[1]
+        old_blank_image = np.zeros((old_height, old_width, 3), np.uint8)
 
   
 
         #crops the depth image
 
         img = img[mouseY[0]:mouseY[1], mouseX[0]:mouseX[1]]
-        final_im = util.normalize_depth(img, colormap=cv2.COLORMAP_BONE)
-        #img = util.fixHoles(img)
-
-        #For convenience, to see what you cropped
-
-        imgC = imgC[mouseY[0]:mouseY[1], mouseX[0]:mouseX[1]]
-
-        cv2.imshow('cropped', imgC)
-
-        
-
-        #cv2.waitKey(0)
-
         im_size = img.shape
-
         height = img.shape[0]
-
         width = img.shape[1]
-
         blank_image = np.zeros((height, width, 3), np.uint8)
+        final_im = util.normalize_depth(img, colormap=cv2.COLORMAP_BONE)
+
 
         
 
         P = sio.loadmat('Parameter.mat')
-
         param = P['P']
 
-
-
-    
+        ###Create a thing to define everything here?
 
         # evenly increases the contrast of the entire image
-
         # ref: http://docs.opencv.org/3.1.0/d5/daf/tutorial_py_histogram_equalization.html
 
         def clahe(img, iter=1):
 
             for i in range(0, iter):
-
                 clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
-
                 img = clahe.apply(img)
-
             return img
 
     
-
-    
-
         # Open a copy of the depth image
-
         # to change the contrast on the full-sized image
-
         img2 = cv2.imread(depth_im, -1)
-
-        old_height = img2.shape[0]
-
-        old_width = img2.shape[1]
-        
-        old_blank_image = np.zeros((old_height, old_width, 3), np.uint8)
-        
-        util.depthToPC(img2, old_blank_image, 320, 240, 300, mouseY[0], mouseX[0])
-
-
         img2 = util.normalize_depth(img2)
-
         img2 = clahe(img2, iter=2)
         
-
         # crops the image
-
         img2 = img2[mouseY[0]:mouseY[1], mouseX[0]:mouseX[1]]
 
-        
-
-
-
-
-    
-
-    
 
         # ******* SECTION 1 *******
 
@@ -191,30 +81,18 @@ if __name__ == '__main__':
 
         curve_disc, curve_con, depth_disc, depth_con, edgelist = edge_detect(img, img2, img, numImg)
 
-    
-
-        # Remove extra dimensions from data
-
+        #CREATES LINE SEGMENTS
         res = lineseg(edgelist, tol=5)
 
+        #REMOVES EXTRA DIMENSIONS FROM data
         seglist = []
 
         for i in range(res.shape[0]):
 
             # print('shape', res[i].shape)
-
             if res[i].shape[0] > 2:
-
-                # print(res[i])
-
-                # print(res[i][0])
-
                 seglist.append(np.concatenate((res[i], [res[i][0]])))
-
-    
-
             else:
-
                 seglist.append(res[i])
 
     
@@ -226,7 +104,7 @@ if __name__ == '__main__':
 
     
 
-        drawedgelist(seglist, blank_image, numImg)
+        draw_edge_list(seglist, blank_image, numImg)
 
     
 

@@ -178,28 +178,16 @@ def create_img(mat):
 
 #Passes in a depth image and turns it into a pointcloud
 def depthToPC(img, blank_image, cx, cy, f, mouseY, mouseX):
-    #Fixing cx cy since image was cropped
-    #cx = cx - mouseX
-    #cy = cy - mouseY
-
-
     #img is the depth image, blank_image is for the pointcloud
+
+    ###Need to edit for mouseY and mouseX(crop it later)
     newblank_image = copy.deepcopy(blank_image)
 
     xVal = []
     yVal = []
     zVal = []
-    maxNum = 215
-    minNum = -106
-    newX = []
-    newY = []
-    newZ = []
-    rangeN = maxNum-minNum
+
     for yCoord in range(len(img)):
-        newX = []
-        newY = []
-        newZ = []
-        
         for xCoord in range(len(img[0])):
             x, y, z = depthTo3d(img, xCoord, yCoord, cx, cy, f)
             """z = img[yCoord][xCoord]
@@ -216,32 +204,12 @@ def depthToPC(img, blank_image, cx, cy, f, mouseY, mouseX):
                 yVal.append(int(y))
                 zVal.append(int(z))
                 
-        """xVal.append(newX)
-                                yVal.append(newY)
-                                zVal.append(newZ)"""
-
-        """color = (abs(x/rangeN), abs(y/rangeN), abs(z/rangeN))
-                                            if(int(x)%10 == 0 and int(y)%10 == 0):
-                                                ax.scatter(int(x), int(z), int(y), c=color, marker="o")"""
 
 
-    """for yCoord in range(len(img)):
-                    for xCoord in range(len(img[0])):
-                        color_img[yCoord][xCoord] = np.abs((newblank_image[yCoord][xCoord])*255)/maxNum"""
-
-    #create3dPlot(xVal, yVal, zVal)
+    #create3dPlot in plot_3d.py (xVal, yVal, zVal)
     np.save("saveX", xVal)
     np.save("saveY", yVal)
     np.save("saveZ", zVal)
-
-
-
-    """ax.set_xlabel('X Label')
-                ax.set_ylabel('Y Label')
-                ax.set_zlabel('Z Label')
-                ax.view_init(elev = 30, azim = 300)
-                plt.draw()
-                plt.pause(1)"""
 
 
     return newblank_image

@@ -1,4 +1,4 @@
-from check_overlap import check_overlap
+#from check_overlap import check_overlap
 from relative_pos import relative_pos
 from distance2d import distance2d
 import copy

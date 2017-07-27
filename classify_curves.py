@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 import util as util
-import drawedgelist as de
+import draw_edge_list as de
 import edge_detect as ed
 
 
@@ -84,9 +84,9 @@ def classify_curves(curve_im, depth_im, list_lines, list_points, window_size):
 
         # determine if the line is a discontinuity if
         # it shows up in both curve and depth
-        if abs(count_c - count_d) <= line[4] * .25:
+        if abs(count_c - count_d) <= line[4] * .50:
             line_new.append(np.append(list_lines[i], [13]))
-            # print("14, hole", count_c, count_d)
+            # print("14, hole", count_c, count_d)"""
         elif count_c > count_d:
             # Line is a curvature
             line_new.append(np.append(list_lines[i], [12]))
