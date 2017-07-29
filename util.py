@@ -5,6 +5,7 @@ from skimage import morphology
 import copy
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
+import copy
 
 
 def auto_canny(image, sigma=0.33):
@@ -37,16 +38,6 @@ def morpho(img):
 
     return skel
 
-
-def showimg(img, im_name='image', write=False, imagename='img.png'):
-        cv2.imshow(im_name, img)
-        #cv2.waitKey(0)
-        #cv2.destroyAllWindows()
-
-        if write:
-            cv2.imwrite("../../images/%s", imagename, img)
-
-
 def find_contours(im, mode=cv2.RETR_CCOMP):
     ####IS THERE ANY POINT TO THIS FUNCTION?#######
     
@@ -68,6 +59,14 @@ def find_contours(im, mode=cv2.RETR_CCOMP):
     contours = np.squeeze(contours)
 
     return contours
+
+def clahe(img, iter=1):
+    # evenly increases the contrast of the entire image
+    # ref: http://docs.opencv.org/3.1.0/d5/daf/tutorial_py_histogram_equalization.html
+    for i in range(0, iter):
+        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+        img = clahe.apply(img)
+    return imgclah
 
 
 def swap_cols(arr, frm, to):
@@ -113,55 +112,6 @@ def draw_contours(im, contours):
     # cv2.destroyAllWindows()
 
 
-def draw_lf(line_feature, img, numImg):
-    # print(line_feature[0])
-    print(numImg)
-    for i, e in enumerate(line_feature):
-        x1 = int(e[1])
-        y1 = int(e[0])
-        x2 = int(e[3])
-        y2 = int(e[2])
-        color = (rand.randint(0, 255), rand.randint(0, 255), rand.randint(0, 255))
-        cv2.line(img, (x1, y1), (x2, y2), color, 2)
-        # cv2.namedWindow('Convex lines', cv2.WINDOW_NORMAL)
-        # cv2.imshow('Convex lines', blank_image)
-        # cv2.waitKey(0)
-        # cv2.destroyAllWindows()
-    #cv2.imshow("line features", img)
-    #cv2.imwrite("line_features%d.png" %numImg, img)
-    cv2.waitKey(0)
-    print("ran")
-    cv2.destroyAllWindows()
-
-
-
-def draw_listpair(list_pair, line_feature, img):
-    # blank_image = normalize_depth(img, colormap=True)
-
-    for i in range(len(list_pair)):
-        color = (rand.randint(0, 255), rand.randint(0, 255), rand.randint(0, 255))
-        # line in the list of lines
-        line1 = line_feature[list_pair[i][0]]
-        line2 = line_feature[list_pair[i][1]]
-        # print(line1, line2)
-        x1 = int(line1[1])
-        y1 = int(line1[0])
-        x2 = int(line1[3])
-        y2 = int(line1[2])
-
-        x3 = int(line2[1])
-        y3 = int(line2[0])
-        x4 = int(line2[3])
-        y4 = int(line2[2])
-
-        cv2.line(img, (x1, y1), (x2, y2), color, 2)
-        cv2.line(img, (x3, y3), (x4, y4), color, 2)
-
-    # cv2.namedWindow('Line features', cv2.WINDOW_NORMAL)
-    cv2.imshow('*~ALL THE PAIRS~*', img)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-
 def swap_indices(arr):
     res = []
     for i, e in enumerate(arr):
@@ -177,25 +127,24 @@ def create_img(mat):
     return mask
 
 #Passes in a depth image and turns it into a pointcloud
-def depthToPC(img, blank_image, cx, cy, f, mouseY, mouseX):
+def depth_to_PC(P):
     #img is the depth image, blank_image is for the pointcloud
-
     ###Need to edit for mouseY and mouseX(crop it later)
-    newblank_image = copy.deepcopy(blank_image)
+    new_blank_image = copy.deepcopy(P["old_blank_image"])
 
     xVal = []
     yVal = []
     zVal = []
 
-    for yCoord in range(len(img)):
-        for xCoord in range(len(img[0])):
-            x, y, z = depthTo3d(img, xCoord, yCoord, cx, cy, f)
+    for yCoord in range(len(new_blank_image)):
+        for xCoord in range(len(new_blank_image[0])):
+            x, y, z = depth_to_3d(xCoord, yCoord, P)
             """z = img[yCoord][xCoord]
                                                 x = (xCoord - cx) * z / f
                                                 y = (yCoord - cy) * z / f"""
             #print(y, x)
             #print("blank_imageyx", blank_image[yCoord][xCoord])
-            newblank_image[yCoord][xCoord] = (x, y, z)
+            new_blank_image[yCoord][xCoord] = (x, y, z)
             """newX.append(int(x))
                                                 newY.append(int(y))
                                                 newZ.append(int(z))"""
@@ -212,69 +161,14 @@ def depthToPC(img, blank_image, cx, cy, f, mouseY, mouseX):
     np.save("saveZ", zVal)
 
 
-    return newblank_image
+    return new_blank_image
 
 #DepthTo3d
-def depthTo3d(img, x, y, cx, cy, f):
-    z = img[y][x]
+def depth_to_3d(x, y, P):
+    cx = P["cx"]
+    cy = P["cy"]
+    f = P["focal_length"]
+    z = copy.deepcopy(P["old_img"][y][x])
     x = (x - cx) * (z/(f))
     y = (y - cy) * (z/(f))
     return x, y, z
-
-def create3dPlot(xVal, yVal, zVal):
-    newFig = plt.figure()
-    ax = newFig.add_subplot(111, projection='3d')
-    x = xVal
-    y = yVal
-    z = zVal
-    ax.scatter(x, y, z, c="r", marker="o")
-    ax.set_xlabel('X Label')
-    ax.set_ylabel('Y Label')
-    ax.set_zlabel('Z Label')
-    plt.savefig('foo1.png')
-    plt.close(fig)
-
-def fixHoles(img, gradImg, backgroundVal):
-    """prox = [(-1, -1), (-1, 0), (-1, 1),
-                        (0, -1),           (0, 1),
-                        (1, -1), (1, 0), (1, 1)]
-                for y in range(len(img)):
-                    for x in range(len(img[0])):
-                        if(img[y][x] == 0):
-                            total = 0
-                            totalNear = 0
-                            for eachProx in range(len(prox)):
-                                for upTen in range(10):
-                                    newY = y + prox[eachProx][0]*upTen
-                                    newX = x + prox[eachProx][1]*upTen
-                                    if(img[newY][newX] != 0):
-                                        total += img[newY][newX]
-                                        totalNear += 1
-                            img[y][x] = total//totalNear
-                return img"""
-    for y in range(len(img)):
-        for x in range(len(img[0])):
-            if(img[y][x] == 0):
-                print(gradImg[y][x], backgroundVal, "grad and background")
-                gradImg[y][x] = backgroundVal
-    return gradImg
-
-
-def fixHoles2(img):
-    prox = [(-1, -1), (-1, 0), (-1, 1),
-            (0, -1),           (0, 1),
-            (1, -1), (1, 0), (1, 1)]
-    for y in range(len(img)):
-        for x in range(len(img[0])):
-            if(img[y][x] == 0):
-                total = 0
-                totalNear = 0
-                for eachProx in range(len(prox)):
-                    for upTen in range(10):
-                        newY = y + prox[eachProx][0]*upTen
-                        newX = x + prox[eachProx][1]*upTen
-                        if(img[newY][newX] != 0):
-                            total += img[newY][newX]
-                            totalNear += 1
-                img[y][x] = total//totalNear
-    return img

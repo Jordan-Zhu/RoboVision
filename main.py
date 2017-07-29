@@ -1,300 +1,141 @@
 import cv2
 import numpy as np
 import scipy.io as sio
-
 import Line_feat_contours as lfc
 import classify_curves as cc
 import label_curves as lc
-import merge_lines_v4 as merge_lines_v4
+import merge_lines as merge_lines
 import util as util
-from draw_edge_list import draw_edge_list
 from edge_detect import edge_detect
 from line_match import line_match
-from lineseg import lineseg
+from line_seg import line_seg
 from crop_image import crop_image
-
+import draw_img as draw
 np.set_printoptions(threshold=np.nan)
 
 if __name__ == '__main__':
     # This is the directory to save images to
-    path = 'outputImg\\'
 
-    for numImg in [3]:
-        mouseX, mouseY = crop_image(numImg)
+    for num_img in [4]:
+        #Crops the image according to the user's mouse clicks
+        #First click is top left, second click is bottom right
+        mouse_X, mouse_Y = crop_image(num_img)
 
 
         # Read in depth image, -1 means w/ alpha channel.
-
         # This keeps in the holes with no depth data as just black.
 
-        depth_im = 'img/learn%d.png'%numImg
-
-        img = cv2.imread(depth_im, -1)
-        util.depthToPC(img2, old_blank_image, 320, 240, 300, mouseY[0], mouseX[0])
-        old_height = img2.shape[0]
-        old_width = img2.shape[1]
-        old_blank_image = np.zeros((old_height, old_width, 3), np.uint8)
-
-  
+        depth_im = 'img/learn%d.png'%num_img
+        old_img = cv2.imread(depth_im, -1)
 
         #crops the depth image
+        img = old_img[mouse_Y[0]:mouse_Y[1], mouse_X[0]:mouse_X[1]]
+        final_img = util.normalize_depth(img, colormap=cv2.COLORMAP_BONE)
 
-        img = img[mouseY[0]:mouseY[1], mouseX[0]:mouseX[1]]
-        im_size = img.shape
-        height = img.shape[0]
-        width = img.shape[1]
-        blank_image = np.zeros((height, width, 3), np.uint8)
-        final_im = util.normalize_depth(img, colormap=cv2.COLORMAP_BONE)
+        #USE COPY.DEEPCOPY if you don't want to edit variables passed in
+        #AKA THE IMAGES, DON'T DO THIS
+        P = {"path": 'outputImg\\',
+        "num_img": num_img,
+        "old_img": old_img,
+        "old_height": old_img.shape[0],
+        "old_width": old_img.shape[1],
+        "img": img,
+        "height": img.shape[0],
+        "width":img.shape[1],
+        "img_size":img.shape,
+        "mouse_X": mouse_X,
+        "mouse_Y": mouse_Y,
+        "cx": 320,
+        "cy": 240,
+        "focal_length": 300,
+        "thresh": 20,
+        "window_size": 10,
+        "min_len": 20,
+        "min_dist": 10,
+        "max_dist": 200,
+        "delta_angle": 20
+        }
 
+        #Values that depend on values in P
+        P2 = {"old_blank_image": np.zeros((P["old_height"], P["old_width"], 3), np.uint8),
+        "blank_image": np.zeros((P["height"], P["width"], 3), np.uint8)}
 
-        
+        #adds all these new values to P
+        P.update(P2)
 
-        P = sio.loadmat('Parameter.mat')
-        param = P['P']
-
-        ###Create a thing to define everything here?
-
-        # evenly increases the contrast of the entire image
-        # ref: http://docs.opencv.org/3.1.0/d5/daf/tutorial_py_histogram_equalization.html
-
-        def clahe(img, iter=1):
-
-            for i in range(0, iter):
-                clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
-                img = clahe.apply(img)
-            return img
+        #Creates point cloud map
+        point_cloud = util.depth_to_PC(P)
 
     
         # Open a copy of the depth image
         # to change the contrast on the full-sized image
         img2 = cv2.imread(depth_im, -1)
         img2 = util.normalize_depth(img2)
-        img2 = clahe(img2, iter=2)
+        img2 = util.clahe(img2, iter=2)
         
         # crops the image
-        img2 = img2[mouseY[0]:mouseY[1], mouseX[0]:mouseX[1]]
+        img2 = img2[mouse_Y[0]:mouse_Y[1], mouse_X[0]:mouse_X[1]]
+        P["img2"] = img2
 
-
-        # ******* SECTION 1 *******
+        # *********************************** SECTION 1 *****************************************
 
         # FIND DEPTH / CURVATURE DISCONTINUITIES.
-
-        curve_disc, curve_con, depth_disc, depth_con, edgelist = edge_detect(img, img2, img, numImg)
+        curve_disc, depth_disc, edgelist = edge_detect(P)
 
         #CREATES LINE SEGMENTS
-        res = lineseg(edgelist, tol=5)
-
-        #REMOVES EXTRA DIMENSIONS FROM data
-        seglist = []
-
-        for i in range(res.shape[0]):
-
-            # print('shape', res[i].shape)
-            if res[i].shape[0] > 2:
-                seglist.append(np.concatenate((res[i], [res[i][0]])))
-            else:
-                seglist.append(res[i])
-
-    
-
-        seglist = np.array(seglist)
-        print(edgelist.shape, "edgelist shape")
-        # print(edgelist[0])
-        print(seglist.shape, "seglist shape")
-
-    
-
-        draw_edge_list(seglist, blank_image, numImg)
-
-    
+        seglist = line_seg(edgelist, tol=5)                                             
+        draw.draw_edge_list(seglist, P)
 
         # ******* SECTION 2 *******
-
         # SEGMENT AND LABEL THE CURVATURE LINES (CONVEX/CONCAVE).
         for j in range(seglist.shape[0]):
-            # LineFeature, ListPoint = Lseg_to_Lfeat_v4.create_linefeatures(seglist, dst, im_size)
-            LineFeature, ListPoint = lfc.create_linefeatures(seglist[j], j, edgelist, im_size)
+            #First round of creating line features- creating these features first to use in line merge
+            #Line features created:
+            line_feature, list_point = lfc.create_line_features(seglist[j], j, edgelist, P)
 
-            # print("angles\n", LineFeature[:, 6])
+            #Merge lines that are next to each other and have a similar slope
+            line_new, list_point_new, line_merged = merge_lines.merge_lines(line_feature, list_point, P)
 
-            Line_new, ListPoint_new, line_merged = merge_lines_v4.merge_lines(LineFeature, ListPoint, 20, im_size)
-            # print(line_merged, "merged")
-            # print("angles\n", Line_new[:, 6])
+            #Draw the contour with the merged lines
+            draw.draw_merged(line_new, P)
 
-            # Line_new = LineFeature
-            # ListPoint_new = ListPoint
+            #Classify curves as either discontinuity or curvature
+            line_new = cc.classify_curves(curve_disc, depth_disc, line_new, list_point_new, P)
+            
+            #Draws curves with different colors according to what kind of discontinuity that line is
+            #KEY: Green is depth discontinuity
+            #KEY: Blue is curvature discontinuity
+            draw.draw_curve(line_new, j, P)
 
-            # print(Line_new.shape, "NEW line size")
-            # print(ListPoint_new.shape, "NEW list point size")
-            # blank_im = np.zeros((height, width, 3), np.uint8)
-            # for i in range(ListPoint_new.shape[0]):
-            #     y, x = np.unravel_index(ListPoint_new[i], im_size, order='F')
-            #     x = np.squeeze(x)
-            #     y = np.squeeze(y)
-            #     print(x, "x")
-            #     print(y, "y")
-            #     for i, e in enumerate(Line_new):
-            #         x1 = int(e[1])
-            #         y1 = int(e[0])
-            #         x2 = int(e[3])
-            #         y2 = int(e[2])
-            #         color = (0, 255, 0)
-            #         cv2.line(blank_im, (x1, y1), (x2, y2), color, thickness=1)
-            #         # blank_im2 = np.zeros((height, width, 3), np.uint8)
-            #         # cv2.line(blank_im2, (x1, y1), (x2, y2), (0, 0, 255), thickness=1)
-            #         cv2.imshow("Current Line", blank_im)
-            #
-            #         for i in range(x.shape[0]):
-            #             x = int(e[1])
-            #             y = int(e[0])
-            #             color = (0, 0, 255)
-            #             cv2.line(blank_im, (x, y), (x, y), color, thickness=1)
-            #
-            #         cv2.imshow("List Edges", blank_im)
-            #         cv2.waitKey(0)
-            # for i, e in enumerate(ListPoint_new):
-            #     y1, x1 = np.unravel_index([lind1], im_size, order='F')
-            #     x = int(e[1])
-            #     y = int(e[0])
-            #     x1 = int(Line_new[i][1])
-            #     y1 = int(Line_new[i][0])
-            #     x2 = int(Line_new[i][3])
-            #     y2 = int(Line_new[i][2])
-            #     color = (0, 255, 0)
-            #     cv2.line(blank_im, (x, y), (x, y), color, thickness=1)
-            #     print("x1", x1, "y1", y1, "x2", x2, "y2", y2)
-            #     blank_im2 = np.zeros((height, width, 3), np.uint8)
-            #     cv2.line(blank_im2, (x1, y1), (x2, y2), (0, 0, 255), thickness=1)
-            #     cv2.imshow("Current Line", blank_im2)
-            #     cv2.imshow("List Edges", blank_im)
-            #     cv2.waitKey(0)
-
-
-            util.draw_lf(Line_new, blank_image, numImg)
-
-
-
-            # line_newC = LabelLineCurveFeature_v4.classify_curves(curve_disc, depth_disc, Line_new, ListPoint_new, 11)
-            line_new = cc.classify_curves(curve_disc, depth_disc, Line_new, ListPoint_new, 10)
-
-            # print(line_new)
-
-            blank_im = np.zeros((height, width, 3), np.uint8)
-            def draw_curve(list_lines, img, i):
-                for i, e in enumerate(list_lines):
-                    if e[10] == 12:
-                        # Blue is a curvature
-                        color = (255, 0, 0)
-                    elif e[10] == 13:
-                        # Green is a discontinuity
-                        color = (0, 255, 0)
-                    else:
-                        # Red is a 'hole' line
-                        color = (0, 0, 255)
-                    x1 = int(e[1])
-                    y1 = int(e[0])
-                    x2 = int(e[3])
-                    y2 = int(e[2])
-                    cv2.line(img, (x1, y1), (x2, y2), color, 2)
-                # cv2.imshow("curvatures", img)
-                cv2.imshow("Curvature%d" % numImg, img)
-                cv2.imwrite(str(path) + "Curvature%d%d.png" % (numImg, i), img)
-                # cv2.waitKey(0)
-                # cv2.destroyAllWindows()
-
-            draw_curve(line_new, blank_im, j)
-
-
-            def draw_label(list_lines, img, i):
-                for i, e in enumerate(list_lines):
-                    # left of disc
-                    if e[12] == 1:
-                        # Teal
-                        color = (255, 255, 0)
-                    # right of disc
-                    elif e[12] == 2:
-                        # Orange
-                        color = (0, 165, 255)
-                    # convex/left of curv
-                    elif e[12] == 3:
-                        # Pink
-                        color = (194, 89, 254)
-                    # convex/right
-                    elif e[12] == 32:
-                        # lavender
-                        color = (255, 182, 193)
-                        # color = (194, 89, 254)
-                    # concave of curv
-                    elif e[12] == 4:
-                        # Purple
-                        color = (128, 0, 128)
-                    # Remove
-                    elif e[12] == -1:
-                        # Yellow
-                        color = (0, 255, 255)
-                    else:
-                        # Red is a 'hole' line
-                        color = (0, 0, 255)
-                    x1 = int(e[1])
-                    y1 = int(e[0])
-                    x2 = int(e[3])
-                    y2 = int(e[2])
-                    cv2.line(img, (x1, y1), (x2, y2), color, 2)
-                # cv2.imshow("Labels", img)
-                cv2.imshow("Label%d" % numImg, img)
-                cv2.imwrite(str(path) + "Label%d%d.png" % (numImg, i), img)
-                # cv2.waitKey(0)
-                # cv2.destroyAllWindows()
-            # print(edgelist[j], "edgelist[j]")
-            line_new = lc.label_curves(img, line_new, ListPoint_new, edgelist[j])
-
-            blank_im = np.zeros((height, width, 3), np.uint8)
-            draw_label(line_new, blank_im, j)
+            #Label curves further
+            #Curvature - convex or concave
+            #Depth - Right or Left or Doesn't belong to this contour at all 
+            line_new = lc.label_curves(img, line_new, list_point_new, edgelist[j])
     
+            #Draws curves with different colors according to what kind of discontinuity that line is
+            #KEY: Curvature-
+            #Convex: Pink
+            #Concave: Purple
+            #KEY: Depth-
+            #Left: Blue
+            #Right: Orange
+            #Does not belong to this contour: Yellow
+            draw.draw_label(line_new, j, P)
 
-        # # Drop the angle 11th column
-
-        # line_newC = np.delete(line_newC, 10, axis=1)
-
-        # line_new_new = LabelLineFeature_v1.label_line_features(img, edges, line_newC, param)
-
-        # print('Line_new:', line_new_new.shape)
-
-        #
-
-        # # ******* SECTION 4 *******
-
-        # # SELECT THE DESIRED LINES FROM THE LIST
-
-        #
-
-        # # Keep the lines that are curvature / discontinuities
-
-        # relevant_lines = np.where(line_new_new[:, 10] != 0)[0]
-
-        # line_interesting = line_new_new[relevant_lines]
-
-        # # Sort lines in ascending order based on angle
-
-        # line_interesting = line_interesting[line_interesting[:, 6].argsort()]
-
-        #
-
-        # print('Line interesting:', line_interesting.shape)
-
-        # util.draw_lfeat(line_interesting, img)
-
-        #
-
-        # # Match the lines into pairs
-        #     print(line_new.shape, 'before')
-            delet_these = np.where(np.logical_or(line_new[:, 12] == 4, line_new[:, 12] == -1))
-            line_new = np.delete(line_new, delet_these, axis=0)
-            # print(line_new.shape, 'after')
-
-            list_pair = line_match(line_new, param, blank_image)
-
-            print('List pair:', list_pair)
-            blank_im = np.zeros((height, width, 3), np.uint8)
-            util.draw_listpair(list_pair, line_new, final_im)
-        cv2.imshow("ALL THE PAIRS", final_im)
+            # START PAIRING THE LINES
+            # Delete lines that are concave OR less than the minimum length OR shouldn't be part of that contour (it belongs to the object in front of it or next to it)
+            delete_these = np.where(np.logical_or(line_new[:, 12] == 4, line_new[:, 12] == -1, line_new[:, 4] < P["min_len"]))
+            line_new = np.delete(line_new, delete_these, axis=0)
+            
+            #Starts pairing lines that passed minimum requirements
+            list_pair = line_match(line_new, P)
+            
+            #Draws the pairs that were found
+            #Same colors are paired together
+            draw.draw_listpair(list_pair, line_new, final_img)
+        
+        #Final drawing of all the pairs that were found
+        cv2.imshow("ALL THE PAIRS", final_img)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+        

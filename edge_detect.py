@@ -16,9 +16,13 @@ def create_img(mat):
     return mask
     
 
-def edge_detect(depthC, depthD, origImg, numImg):
-    curve_disc, curve_con = cd.curve_discont(depthC)
-    depth_disc, depth_con = dd.depth_discont(depthD)
+def edge_detect(P):
+    depth_C = copy.deepcopy(P["img"])
+    depth_D = copy.deepcopy(P["img2"])
+    orig_img = copy.deepcopy(P["img"])
+    num_img = copy.deepcopy(P["num_img"])
+    curve_disc = cd.curve_discont(depth_C)
+    depth_disc = dd.depth_discont(depth_D)
 
     # squeeze_ndarr(curve_con)
     # squeeze_ndarr(depth_con)
@@ -31,7 +35,8 @@ def edge_detect(depthC, depthD, origImg, numImg):
 
     #checking = checking.astype('uint8')
     dst = create_img(dst)
-    util.showimg(dst, "Depth + Discontinuity")
+    cv2.imshow("Depth + discontinuity", dst)
+    #util.showimg(dst, "Depth + Discontinuity")
 
     """
 
@@ -67,7 +72,7 @@ def edge_detect(depthC, depthD, origImg, numImg):
 
 
     skel_dst = util.morpho(dst)
-    out = mask_contours(create_img(skel_dst), origImg, numImg)
+    out = mask_contours(create_img(skel_dst), orig_img, num_img)
 
 
     ######CHECK WHAT THE POINT OF THIS IS################
@@ -91,18 +96,12 @@ def edge_detect(depthC, depthD, origImg, numImg):
     out = np.asarray(out)
     print(len(out), print(out.shape), "out")
     print(len(res), print(res.shape), "res")
-    # squeeze_ndarr(res)
-
-    #What is the point of this line
-    #dst = util.find_contours(create_img(skel_dst), cv2.RETR_EXTERNAL)
-
-    #util.showimg(dst, "Depth + Discontinuity2")
 
 
-    return curve_disc, curve_con, depth_disc, depth_con, res
+    return curve_disc, depth_disc, res
 
 
-def mask_contours(im, origImg, numImg):
+def mask_contours(im, orig_img, num_img):
     # save directory
     path = 'outputImg\\'
     # showimg(im)
@@ -131,7 +130,7 @@ def mask_contours(im, origImg, numImg):
     contourCopy = copy.deepcopy(contours)
     totalDel = 0
     for x in range(len(contours)):
-        mask = np.zeros(origImg.shape,np.uint8)
+        mask = np.zeros(orig_img.shape,np.uint8)
         cv2.drawContours(mask,[contours[x]],0,255,-1)
         pixelpoints = np.transpose(np.nonzero(mask))
         #print(pixelpoints, "pixelpoints testing")
@@ -139,7 +138,7 @@ def mask_contours(im, origImg, numImg):
         for pixel in range(len(pixelpoints)):
             newY = pixelpoints[pixel][0]
             newX = pixelpoints[pixel][1]
-            if(origImg[newY][newX] == 0):
+            if(orig_img[newY][newX] == 0):
                 count+=1
         print(x, count, len(pixelpoints), "contour num, pixel points and count")
 
@@ -165,9 +164,9 @@ def mask_contours(im, origImg, numImg):
 
             cv2.drawContours(blank_image, contours, x, (int(randA*255), int(randB*255), int(randC*255)), 1, 8)
     cv2.imshow("CONTOURS", blank_image)
-    cv2.imwrite(str(path) + "Contours%d.png"%numImg, blank_image)
+    cv2.imwrite(str(path) + "Contours%d.png"%num_img, blank_image)
     cv2.imshow("CONTOURS DELETED", blank_image2)
-    cv2.imwrite(str(path) + "CONTOURS DELETED%d.png"%numImg, blank_image2)
+    cv2.imwrite(str(path) + "CONTOURS DELETED%d.png"%num_img, blank_image2)
 
 
     #cv2.imwrite("checking_2.png", blank_image)

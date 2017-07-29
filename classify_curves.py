@@ -3,6 +3,7 @@ import numpy as np
 import util as util
 import draw_edge_list as de
 import edge_detect as ed
+import copy
 
 
 def roipoly(src, poly):
@@ -65,7 +66,8 @@ def count_roi(im, win):
     return len(pts)
 
 
-def classify_curves(curve_im, depth_im, list_lines, list_points, window_size):
+def classify_curves(curve_im, depth_im, list_lines, list_points, P):
+    window_size = copy.deepcopy(P["window_size"])
     line_new = []
     # show both images so the user can see them
     cv2.imshow("curve im", ed.create_img(curve_im))

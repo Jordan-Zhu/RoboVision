@@ -1,11 +1,11 @@
 import numpy as np
 import cv2
 
-def crop_image(numImg):
+def crop_image(num_img):
     ##These methods are for the picture resizing
-    global mouseX, mouseY, numC
-    mouseX = []
-    mouseY = []
+    global mouse_X, mouse_Y, numC
+    mouse_X = []
+    mouse_Y = []
     numC = 0
 
     ###Event 4 means that the right key was clicked
@@ -13,18 +13,18 @@ def crop_image(numImg):
 
     def choosePoints(event,x,y,flags,param):
 
-        global mouseX, mouseY, numC
+        global mouse_X, mouse_Y, numC
 
         if event == 4:
             numC += 1
-            mouseX.append(x)
-            mouseY.append(y)
+            mouse_X.append(x)
+            mouse_Y.append(y)
 
     
 
     #Opens up the color image for user to click on
 
-    imgC = cv2.imread('img/clearn%d.png' %numImg, -1)
+    imgC = cv2.imread('img/clearn%d.png' %num_img, -1)
     cv2.imshow('image',imgC)
     cv2.setMouseCallback('image', choosePoints)
 
@@ -38,5 +38,5 @@ def crop_image(numImg):
 
     #Closes color image once user clicks twice
     cv2.destroyAllWindows()
-    print(mouseX, mouseY, "mouse X and mouse Y")
-    return mouseX, mouseY
+    print(mouse_X, mouse_Y, "mouse X and mouse Y")
+    return mouse_X, mouse_Y

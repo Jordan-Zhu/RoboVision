@@ -1,7 +1,7 @@
 from math import inf, sqrt, atan, degrees
 import numpy as np
-
 import cv2
+import copy
 
 def calc_inf(y2, y1, x2, x1):
     return inf if (y2 - y1) > 0 else -inf
@@ -19,10 +19,11 @@ def find_star(x, y, idx, ListEdges):
     return next(iter(set(sty[0]).intersection(stx[0])))
 
 
-def get_lin_index(x1, y1, imgsize):
-    return np.ravel_multi_index((y1, x1), imgsize, order='F')
+def get_lin_index(x1, y1, img_size):
+    return np.ravel_multi_index((y1, x1), img_size, order='F')
 
-def create_linefeatures(ListSegments, idx, ListEdges, imgsize):
+def create_line_features(ListSegments, idx, ListEdges, P):
+    img_size = copy.deepcopy(P["img_size"])
     c0 = 0
     LineFeature = []
     ListPoint = []
@@ -37,8 +38,8 @@ def create_linefeatures(ListSegments, idx, ListEdges, imgsize):
         # finds the positive angle of the line to the horizontal
         slope = round((y2 - y1) / (x2 - x1), 4) if ((x2 - x1) != 0) else calc_inf(y2, y1, x2, x1)
         # linear indices
-        lin_ind1 = get_lin_index(x1, y1, imgsize)
-        lin_ind2 = get_lin_index(x2, y2, imgsize)
+        lin_ind1 = get_lin_index(x1, y1, img_size)
+        lin_ind2 = get_lin_index(x2, y2, img_size)
         linelen = sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
         # tangent
         alpha = degrees(atan(-slope))
@@ -53,8 +54,8 @@ def create_linefeatures(ListSegments, idx, ListEdges, imgsize):
         ListPoint.append(ListEdges[idx][a:b + 1])
 
         # show the contour points and the line
-        # height = imgsize[0]
-        # width = imgsize[1]
+        # height = img_size[0]
+        # width = img_size[1]
         # blank_im = np.zeros((height, width, 3), np.uint8)
         # print(len(ListPoint[-1]), "ListPoint len")
         # for l,e in enumerate(ListPoint[-1]):
@@ -78,6 +79,6 @@ def create_linefeatures(ListSegments, idx, ListEdges, imgsize):
     len_lp = len(ListPoint)
     LPP = []
     for cnt in range(len_lp):
-        LPP.append(np.ravel_multi_index((ListPoint[cnt][:, 0], ListPoint[cnt][:, 1]), imgsize, order='F'))
+        LPP.append(np.ravel_multi_index((ListPoint[cnt][:, 0], ListPoint[cnt][:, 1]), img_size, order='F'))
 
     return np.array(LineFeature), np.array(LPP)
