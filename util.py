@@ -172,3 +172,61 @@ def depth_to_3d(x, y, P):
     x = (x - cx) * (z/(f))
     y = (y - cy) * (z/(f))
     return x, y, z
+
+def create3dPlot(xVal, yVal, zVal):
+    newFig = plt.figure()
+    ax = newFig.add_subplot(111, projection='3d')
+    x = xVal
+    y = yVal
+    z = zVal
+    ax.scatter(x, y, z, c="r", marker="o")
+    ax.set_xlabel('X Label')
+    ax.set_ylabel('Y Label')
+    ax.set_zlabel('Z Label')
+    plt.savefig('foo1.png')
+    plt.close(newFig)
+
+def fixHoles(img, gradImg, backgroundVal):
+    """prox = [(-1, -1), (-1, 0), (-1, 1),
+                        (0, -1),           (0, 1),
+                        (1, -1), (1, 0), (1, 1)]
+                for y in range(len(img)):
+                    for x in range(len(img[0])):
+                        if(img[y][x] == 0):
+                            total = 0
+                            totalNear = 0
+                            for eachProx in range(len(prox)):
+                                for upTen in range(10):
+                                    newY = y + prox[eachProx][0]*upTen
+                                    newX = x + prox[eachProx][1]*upTen
+                                    if(img[newY][newX] != 0):
+                                        total += img[newY][newX]
+                                        totalNear += 1
+                            img[y][x] = total//totalNear
+                return img"""
+    for y in range(len(img)):
+        for x in range(len(img[0])):
+            if(img[y][x] == 0):
+                print(gradImg[y][x], backgroundVal, "grad and background")
+                gradImg[y][x] = backgroundVal
+    return gradImg
+
+
+def fixHoles2(img):
+    prox = [(-1, -1), (-1, 0), (-1, 1),
+            (0, -1),           (0, 1),
+            (1, -1), (1, 0), (1, 1)]
+    for y in range(len(img)):
+        for x in range(len(img[0])):
+            if(img[y][x] == 0):
+                total = 0
+                totalNear = 0
+                for eachProx in range(len(prox)):
+                    for upTen in range(10):
+                        newY = y + prox[eachProx][0]*upTen
+                        newX = x + prox[eachProx][1]*upTen
+                        if(img[newY][newX] != 0):
+                            total += img[newY][newX]
+                            totalNear += 1
+                img[y][x] = total//totalNear
+    return img
