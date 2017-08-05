@@ -19,7 +19,8 @@ def line_match(LineInteresting, P):
     rowsize = LineInteresting.shape[0]
     #Number of lines in this contour
 
-    ListPair = []
+    list_pair = []
+    matched_lines = []
     #Goes through every line
     for i in range(0, rowsize):
 
@@ -39,7 +40,8 @@ def line_match(LineInteresting, P):
                         #Checking to make sure they are not too far apart or two close together
                         d = distance2d(LineInteresting[i, :], LineInteresting[j, :])
                         if min_dist < d < max_dist:
-                            ListPair.append([i,j])
+                            list_pair.append([i,j])
+                            matched_lines.append([LineInteresting[i], LineInteresting[j]])
 
-    print(ListPair, "listpair")
-    return ListPair
+    print(list_pair, "listpair")
+    return list_pair, matched_lines

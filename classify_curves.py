@@ -4,6 +4,7 @@ import util as util
 import draw_edge_list as de
 import edge_detect as ed
 import copy
+import settings
 
 
 def roipoly(src, poly):
@@ -69,9 +70,10 @@ def count_roi(im, win):
 def classify_curves(curve_im, depth_im, list_lines, list_points, P):
     window_size = copy.deepcopy(P["window_size"])
     line_new = []
-    # show both images so the user can see them
-    cv2.imshow("curve im", ed.create_img(curve_im))
-    cv2.imshow("depth im", ed.create_img(depth_im))
+    # show both images to see where the lines belong
+    if settings.dev_mode is True:
+        cv2.imshow("curve im", ed.create_img(curve_im))
+        cv2.imshow("depth im", ed.create_img(depth_im))
     # going through each line
     for i, line in enumerate(list_lines):
         # strategy:

@@ -66,7 +66,7 @@ def clahe(img, iter=1):
     for i in range(0, iter):
         clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
         img = clahe.apply(img)
-    return imgclah
+    return img
 
 
 def swap_cols(arr, frm, to):
@@ -132,33 +132,33 @@ def depth_to_PC(P):
     ###Need to edit for mouseY and mouseX(crop it later)
     new_blank_image = copy.deepcopy(P["old_blank_image"])
 
-    xVal = []
-    yVal = []
-    zVal = []
+    x_val = []
+    y_val = []
+    z_val = []
 
-    for yCoord in range(len(new_blank_image)):
-        for xCoord in range(len(new_blank_image[0])):
-            x, y, z = depth_to_3d(xCoord, yCoord, P)
+    for y_coord in range(len(new_blank_image)):
+        for x_coord in range(len(new_blank_image[0])):
+            x, y, z = depth_to_3d(x_coord, y_coord, P)
             """z = img[yCoord][xCoord]
                                                 x = (xCoord - cx) * z / f
                                                 y = (yCoord - cy) * z / f"""
             #print(y, x)
             #print("blank_imageyx", blank_image[yCoord][xCoord])
-            new_blank_image[yCoord][xCoord] = (x, y, z)
+            new_blank_image[y_coord][x_coord] = (x, y, z)
             """newX.append(int(x))
                                                 newY.append(int(y))
                                                 newZ.append(int(z))"""
-            if(xCoord%10 == 0 and yCoord%10 == 0):
-                xVal.append(int(x))
-                yVal.append(int(y))
-                zVal.append(int(z))
+            if(x_coord%10 == 0 and y_coord%10 == 0):
+                x_val.append(int(x))
+                y_val.append(int(y))
+                z_val.append(int(z))
                 
 
 
     #create3dPlot in plot_3d.py (xVal, yVal, zVal)
-    np.save("saveX", xVal)
-    np.save("saveY", yVal)
-    np.save("saveZ", zVal)
+    np.save("saveX", x_val)
+    np.save("saveY", y_val)
+    np.save("saveZ", z_val)
 
 
     return new_blank_image

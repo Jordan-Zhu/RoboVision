@@ -25,8 +25,8 @@ def crop_image(num_img):
     #Opens up the color image for user to click on
 
     imgC = cv2.imread('img/clearn%d.png' %num_img, -1)
-    cv2.imshow('image',imgC)
-    cv2.setMouseCallback('image', choosePoints)
+    cv2.imshow('image %d' %num_img, imgC)
+    cv2.setMouseCallback('image %d' %num_img, choosePoints)
 
 
     #checks and makes sure 2 points were clicked

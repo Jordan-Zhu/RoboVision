@@ -3,6 +3,7 @@ import numpy as np
 import util as util
 import curv_disc as cd
 import depth_disc as dd
+import settings
 import skimage
 import copy
 import random
@@ -35,7 +36,8 @@ def edge_detect(P):
 
     #checking = checking.astype('uint8')
     dst = create_img(dst)
-    cv2.imshow("Depth + discontinuity", dst)
+    if settings.dev_mode is True:
+        cv2.imshow("Depth + discontinuity", dst)
     #util.showimg(dst, "Depth + Discontinuity")
 
     """
@@ -163,10 +165,11 @@ def mask_contours(im, orig_img, num_img):
             randA = random.uniform(0,1)
 
             cv2.drawContours(blank_image, contours, x, (int(randA*255), int(randB*255), int(randC*255)), 1, 8)
-    cv2.imshow("CONTOURS", blank_image)
-    cv2.imwrite(str(path) + "Contours%d.png"%num_img, blank_image)
-    cv2.imshow("CONTOURS DELETED", blank_image2)
-    cv2.imwrite(str(path) + "CONTOURS DELETED%d.png"%num_img, blank_image2)
+    if settings.dev_mode is True:
+        cv2.imshow("CONTOURS", blank_image)
+        cv2.imwrite(str(path) + "Contours%d.png"%num_img, blank_image)
+        cv2.imshow("CONTOURS DELETED", blank_image2)
+        cv2.imwrite(str(path) + "CONTOURS DELETED%d.png"%num_img, blank_image2)
 
 
     #cv2.imwrite("checking_2.png", blank_image)

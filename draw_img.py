@@ -2,6 +2,8 @@ import sys
 import cv2
 import numpy as np
 import random as rand
+import util as util
+import settings
 import copy
 
 
@@ -105,7 +107,6 @@ def draw_curve(list_lines, i, P):
     # cv2.destroyAllWindows()
 
 
-
 def draw_listpair(list_pair, line_feature, img):
     # blank_image = normalize_depth(img, colormap=True)
 
@@ -129,6 +130,7 @@ def draw_listpair(list_pair, line_feature, img):
         cv2.line(img, (x3, y3), (x4, y4), color, 2)
 
     # cv2.namedWindow('Line features', cv2.WINDOW_NORMAL)
-    cv2.imshow('*~ALL THE PAIRS~*', img)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    if settings.dev_mode is True:
+        cv2.imshow('CONTOUR PAIRS', img)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
