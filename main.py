@@ -6,7 +6,6 @@ import classify_curves as cc
 import label_curves as lc
 import merge_lines as merge_lines
 import util as util
-import settings
 from edge_detect import edge_detect
 from line_match import line_match
 from line_seg import line_seg
@@ -15,9 +14,7 @@ import draw_img as draw
 np.set_printoptions(threshold=np.nan)
 
 if __name__ == '__main__':
-    settings.init()
-    settings.dev_mode = True
-    # print(settings.dev_mode)
+    # This is the directory to save images to
 
     for num_img in [4]:
         #Crops the image according to the user's mouse clicks
@@ -86,11 +83,8 @@ if __name__ == '__main__':
         curve_disc, depth_disc, edgelist = edge_detect(P)
 
         #CREATES LINE SEGMENTS
-        seglist = line_seg(edgelist, tol=5)
-        if settings.dev_mode is True:
-            draw.draw_edge_list(seglist, P)
-
-        line_pairs = []
+        seglist = line_seg(edgelist, tol=5)                                             
+        draw.draw_edge_list(seglist, P)
 
         # ******* SECTION 2 *******
         # SEGMENT AND LABEL THE CURVATURE LINES (CONVEX/CONCAVE).
@@ -103,8 +97,7 @@ if __name__ == '__main__':
             line_new, list_point_new, line_merged = merge_lines.merge_lines(line_feature, list_point, P)
 
             #Draw the contour with the merged lines
-            if settings.dev_mode is True:
-                draw.draw_merged(line_new, P)
+            draw.draw_merged(line_new, P)
 
             #Classify curves as either discontinuity or curvature
             line_new = cc.classify_curves(curve_disc, depth_disc, line_new, list_point_new, P)
@@ -112,8 +105,7 @@ if __name__ == '__main__':
             #Draws curves with different colors according to what kind of discontinuity that line is
             #KEY: Green is depth discontinuity
             #KEY: Blue is curvature discontinuity
-            if settings.dev_mode is True:
-                draw.draw_curve(line_new, j, P)
+            draw.draw_curve(line_new, j, P)
 
             #Label curves further
             #Curvature - convex or concave
@@ -128,8 +120,7 @@ if __name__ == '__main__':
             #Left: Blue
             #Right: Orange
             #Does not belong to this contour: Yellow
-            if settings.dev_mode is True:
-                draw.draw_label(line_new, j, P)
+            draw.draw_label(line_new, j, P)
 
             # START PAIRING THE LINES
             # Delete lines that are concave OR less than the minimum length OR shouldn't be part of that contour (it belongs to the object in front of it or next to it)
@@ -137,15 +128,12 @@ if __name__ == '__main__':
             line_new = np.delete(line_new, delete_these, axis=0)
             
             #Starts pairing lines that passed minimum requirements
-            list_pair, matched_lines = line_match(line_new, P)
-            for k in range(len(matched_lines)):
-                line_pairs.append(matched_lines[k])
+            list_pair = line_match(line_new, P)
             
             #Draws the pairs that were found
             #Same colors are paired together
             draw.draw_listpair(list_pair, line_new, final_img)
-
-        print("Line pairs: ", line_pairs)
+        
         #Final drawing of all the pairs that were found
         cv2.imshow("ALL THE PAIRS", final_img)
         cv2.waitKey(0)
