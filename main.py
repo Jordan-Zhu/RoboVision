@@ -17,8 +17,7 @@ np.set_printoptions(threshold=np.nan)
 
 if __name__ == '__main__':
     settings.init()
-    settings.dev_mode = True
-    # print(settings.dev_mode)
+    settings.dev_mode = False
 
     for num_img in [4]:
         #Crops the image according to the user's mouse clicks
@@ -36,21 +35,21 @@ if __name__ == '__main__':
         img = old_img[mouse_Y[0]:mouse_Y[1], mouse_X[0]:mouse_X[1]]
         final_img = util.normalize_depth(img, colormap=cv2.COLORMAP_BONE)
 
+        cy = round(img.shape[0] / 2)
+        cx = round(img.shape[1] / 2)
+
         #USE COPY.DEEPCOPY if you don't want to edit variables passed in
         #AKA THE IMAGES, DON'T DO THIS
         P = {"path": 'outputImg\\',
         "num_img": num_img,
-        "old_img": old_img,
-        "old_height": old_img.shape[0],
-        "old_width": old_img.shape[1],
         "img": img,
         "height": img.shape[0],
         "width":img.shape[1],
         "img_size":img.shape,
         "mouse_X": mouse_X,
         "mouse_Y": mouse_Y,
-        "cx": 320,
-        "cy": 240,
+        "cx": cx,
+        "cy": cy,
         "focal_length": 300,
         "thresh": 20,
         "window_size": 10,
@@ -61,8 +60,7 @@ if __name__ == '__main__':
         }
 
         #Values that depend on values in P
-        P2 = {"old_blank_image": np.zeros((P["old_height"], P["old_width"], 3), np.uint8),
-        "blank_image": np.zeros((P["height"], P["width"], 3), np.uint8)}
+        P2 = {"blank_image": np.zeros((P["height"], P["width"], 3), np.uint8)}
 
         #adds all these new values to P
         P.update(P2)
@@ -142,11 +140,21 @@ if __name__ == '__main__':
             for k in range(len(matched_lines)):
                 line_pairs.append(matched_lines[k])
 
-                #Draws the pairs that were found
+            #Draws the pairs that were found
             #Same colors are paired together
             draw.draw_listpair(list_pair, line_new, final_img)
-        
+
         #Final drawing of all the pairs that were found
         cv2.imshow("ALL THE PAIRS", final_img)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
+
+        pairs_3d = []
+        for i in range(len(line_pairs)):
+            line1 = line_pairs[i][0]
+            line2 = line_pairs[i][1]
+
+            new_line1 = np.array([point_cloud[int(line1[0])][int(line1[1])], point_cloud[int(line1[2])][int(line1[3])]])
+            new_line2 = np.array([point_cloud[int(line2[0])][int(line2[1])], point_cloud[int(line2[2])][int(line2[3])]])
+            pairs_3d.append([new_line1, new_line2])
+        print("Pairs 3d", pairs_3d)
