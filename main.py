@@ -133,16 +133,20 @@ if __name__ == '__main__':
                 # START PAIRING THE LINES
             # Delete lines that are concave OR less than the minimum length OR shouldn't be part of that contour (it belongs to the object in front of it or next to it)
             delete_these = np.where(np.logical_or(line_new[:, 12] == 4, line_new[:, 12] == -1, line_new[:, 4] < P["min_len"]))
-            line_new = np.delete(line_new, delete_these, axis=0)
+            line_final = np.delete(line_new, delete_these, axis=0)
+            list_point_final = np.delete(list_point_new, delete_these, axis=0)
+
+            print(line_final.shape)
+            print(list_point_final.shape)
             
             #Starts pairing lines that passed minimum requirements
-            list_pair, matched_lines = line_match(line_new, P)
+            list_pair, matched_lines = line_match(line_final, P)
             for k in range(len(matched_lines)):
                 line_pairs.append(matched_lines[k])
 
             #Draws the pairs that were found
             #Same colors are paired together
-            draw.draw_listpair(list_pair, line_new, final_img)
+            draw.draw_listpair(list_pair, line_final, final_img)
 
         #Final drawing of all the pairs that were found
         cv2.imshow("ALL THE PAIRS", final_img)
@@ -154,7 +158,16 @@ if __name__ == '__main__':
             line1 = line_pairs[i][0]
             line2 = line_pairs[i][1]
 
-            new_line1 = np.array([point_cloud[int(line1[0])][int(line1[1])], point_cloud[int(line1[2])][int(line1[3])]])
-            new_line2 = np.array([point_cloud[int(line2[0])][int(line2[1])], point_cloud[int(line2[2])][int(line2[3])]])
-            pairs_3d.append([new_line1, new_line2])
+            # new_line1 = np.array([point_cloud[int(line1[0])][int(line1[1])], point_cloud[int(line1[2])][int(line1[3])]])
+            # new_line2 = np.array([point_cloud[int(line2[0])][int(line2[1])], point_cloud[int(line2[2])][int(line2[3])]])
+            # pairs_3d.append([new_line1, new_line2])
+            pairs_3d.append(point_cloud[int(line1[0])][int(line1[1])])
+            pairs_3d.append(point_cloud[int(line1[2])][int(line1[3])])
+            pairs_3d.append(point_cloud[int(line2[0])][int(line2[1])])
+            pairs_3d.append(point_cloud[int(line2[2])][int(line2[3])])
         print("Pairs 3d", pairs_3d)
+
+        # Get window of points within the line pairs
+        # Add listpoints to this set of points
+        # Fit plane to the points
+        # Set plane size to be the average distance between line pairs
