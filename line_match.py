@@ -10,7 +10,7 @@ import numpy as np
 # Input: LineInteresting, P(Parameters)
 # Output: ListPair
 
-def line_match(LineInteresting, P):
+def line_match(LineInteresting, list_point_final, P):
     # Constants
     delta_angle = copy.deepcopy(P["delta_angle"])
     min_dist = copy.deepcopy(P["min_dist"])
@@ -21,6 +21,7 @@ def line_match(LineInteresting, P):
 
     list_pair = []
     matched_lines = []
+    cntr_pairs = []
     #Goes through every line
     for i in range(0, rowsize):
 
@@ -42,6 +43,7 @@ def line_match(LineInteresting, P):
                         if min_dist < d < max_dist:
                             list_pair.append([i,j])
                             matched_lines.append([LineInteresting[i], LineInteresting[j]])
+                            cntr_pairs.append([list_point_final[i], list_point_final[j]])
 
     print(list_pair, "listpair")
-    return list_pair, matched_lines
+    return list_pair, matched_lines, cntr_pairs

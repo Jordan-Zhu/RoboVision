@@ -92,7 +92,7 @@ def get_mean(src, lp, win_p, win_n):
 def label_convexity(lp_curr, mean_p, mean_n):
     # mean_win = (mask_p + mask_n) / 2
 
-    print("| LP mean:", lp_curr, "| mean_P:", mean_p, "| mean_N:", mean_n)
+    # print("| LP mean:", lp_curr, "| mean_P:", mean_p, "| mean_N:", mean_n)
     # if lp_curr <= mean_p and lp_curr <= mean_n:
     #     if mean_p >= mean_n:
     #         return 31
@@ -108,7 +108,7 @@ def label_convexity(lp_curr, mean_p, mean_n):
 
 # obj on left/right side of discontinuity
 def label_pose(mean_p, mean_n, count_p, count_n):
-    print("| mean_P:", mean_p, "| mean_N:", mean_n, "p count", count_p, "n count", count_n)
+    # print("| mean_P:", mean_p, "| mean_N:", mean_n, "p count", count_p, "n count", count_n)
     if mean_p >= mean_n and count_n >= count_p:
         return 1
     elif mean_n >= mean_p and count_p >= count_n:
@@ -202,10 +202,10 @@ def label_curves(src, list_lines, list_point, contour):
             y, x = np.unravel_index([list_point[i]], src.shape, order='F')
             mean_lp = line_mean(src, y, x)
             label = label_convexity(mean_lp, mean_p, mean_n)
-            print(label, "curv label")
+            # print(label, "curv label")
         elif line[10] == 13 or line[10] == 14:
             label = label_pose(mean_p, mean_n, count_p, count_n)
-            print(label, "disc label")
+            # print(label, "disc label")
         else:
             label = 0
         line[12] = label

@@ -128,9 +128,9 @@ def create_img(mat):
 
 #Passes in a depth image and turns it into a pointcloud
 def depth_to_PC(P):
-    #img is the depth image, blank_image is for the pointcloud
-    ###Need to edit for mouseY and mouseX(crop it later)
-    new_blank_image = copy.deepcopy(P["old_blank_image"])
+    # img is the depth image, blank_image is for the pointcloud
+    ###Need to edit for mouseY and mouseX(crop it later) -- done
+    new_blank_image = copy.deepcopy(P["blank_image"])
 
     x_val = []
     y_val = []
@@ -142,35 +142,33 @@ def depth_to_PC(P):
             """z = img[yCoord][xCoord]
                                                 x = (xCoord - cx) * z / f
                                                 y = (yCoord - cy) * z / f"""
-            #print(y, x)
-            #print("blank_imageyx", blank_image[yCoord][xCoord])
+            # print(y, x)
+            # print("blank_imageyx", blank_image[yCoord][xCoord])
             new_blank_image[y_coord][x_coord] = (x, y, z)
             """newX.append(int(x))
                                                 newY.append(int(y))
                                                 newZ.append(int(z))"""
-            if(x_coord%10 == 0 and y_coord%10 == 0):
+            if (x_coord % 10 == 0 and y_coord % 10 == 0):
                 x_val.append(int(x))
                 y_val.append(int(y))
                 z_val.append(int(z))
-                
 
-
-    #create3dPlot in plot_3d.py (xVal, yVal, zVal)
+    # create3dPlot in plot_3d.py (xVal, yVal, zVal)
     np.save("saveX", x_val)
     np.save("saveY", y_val)
     np.save("saveZ", z_val)
 
-
     return new_blank_image
 
-#DepthTo3d
+
+# DepthTo3d
 def depth_to_3d(x, y, P):
     cx = P["cx"]
     cy = P["cy"]
     f = P["focal_length"]
-    z = copy.deepcopy(P["old_img"][y][x])
-    x = (x - cx) * (z/(f))
-    y = (y - cy) * (z/(f))
+    z = copy.deepcopy(P["img"][y][x])
+    x = (x - cx) * (z / (f))
+    y = (y - cy) * (z / (f))
     return x, y, z
 
 def create3dPlot(xVal, yVal, zVal):

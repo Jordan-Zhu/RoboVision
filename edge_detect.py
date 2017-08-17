@@ -96,8 +96,8 @@ def edge_detect(P):
     util.sqz_contours(res)
 
     out = np.asarray(out)
-    print(len(out), print(out.shape), "out")
-    print(len(res), print(res.shape), "res")
+    # print(len(out), print(out.shape), "out")
+    # print(len(res), print(res.shape), "res")
 
 
     return curve_disc, depth_disc, res
@@ -115,8 +115,8 @@ def mask_contours(im, orig_img, num_img):
 
     #im = tryConnected(im)
     im2, contours, hierarchy = cv2.findContours(im, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_NONE)
-    print(type(contours), "type contours")
-    print(hierarchy, "hierarchy")
+    # print(type(contours), "type contours")
+    # print(hierarchy, "hierarchy")
 
     #cv2.drawContours(im, contours, -1, (0, 0, 0), 1, 8)
     #contours = fixOverlap(contours)
@@ -142,7 +142,7 @@ def mask_contours(im, orig_img, num_img):
             newX = pixelpoints[pixel][1]
             if(orig_img[newY][newX] == 0):
                 count+=1
-        print(x, count, len(pixelpoints), "contour num, pixel points and count")
+        # print(x, count, len(pixelpoints), "contour num, pixel points and count")
 
         area = cv2.contourArea(contours[x], oriented=True)
         #filters out a few contours that are too small to be of use
@@ -176,8 +176,8 @@ def mask_contours(im, orig_img, num_img):
     #cv2.waitKey(0)
     #cv2.destroyAllWindows()
 
-    print(len(contourCopy), "len cntr1")
-    print(len(contours), "len cntr1 old")
+    # print(len(contourCopy), "len cntr1")
+    # print(len(contours), "len cntr1 old")
 
 
 
@@ -194,7 +194,7 @@ def fixOverlap(contours):
     for x in range(len(contours)):
         contoursShape = contours[x].shape
         contours[x] = np.reshape(contours[x], (contoursShape[0], 2), 0)
-        print(contours[x].shape, "Contours[x].shape")
+        # print(contours[x].shape, "Contours[x].shape")
     
     #going through each contour except last one
     for x in range(len(contours)-1):
@@ -215,7 +215,7 @@ def fixOverlap(contours):
         #the mask contains an array such as [true, false, false]
         #with false on the points where there was an array with the same point
         newContours[x] = newContours[x][mask]
-        print(len(newContours[x]), len(contours[x]),"deleteTotal")
+        # print(len(newContours[x]), len(contours[x]),"deleteTotal")
         #print(deleteTotal, len(contours[x]), "comparison len")
 
             #print(total, len(contours[x]))
