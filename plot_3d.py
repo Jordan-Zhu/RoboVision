@@ -56,9 +56,44 @@ trace2 = go.Scatter3d(
     ),
 )
 
+x3 = np.load("save_mX.npy")
+y3 = np.load("save_mY.npy")
+z3 = np.load("save_mZ.npy")
+trace3 = go.Scatter3d(
+    x=x3,
+    y=y3,
+    z=z3,
+    mode='markers',
+     marker=dict(
+        size=4,
+        color=z,                # set color to an array/list of desired values
+        colorscale='Picnic',   # choose a colorscale
+        opacity=0.8
+    ),
+)
 
 
-data = [trace0, trace1, trace2]
+x4 = np.load("new_x.npy")
+y4 = np.load("new_y.npy")
+z4 = np.load("new_z.npy")
+trace4 = go.Scatter3d(
+    x=x4,
+    y=y4,
+    z=z4,
+    mode='markers',
+     marker=dict(
+        size=4,
+        color=z,                # set color to an array/list of desired values
+        colorscale='Picnic',   # choose a colorscale
+        opacity=0.8
+    ),
+)
+
+
+
+
+
+data = [trace0, trace1, trace2, trace3, trace4]
 layout = go.Layout(
     title='Point Cloud',
     margin=dict(

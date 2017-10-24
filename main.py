@@ -100,6 +100,59 @@ if __name__ == '__main__':
         blank_im = np.zeros((height, width, 3), np.uint8)
         print("img size", img_size)
 
+
+        window_size = 3
+        def roipoly(src, poly):
+            mask = np.zeros_like(src, dtype=np.uint8)
+            win = util.swap_indices(poly)
+            cv2.fillConvexPoly(mask, win, 255)  # Create the ROI
+            res = src * mask
+            # cv2.imshow("roi", res)
+            # cv2.waitKey(0)
+            return res
+
+
+        def get_orientation(line, window_size):
+            dy = abs(line[0] - line[2])
+            dx = abs(line[1] - line[3])
+            # Vertical or horizontal line test
+            if dy > dx or dy == dx:
+                pt1 = [line[0], line[1] - window_size]
+                pt2 = [line[0], line[1] + window_size]
+                pt3 = [line[2], line[3] - window_size]
+                pt4 = [line[2], line[3] + window_size]
+                return pt1, pt2, pt3, pt4
+            else:
+                pt1 = [line[0] - window_size, line[1]]
+                pt2 = [line[0] + window_size, line[1]]
+                pt3 = [line[2] - window_size, line[3]]
+                pt4 = [line[2] + window_size, line[3]]
+                return pt1, pt2, pt3, pt4
+
+
+        def get_ordering(pt1, pt2, pt3, pt4):
+            temp1 = np.linalg.norm(np.subtract((np.add(pt1, pt3) / 2.0), (np.add(pt2, pt4) / 2.0)))
+            temp2 = np.linalg.norm(np.subtract((np.add(pt1, pt4) / 2.0), (np.add(pt2, pt3) / 2.0)))
+            res = np.array([pt1, pt3, pt4, pt2]) if temp1 > temp2 else np.array([pt1, pt4, pt3, pt2])
+            return [[int(i) for i in pt] for pt in res]
+
+
+        def grad_dir(img):
+            # compute x and y derivatives
+            # OpenCV's Sobel operator gives better results than numpy gradient
+            sobelx = cv2.Sobel(img, cv2.CV_64F, 1, 0, ksize=-1)
+            sobely = cv2.Sobel(img, cv2.CV_64F, 0, 1, ksize=-1)
+
+            # calculate gradient direction angles
+            # phase needs 64-bit input
+            angle = cv2.phase(sobelx, sobely)
+
+            # truncates number
+            gradir = np.fix(180 + angle)
+
+            return gradir
+
+
         # ******* SECTION 2 *******
         # SEGMENT AND LABEL THE CURVATURE LINES (CONVEX/CONCAVE).
         for j in range(seglist.shape[0]):
@@ -148,8 +201,41 @@ if __name__ == '__main__':
             #Starts pairing lines that passed minimum requirements
             list_pair, matched_lines, matched_cntrs = line_match(line_final, list_point_final, P)
 
+
+            cv2.imwrite("test_im.png", img)
             for k in range(len(matched_lines)):
                 line_pairs.append(matched_lines[k])
+                for m in range(2):
+                    if line_pairs[k][m][10] == 13:
+                        del matched_cntrs[k][m]
+
+                        pt1, pt2, pt3, pt4 = get_orientation(line_pairs[k][m], window_size)
+                        win = np.array(get_ordering(pt1, pt2, pt3, pt4))
+                        print("window: ", win)
+                        sobely = cv2.Sobel(img, cv2.CV_64F, 0, 1, ksize=-1)
+                        abs_sobel64f = np.absolute(sobely)
+                        sobel_8u = np.uint8(abs_sobel64f)
+                        roi = roipoly(sobel_8u, win)
+                        cv2.imshow("Line window", img)
+                        roi2 = roi[win[0][0]:win[2][0], win[0][1]:win[2][1]]
+                        print(roi2.shape)
+                        sobelx = cv2.Sobel(img, cv2.CV_64F, 1, 0, ksize=-1)
+                        sobely = cv2.Sobel(img, cv2.CV_64F, 0, 1, ksize=-1)
+
+                        cv2.imshow("Image", roi2)
+                        print(roi2[0][0])
+                        print(np.where(roi2 == 255))
+
+                        # mag = []
+                        # for i in range(roi2.shape[1]):
+                        #     for j in range(roi2.shape[0] - 1):
+
+            # np.save("save_matched_lines", np.array(matched_lines))
+            # np.save("save_contours", np.array(matched_cntrs))
+
+
+            print("matched lines", matched_lines)
+            print("matched cntrs", matched_cntrs)
 
             matched_cntrs = np.squeeze(np.array(matched_cntrs))
 
@@ -158,8 +244,8 @@ if __name__ == '__main__':
                 mc = matched_cntrs.flatten()
                 y, x = np.unravel_index([mc[i]], img_size, order='F')
 
-                x = np.squeeze(x)
-                y = np.squeeze(y)
+                # x = np.squeeze(x)
+                # y = np.squeeze(y)
                 # print("x ", x)
                 # print("y ", y)
                 cntr_pairs.append([x, y])
@@ -168,11 +254,11 @@ if __name__ == '__main__':
                     y0 = int(y[j])
                     # print(x0, ", ", y0)
                     color = (0, 255, 0)
-                    cv2.line(blank_im, (x0, y0), (x0, y0), color, thickness=1)
+                    cv2.line(final_img, (x0, y0), (x0, y0), color, thickness=1)
 
             #Draws the pairs that were found
             #Same colors are paired together
-            draw.draw_listpair(list_pair, line_final, final_img)
+            draw.draw_listpair(matched_lines, final_img)
 
         # Contour pairs (debugging)
         cv2.imshow("Contour pairs", blank_im)
@@ -197,7 +283,9 @@ if __name__ == '__main__':
 
         # print("cntr pc: ", cntr_pc)
         np.save("saveCntr", np.array(cntr_pc))
+        np.save("savePairs", np.array(line_pairs))
 
+        print(line_pairs)
         pairs_3d = []
         for i in range(len(line_pairs)):
             line1 = line_pairs[i][0]
@@ -213,4 +301,8 @@ if __name__ == '__main__':
             # pairs_3d.append(point_cloud[int(line2[2])][int(line2[3])])
         # print("Pairs 3d", pairs_3d)
         np.save("save_pairs", np.array(pairs_3d))
+
+        # for i in range(len(line_pairs)):
+        #     if line_pairs[i][10] == 13:
+        #         del
 

@@ -37,7 +37,7 @@ def curve_discont(depth_im):
     dimg1 = util.auto_canny(median)
     skel1 = util.morpho(dimg1)
 
-    #util.showimg(util.create_img(skel1), "Morphology + canny on depth image")
+    # util.showimg(util.create_img(skel1), "Morphology + canny on depth image")
 
 
     ######CAN'T FIND USE FOR CNT1, what is the point of finding contours here?########

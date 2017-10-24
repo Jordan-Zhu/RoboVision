@@ -2,7 +2,7 @@ import numpy as np
 
 
 cp = np.load("saveCntr.npy")
-print(cp[:, 0])
+print(cp)
 # x = []
 # y = []
 # z = []

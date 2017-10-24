@@ -1,43 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/main.py" line="350" mnemonic="3" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="9698a6a6-bf7b-4a19-add3-f49d8340dfdc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/testing_jordan.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/LabelLineCurveFeature_v4.py" afterPath="$PROJECT_DIR$/legacyCode/LabelLineCurveFeature_v4.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/LabelLineFeature_v1.py" afterPath="$PROJECT_DIR$/legacyCode/LabelLineFeature_v1.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Lseg_to_Lfeat_v4.py" afterPath="$PROJECT_DIR$/legacyCode/Lseg_to_Lfeat_v4.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/availablepixels.py" afterPath="$PROJECT_DIR$/legacyCode/availablepixels.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/findendsjunctions.py" afterPath="$PROJECT_DIR$/legacyCode/findendsjunctions.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/merge_lines_new.py" afterPath="$PROJECT_DIR$/legacyCode/merge_lines_new.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/trackedge.py" afterPath="$PROJECT_DIR$/legacyCode/trackedge.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/utility.py" afterPath="$PROJECT_DIR$/legacyCode/utility.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/magnitude_gradient.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/run_test_2.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/testing_magnitude.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/outputImg/CONTOURS DELETED4.png" afterPath="$PROJECT_DIR$/outputImg/CONTOURS DELETED4.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/outputImg/Contours4.png" afterPath="$PROJECT_DIR$/outputImg/Contours4.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/outputImg/Curvature44.png" afterPath="$PROJECT_DIR$/outputImg/Curvature44.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/outputImg/Curvature46.png" afterPath="$PROJECT_DIR$/outputImg/Curvature46.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/outputImg/Edgelist40.png" afterPath="$PROJECT_DIR$/outputImg/Edgelist40.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/outputImg/Edgelist41.png" afterPath="$PROJECT_DIR$/outputImg/Edgelist41.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/outputImg/Edgelist42.png" afterPath="$PROJECT_DIR$/outputImg/Edgelist42.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/outputImg/Edgelist43.png" afterPath="$PROJECT_DIR$/outputImg/Edgelist43.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/outputImg/Label44.png" afterPath="$PROJECT_DIR$/outputImg/Label44.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/outputImg/Label46.png" afterPath="$PROJECT_DIR$/outputImg/Label46.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/saveX.npy" afterPath="$PROJECT_DIR$/saveX.npy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/saveY.npy" afterPath="$PROJECT_DIR$/saveY.npy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/saveZ.npy" afterPath="$PROJECT_DIR$/saveZ.npy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classify_curves.py" afterPath="$PROJECT_DIR$/classify_curves.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.ipynb_checkpoints/edge_detecting_graspable_edges (EDGE)-checkpoint.ipynb" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/edge_detecting_graspable_edges (EDGE)-checkpoint.ipynb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/crop_image.py" afterPath="$PROJECT_DIR$/crop_image.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/curv_disc.py" afterPath="$PROJECT_DIR$/curv_disc.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/depth_disc.py" afterPath="$PROJECT_DIR$/depth_disc.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/draw_img.py" afterPath="$PROJECT_DIR$/draw_img.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/edge_detecting_graspable_edges (EDGE).ipynb" afterPath="$PROJECT_DIR$/edge_detecting_graspable_edges (EDGE).ipynb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/merge_lines_v4.py" afterPath="$PROJECT_DIR$/merge_lines_v4.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testingColorImg.py" afterPath="$PROJECT_DIR$/testingColorImg.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing_linefeat.py" afterPath="$PROJECT_DIR$/testing_linefeat.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unsorted/LabelLineCurveFeature.py" afterPath="$PROJECT_DIR$/unsorted/LabelLineCurveFeature.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unsorted/LabelLineCurveFeature_py.py" afterPath="$PROJECT_DIR$/unsorted/LabelLineCurveFeature_py.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unsorted/LabelLineCurveFeature_v3.py" afterPath="$PROJECT_DIR$/unsorted/LabelLineCurveFeature_v3.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unsorted/Lseg_to_Lfeat_py.py" afterPath="$PROJECT_DIR$/unsorted/Lseg_to_Lfeat_py.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unsorted/Unit Tests/canny_test.py" afterPath="$PROJECT_DIR$/unsorted/Unit Tests/canny_test.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unsorted/Unit Tests/id_contours.py" afterPath="$PROJECT_DIR$/unsorted/Unit Tests/id_contours.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unsorted/Unit Tests/py_build.py" afterPath="$PROJECT_DIR$/unsorted/Unit Tests/py_build.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unsorted/Unit Tests/test_LineCurveFeat.py" afterPath="$PROJECT_DIR$/unsorted/Unit Tests/test_LineCurveFeat.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unsorted/Unit Tests/test_algo_1.py" afterPath="$PROJECT_DIR$/unsorted/Unit Tests/test_algo_1.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unsorted/Unit Tests/test_lp.py" afterPath="$PROJECT_DIR$/unsorted/Unit Tests/test_lp.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unsorted/Unit Tests/test_mergelinev3.py" afterPath="$PROJECT_DIR$/unsorted/Unit Tests/test_mergelinev3.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unsorted/algo.py" afterPath="$PROJECT_DIR$/unsorted/algo.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unsorted/python/findendsjunctions_v1.py" afterPath="$PROJECT_DIR$/unsorted/python/findendsjunctions_v1.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plot_3d.py" afterPath="$PROJECT_DIR$/plot_3d.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run_test.py" afterPath="$PROJECT_DIR$/run_test.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test_plane2.py" afterPath="$PROJECT_DIR$/test_plane2.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test_plotly.py" afterPath="$PROJECT_DIR$/test_plotly.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test_plt.py" afterPath="$PROJECT_DIR$/test_plt.py" />
     </list>
     <ignored path="RoboVision.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -50,21 +42,29 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/RoboVision$test_plane2.coverage" NAME="test_plane2 Coverage Results" MODIFIED="1502338885599" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RoboVision$makelut.coverage" NAME="makelut Coverage Results" MODIFIED="1493393176925" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Unit Tests" />
     <SUITE FILE_PATH="coverage/RoboVision$part1.coverage" NAME="part1 Coverage Results" MODIFIED="1496253917534" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python" />
     <SUITE FILE_PATH="coverage/RoboVision$test_availpix.coverage" NAME="test_availpix Coverage Results" MODIFIED="1495646805885" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Unit Tests" />
     <SUITE FILE_PATH="coverage/RoboVision$Unittests_in_testingLineseg_py.coverage" NAME="Unittests in testingLineseg.py Coverage Results" MODIFIED="1499898112141" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RoboVision$plotly_test.coverage" NAME="plotly_test Coverage Results" MODIFIED="1502328998351" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RoboVision$test_lp.coverage" NAME="test_lp Coverage Results" MODIFIED="1490737437769" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Unit Tests" />
+    <SUITE FILE_PATH="coverage/RoboVision$magnitude_gradient.coverage" NAME="magnitude_gradient Coverage Results" MODIFIED="1503532199335" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RoboVision$test_holefill.coverage" NAME="test_holefill Coverage Results" MODIFIED="1477604952177" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Unit Tests" />
+    <SUITE FILE_PATH="coverage/RoboVision$run_test.coverage" NAME="run_test Coverage Results" MODIFIED="1506622318730" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RoboVision$check_overlap.coverage" NAME="check_overlap Coverage Results" MODIFIED="1477601660119" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RoboVision$LabelLineCurveFeature_py.coverage" NAME="LabelLineCurveFeature_py Coverage Results" MODIFIED="1490732765498" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RoboVision$test_plotly.coverage" NAME="test_plotly Coverage Results" MODIFIED="1503357338508" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RoboVision$test_line_match.coverage" NAME="test_line_match Coverage Results" MODIFIED="1478634504047" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Unit Tests" />
     <SUITE FILE_PATH="coverage/RoboVision$zeroElimMedianHoleFill.coverage" NAME="zeroElimMedianHoleFill Coverage Results" MODIFIED="1478636833925" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/RoboVision$line_match.coverage" NAME="line_match Coverage Results" MODIFIED="1477592406268" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/RoboVision$Plot_3d.coverage" NAME="Plot_3d Coverage Results" MODIFIED="1501179732587" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RoboVision$camera_controls.coverage" NAME="camera_controls Coverage Results" MODIFIED="1502317986801" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RoboVision$line_match.coverage" NAME="line_match Coverage Results" MODIFIED="1503001436185" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RoboVision$run_test_2.coverage" NAME="run_test_2 Coverage Results" MODIFIED="1506617697335" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RoboVision$Plot_3d.coverage" NAME="Plot_3d Coverage Results" MODIFIED="1501180097946" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RoboVision$canny_test.coverage" NAME="canny_test Coverage Results" MODIFIED="1499884755258" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/unsorted/Unit Tests" />
-    <SUITE FILE_PATH="coverage/RoboVision$main.coverage" NAME="main Coverage Results" MODIFIED="1501179713480" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RoboVision$main.coverage" NAME="main Coverage Results" MODIFIED="1508793554866" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RoboVision$Lseg_to_Lfeat_v4.coverage" NAME="Lseg_to_Lfeat_v4 Coverage Results" MODIFIED="1490741421364" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python" />
+    <SUITE FILE_PATH="coverage/RoboVision$test_plt.coverage" NAME="test_plt Coverage Results" MODIFIED="1502339051613" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RoboVision$LabelLineFeature_v4.coverage" NAME="LabelLineFeature_v4 Coverage Results" MODIFIED="1478634280742" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RoboVision$maskedMedianHoleFill.coverage" NAME="maskedMedianHoleFill Coverage Results" MODIFIED="1479843299170" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RoboVision$Unittests_in_test_distance2d_py.coverage" NAME="Unittests in test_distance2d.py Coverage Results" MODIFIED="1500665002986" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -74,16 +74,19 @@
     <SUITE FILE_PATH="coverage/RoboVision$t_distance2d.coverage" NAME="t_distance2d Coverage Results" MODIFIED="1500665095394" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RoboVision$py_build.coverage" NAME="py_build Coverage Results" MODIFIED="1491955382627" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Unit Tests" />
     <SUITE FILE_PATH="coverage/RoboVision$applylut_test__1_.coverage" NAME="applylut_test (1) Coverage Results" MODIFIED="1493761792330" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Unit Tests" />
+    <SUITE FILE_PATH="coverage/RoboVision$testing_magnitude.coverage" NAME="testing_magnitude Coverage Results" MODIFIED="1508793336244" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RoboVision$ZeroElimMedianFilter.coverage" NAME="ZeroElimMedianFilter Coverage Results" MODIFIED="1478636667492" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RoboVision$remove_dups.coverage" NAME="remove_dups Coverage Results" MODIFIED="1492121724178" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Unit Tests" />
     <SUITE FILE_PATH="coverage/RoboVision$LabelLineCurveFeature_v4.coverage" NAME="LabelLineCurveFeature_v4 Coverage Results" MODIFIED="1490824372681" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python" />
     <SUITE FILE_PATH="coverage/RoboVision$loadmat.coverage" NAME="loadmat Coverage Results" MODIFIED="1475606950237" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RoboVision$testing_jordan.coverage" NAME="testing_jordan Coverage Results" MODIFIED="1501113140775" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RoboVision$drawedgelist.coverage" NAME="drawedgelist Coverage Results" MODIFIED="1473360115246" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RoboVision$pairs_PC.coverage" NAME="pairs_PC Coverage Results" MODIFIED="1501971037412" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RoboVision$test_LabelLineFeatures.coverage" NAME="test_LabelLineFeatures Coverage Results" MODIFIED="1478635270153" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Unit Tests" />
     <SUITE FILE_PATH="coverage/RoboVision$Unittests_in_testing_linefeat_py.coverage" NAME="Unittests in testing_linefeat.py Coverage Results" MODIFIED="1499899669892" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RoboVision$applylut_test.coverage" NAME="applylut_test Coverage Results" MODIFIED="1493760368203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python" />
     <SUITE FILE_PATH="coverage/RoboVision$test_trackedge.coverage" NAME="test_trackedge Coverage Results" MODIFIED="1496253761507" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Unit Tests" />
+    <SUITE FILE_PATH="coverage/RoboVision$plot_3d.coverage" NAME="plot_3d Coverage Results" MODIFIED="1506622361565" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -99,48 +102,76 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="39" lean-forward="false" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
+            <state relative-caret-position="102">
+              <caret line="28" column="57" lean-forward="true" selection-start-line="28" selection-start-column="57" selection-end-line="28" selection-end-column="57" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_plotly.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_plotly.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="18" lean-forward="true" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Plot_3d.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Plot_3d.py">
+      <file leaf-file-name="testing_magnitude.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/testing_magnitude.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1">
-              <caret line="0" column="13" lean-forward="false" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
+            <state relative-caret-position="-302">
+              <caret line="108" column="41" lean-forward="true" selection-start-line="108" selection-start-column="41" selection-end-line="108" selection-end-column="41" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlaneModelC.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PlaneModelC.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="23" lean-forward="false" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testing_jordan.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testing_jordan.py">
+      <file leaf-file-name="run_test.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/run_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="37" lean-forward="false" selection-start-line="14" selection-start-column="37" selection-end-line="14" selection-end-column="37" />
-              <folding />
+            <state relative-caret-position="204">
+              <caret line="12" column="48" lean-forward="true" selection-start-line="12" selection-start-column="48" selection-end-line="12" selection-end-column="48" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="drawedgelist.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/drawedgelist.py">
+      <file leaf-file-name="run_test_2.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/run_test_2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1258">
-              <caret line="78" column="4" lean-forward="false" selection-start-line="78" selection-start-column="4" selection-end-line="78" selection-end-column="4" />
-              <folding />
+            <state relative-caret-position="85">
+              <caret line="5" column="46" lean-forward="false" selection-start-line="5" selection-start-column="46" selection-end-line="5" selection-end-column="46" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="merge_lines_v4.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/merge_lines_v4.py">
+      <file leaf-file-name="test_plt.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_plt.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2856">
-              <caret line="171" column="65" lean-forward="false" selection-start-line="171" selection-start-column="65" selection-end-line="171" selection-end-column="65" />
+            <state relative-caret-position="34">
+              <caret line="6" column="24" lean-forward="false" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -149,52 +180,20 @@
       <file leaf-file-name="edge_detect.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/edge_detect.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1683">
-              <caret line="106" column="24" lean-forward="false" selection-start-line="106" selection-start-column="24" selection-end-line="106" selection-end-column="24" />
+            <state relative-caret-position="3298">
+              <caret line="202" column="0" lean-forward="false" selection-start-line="202" selection-start-column="0" selection-end-line="202" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="classify_curves.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/classify_curves.py">
+      <file leaf-file-name="plot_3d.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/plot_3d.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1377">
-              <caret line="85" column="45" lean-forward="false" selection-start-line="85" selection-start-column="45" selection-end-line="85" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="line_match.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/line_match.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="48" column="89" lean-forward="false" selection-start-line="48" selection-start-column="89" selection-end-line="48" selection-end-column="89" />
+            <state relative-caret-position="323">
+              <caret line="22" column="26" lean-forward="false" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
               <folding>
-                <element signature="e#0#39#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Line_feat_contours.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Line_feat_contours.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
-              <caret line="44" column="51" lean-forward="false" selection-start-line="44" selection-start-column="51" selection-end-line="44" selection-end-column="51" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="label_curves.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/label_curves.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1190">
-              <caret line="72" column="39" lean-forward="false" selection-start-line="72" selection-start-column="39" selection-end-line="72" selection-end-column="39" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
+                <element signature="e#0#18#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -205,6 +204,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Jupyter Notebook" />
         <option value="Python Script" />
       </list>
     </option>
@@ -213,6 +213,7 @@
     <findStrings>
       <find>linese</find>
       <find>imwrite</find>
+      <find>curve</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -222,20 +223,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/img/__init__.py" />
-        <option value="$PROJECT_DIR$/python/line_match.py" />
-        <option value="$PROJECT_DIR$/python/LabelLineFeature_v1.py" />
-        <option value="$PROJECT_DIR$/merge_lines_v3.py" />
-        <option value="$PROJECT_DIR$/Unit Tests/remove_dups.py" />
-        <option value="$PROJECT_DIR$/Unit Tests/id_contours.py" />
-        <option value="$PROJECT_DIR$/python/Lseg_to_Lfeat_v4.py" />
-        <option value="$PROJECT_DIR$/lineseg.py" />
-        <option value="$PROJECT_DIR$/python/merge_lines_v4.py" />
-        <option value="$PROJECT_DIR$/python/LabelLineCurveFeature_v4.py" />
-        <option value="$PROJECT_DIR$/Unit Tests/color_test.py" />
-        <option value="$PROJECT_DIR$/Unit Tests/makelut.py" />
-        <option value="$PROJECT_DIR$/algo.py" />
-        <option value="$PROJECT_DIR$/python/part1.py" />
         <option value="$PROJECT_DIR$/Unit Tests/canny_test.py" />
         <option value="$PROJECT_DIR$/python/applylut_test.py" />
         <option value="$PROJECT_DIR$/Unit Tests/applylut_test.py" />
@@ -261,18 +248,32 @@
         <option value="$PROJECT_DIR$/distance2d.py" />
         <option value="$PROJECT_DIR$/holeFill_test.py" />
         <option value="$PROJECT_DIR$/Lseg_to_Lfeat_v4.py" />
-        <option value="$PROJECT_DIR$/Line_feat_contours.py" />
-        <option value="$PROJECT_DIR$/line_match.py" />
-        <option value="$PROJECT_DIR$/util.py" />
         <option value="$PROJECT_DIR$/depth_disc.py" />
-        <option value="$PROJECT_DIR$/label_curves.py" />
-        <option value="$PROJECT_DIR$/curv_disc.py" />
-        <option value="$PROJECT_DIR$/classify_curves.py" />
         <option value="$PROJECT_DIR$/merge_lines_v4.py" />
         <option value="$PROJECT_DIR$/drawedgelist.py" />
-        <option value="$PROJECT_DIR$/edge_detect.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/testing_jordan.py" />
+        <option value="$PROJECT_DIR$/edge_detecting_good_edges.ipynb" />
+        <option value="$PROJECT_DIR$/crop_image.py" />
+        <option value="$PROJECT_DIR$/pairs_PC.py" />
+        <option value="$PROJECT_DIR$/util.py" />
+        <option value="$PROJECT_DIR$/camera_controls.py" />
+        <option value="$PROJECT_DIR$/test_plane2.py" />
+        <option value="$PROJECT_DIR$/test_plt.py" />
+        <option value="$PROJECT_DIR$/Line_feat_contours.py" />
+        <option value="$PROJECT_DIR$/line_match.py" />
+        <option value="$PROJECT_DIR$/label_curves.py" />
+        <option value="$PROJECT_DIR$/edge_detect.py" />
+        <option value="$PROJECT_DIR$/settings.py" />
+        <option value="$PROJECT_DIR$/classify_curves.py" />
+        <option value="$PROJECT_DIR$/curv_disc.py" />
+        <option value="$PROJECT_DIR$/test_plotly.py" />
+        <option value="$PROJECT_DIR$/draw_img.py" />
+        <option value="$PROJECT_DIR$/magnitude_gradient.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/run_test_2.py" />
+        <option value="$PROJECT_DIR$/plot_3d.py" />
+        <option value="$PROJECT_DIR$/run_test.py" />
+        <option value="$PROJECT_DIR$/testing_magnitude.py" />
       </list>
     </option>
   </component>
@@ -283,10 +284,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-19" />
-    <option name="y" value="-21" />
+    <option name="x" value="69" />
+    <option name="y" value="-16" />
     <option name="width" value="1378" />
-    <option name="height" value="744" />
+    <option name="height" value="764" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -323,22 +324,22 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/scratch" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="js.eslint.eslintPackage" value="" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\jzhu\OneDrive\Documents\PycharmProjects\RoboVision\unsorted\Unit Tests" />
-      <recent name="C:\Users\jzhu\OneDrive\Documents\PycharmProjects\RoboVision\Unit Tests" />
-      <recent name="C:\Users\jzhu\OneDrive\Documents\PycharmProjects\RoboVision\python" />
-      <recent name="C:\Users\jzhu\OneDrive\Documents\PycharmProjects\RoboVision" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Jordan\Documents\RoboVision" />
       <recent name="C:\Users\Jordan\Documents\RoboVision\legacyCode" />
       <recent name="C:\Users\jzhu\OneDrive\Documents\PycharmProjects\RoboVision\unsorted" />
+      <recent name="C:\Users\jzhu\OneDrive\Documents\PycharmProjects\RoboVision\Unit Tests" />
+      <recent name="C:\Users\jzhu\OneDrive\Documents\PycharmProjects\RoboVision\python" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jzhu\OneDrive\Documents\PycharmProjects\RoboVision\unsorted\Unit Tests" />
       <recent name="C:\Users\jzhu\OneDrive\Documents\PycharmProjects\RoboVision\Unit Tests" />
       <recent name="C:\Users\jzhu\OneDrive\Documents\PycharmProjects\RoboVision\python" />
       <recent name="C:\Users\jzhu\OneDrive\Documents\PycharmProjects\RoboVision" />
@@ -356,25 +357,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Plot_3d">
-    <configuration name="Plot_3d" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="RoboVision" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Plot_3d.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
+  <component name="RunManager" selected="Python.main">
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-interpreter>project</node-interpreter>
       <node-options />
@@ -576,24 +559,6 @@
       <option name="USE_PATTERN" value="false" />
       <method />
     </configuration>
-    <configuration name="holeFill_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="RoboVision" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/holeFill_test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -612,7 +577,7 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="t_distance2d" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="plot_3d" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -625,12 +590,12 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="RoboVision" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/t_distance2d.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/plot_3d.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="testing_jordan" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="run_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -643,25 +608,61 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="RoboVision" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testing_jordan.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/run_test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="run_test_2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="RoboVision" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/run_test_2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="testing_magnitude" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="RoboVision" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testing_magnitude.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.main" />
-      <item index="1" class="java.lang.String" itemvalue="Python.t_distance2d" />
-      <item index="2" class="java.lang.String" itemvalue="Python.holeFill_test" />
-      <item index="3" class="java.lang.String" itemvalue="Python.testing_jordan" />
-      <item index="4" class="java.lang.String" itemvalue="Python.Plot_3d" />
+      <item index="1" class="java.lang.String" itemvalue="Python.plot_3d" />
+      <item index="2" class="java.lang.String" itemvalue="Python.run_test" />
+      <item index="3" class="java.lang.String" itemvalue="Python.run_test_2" />
+      <item index="4" class="java.lang.String" itemvalue="Python.testing_magnitude" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.Plot_3d" />
-        <item index="1" class="java.lang.String" itemvalue="Python.main" />
-        <item index="2" class="java.lang.String" itemvalue="Python.testing_jordan" />
-        <item index="3" class="java.lang.String" itemvalue="Python.holeFill_test" />
-        <item index="4" class="java.lang.String" itemvalue="Python.t_distance2d" />
+        <item index="0" class="java.lang.String" itemvalue="Python.main" />
+        <item index="1" class="java.lang.String" itemvalue="Python.testing_magnitude" />
+        <item index="2" class="java.lang.String" itemvalue="Python.plot_3d" />
+        <item index="3" class="java.lang.String" itemvalue="Python.run_test" />
+        <item index="4" class="java.lang.String" itemvalue="Python.run_test_2" />
       </list>
     </recent_temporary>
   </component>
@@ -715,18 +716,19 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12518302" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.08418741" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39775282" sideWeight="0.503125" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3961965" sideWeight="0.503125" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42789224" sideWeight="0.496875" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27099842" sideWeight="0.496875" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39905363" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3977813" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -779,78 +781,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/unsorted/Unit Tests/canny_img2.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/unsorted/Unit Tests/Slide1.PNG">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/unsorted/Unit Tests/test.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/unsorted/Unit Tests/Slide2.PNG">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/unsorted/Unit Tests/cylinder2.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/unsorted/Unit Tests/e56Bt.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testingLineseg.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/unsorted/Unit Tests/canny_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testing_linefeat.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="549">
-          <caret line="77" column="29" lean-forward="false" selection-start-line="77" selection-start-column="29" selection-end-line="77" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/legacyCode/LabelLineCurveFeature_v4.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1346">
-          <caret line="125" column="30" lean-forward="false" selection-start-line="125" selection-start-column="30" selection-end-line="125" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Edgelist02.png" />
-    <entry file="file://$PROJECT_DIR$/Edgelist01.png" />
-    <entry file="file://$PROJECT_DIR$/legacyCode/LabelLineFeature_v1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="92" column="36" lean-forward="false" selection-start-line="92" selection-start-column="36" selection-end-line="92" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Edgelist34.png" />
-    <entry file="file://$PROJECT_DIR$/Edgelist00.png" />
-    <entry file="file://$PROJECT_DIR$/Label0.png" />
-    <entry file="file://$PROJECT_DIR$/Label1.png" />
-    <entry file="file://$PROJECT_DIR$/Curvature0.png" />
     <entry file="file://$PROJECT_DIR$/Curvature1.png" />
     <entry file="file://$PROJECT_DIR$/Curvature2.png" />
     <entry file="file://$PROJECT_DIR$/Curvature3.png" />
@@ -860,20 +790,7 @@
     <entry file="file://$PROJECT_DIR$/Contours0.png" />
     <entry file="file://$PROJECT_DIR$/Curvature08.png" />
     <entry file="file://$PROJECT_DIR$/Contours4.png" />
-    <entry file="file://$PROJECT_DIR$/distance2d.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="47" lean-forward="false" selection-start-line="8" selection-start-column="47" selection-end-line="8" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/t_distance2d.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="23" lean-forward="false" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/t_distance2d.py" />
     <entry file="file://$PROJECT_DIR$/relative_pos.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -895,20 +812,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/holeFill_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="11" column="29" lean-forward="false" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/check_overlap.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1043">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/holeFill_test.py" />
     <entry file="file://$PROJECT_DIR$/legacyCode/merge_lines_new.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="309">
@@ -916,42 +820,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lineseg.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="32" column="36" lean-forward="true" selection-start-line="32" selection-start-column="36" selection-end-line="32" selection-end-column="36" />
+    <entry file="file://$PROJECT_DIR$/lineseg.py" />
+    <entry file="file://$PROJECT_DIR$/merge_lines_v4.py" />
+    <entry file="file://$PROJECT_DIR$/drawedgelist.py" />
+    <entry file="file://$PROJECT_DIR$/testingColorImg.py" />
+    <entry file="file://$PROJECT_DIR$/testing_jordan.py" />
+    <entry file="file://$PROJECT_DIR$/check_overlap.py" />
+    <entry file="file://$PROJECT_DIR$/test1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/edge_detecting_good_edges.ipynb" />
+    <entry file="file://$PROJECT_DIR$/edge_detecting_graspable_edges (EDGE).ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/depth_disc.py">
+    <entry file="file://$PROJECT_DIR$/crop_image.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="12" column="4" lean-forward="false" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="40" />
+        <state relative-caret-position="255">
+          <caret line="27" column="32" lean-forward="true" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/util.py">
+    <entry file="file://$PROJECT_DIR$/pairs_PC.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="26" column="16" lean-forward="false" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/curv_disc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="481">
-          <caret line="56" column="0" lean-forward="false" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/label_curves.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1190">
-          <caret line="72" column="39" lean-forward="false" selection-start-line="72" selection-start-column="39" selection-end-line="72" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="272">
+          <caret line="21" column="67" lean-forward="false" selection-start-line="21" selection-start-column="67" selection-end-line="21" selection-end-column="67" />
         </state>
       </provider>
     </entry>
@@ -962,84 +860,188 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/line_match.py">
+    <entry file="file://$PROJECT_DIR$/test_plane2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="48" column="89" lean-forward="false" selection-start-line="48" selection-start-column="89" selection-end-line="48" selection-end-column="89" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/merge_lines_v4.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2856">
-          <caret line="171" column="65" lean-forward="false" selection-start-line="171" selection-start-column="65" selection-end-line="171" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/classify_curves.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1377">
-          <caret line="85" column="45" lean-forward="false" selection-start-line="85" selection-start-column="45" selection-end-line="85" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/drawedgelist.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1258">
-          <caret line="78" column="4" lean-forward="false" selection-start-line="78" selection-start-column="4" selection-end-line="78" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/edge_detect.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1683">
-          <caret line="106" column="24" lean-forward="false" selection-start-line="106" selection-start-column="24" selection-end-line="106" selection-end-column="24" />
-          <folding />
+        <state relative-caret-position="-51">
+          <caret line="14" column="7" lean-forward="true" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Line_feat_contours.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="44" column="51" lean-forward="false" selection-start-line="44" selection-start-column="51" selection-end-line="44" selection-end-column="51" />
-          <folding />
+        <state relative-caret-position="5">
+          <caret line="55" column="46" lean-forward="true" selection-start-line="55" selection-start-column="46" selection-end-line="55" selection-end-column="46" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testingColorImg.py">
+    <entry file="file://$PROJECT_DIR$/merge_lines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5">
+          <caret line="153" column="64" lean-forward="true" selection-start-line="153" selection-start-column="64" selection-end-line="153" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/line_match.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="47" column="32" lean-forward="true" selection-start-line="47" selection-start-column="32" selection-end-line="47" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/distance2d.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="47" lean-forward="false" selection-start-line="8" selection-start-column="47" selection-end-line="8" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classify_curves.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="13" column="20" lean-forward="true" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/draw_edge_list.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testing_jordan.py">
+    <entry file="file://$PROJECT_DIR$/util.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="37" lean-forward="false" selection-start-line="14" selection-start-column="37" selection-end-line="14" selection-end-column="37" />
+        <state relative-caret-position="-820">
+          <caret line="128" column="55" lean-forward="false" selection-start-line="128" selection-start-column="55" selection-end-line="128" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="20" lean-forward="false" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/depth_disc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="40" lean-forward="false" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/label_curves.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" column="24" lean-forward="false" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/draw_img.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="128" column="50" lean-forward="false" selection-start-line="128" selection-start-column="50" selection-end-line="128" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/curv_disc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="30" column="4" lean-forward="false" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/magnitude_gradient.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="18" lean-forward="false" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/edge_detect.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3298">
+          <caret line="202" column="0" lean-forward="false" selection-start-line="202" selection-start-column="0" selection-end-line="202" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plot_3d.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="22" column="26" lean-forward="false" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_plt.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="6" column="24" lean-forward="false" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="48" lean-forward="true" selection-start-line="12" selection-start-column="48" selection-end-line="12" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PlaneModelC.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="23" lean-forward="false" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="39" lean-forward="false" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
+        <state relative-caret-position="102">
+          <caret line="28" column="57" lean-forward="true" selection-start-line="28" selection-start-column="57" selection-end-line="28" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_im.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_plotly.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="18" lean-forward="true" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Plot_3d.py">
+    <entry file="file://$PROJECT_DIR$/testing_magnitude.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1">
-          <caret line="0" column="13" lean-forward="false" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="-302">
+          <caret line="108" column="41" lean-forward="true" selection-start-line="108" selection-start-column="41" selection-end-line="108" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_test_2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="46" lean-forward="false" selection-start-line="5" selection-start-column="46" selection-end-line="5" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -107,14 +107,14 @@ def draw_curve(list_lines, i, P):
     # cv2.destroyAllWindows()
 
 
-def draw_listpair(list_pair, line_feature, img):
+def draw_listpair(list_pair, img):
     # blank_image = normalize_depth(img, colormap=True)
 
     for i in range(len(list_pair)):
         color = (rand.randint(0, 255), rand.randint(0, 255), rand.randint(0, 255))
         # line in the list of lines
-        line1 = line_feature[list_pair[i][0]]
-        line2 = line_feature[list_pair[i][1]]
+        line1 = list_pair[i][0]
+        line2 = list_pair[i][1]
         # print(line1, line2)
         x1 = int(line1[1])
         y1 = int(line1[0])
